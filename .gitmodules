@@ -1,0 +1,12 @@
+[submodule "Cerveau"]
+	path = Cerveau
+	url = https://github.com/JacobFischer/Cerveau.git
+[submodule "Joueur.py"]
+	path = Joueur.py
+	url = https://github.com/JacobFischer/Joueur.py
+[submodule "Joueur.js"]
+	path = Joueur.js
+	url = https://github.com/JacobFischer/Joueur.js
+[submodule "Creer"]
+	path = Creer
+	url = https://github.com/JacobFischer/Creer

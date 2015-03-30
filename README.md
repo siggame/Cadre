@@ -27,6 +27,25 @@ All inspiration taken from [MS&T's SIG-GAME framework](https://github.com/siggam
 * Clients can be adapted for human players, and if continued development a standalone visualizer would support this
 
 
+## What's what?
+
+The naming scheme is simple, French:
+
+* Server = [Cerveau](https://github.com/JacobFischer/Cerveau)
+* Codegen = [Creer](https://github.com/JacobFischer/Creer)
+* Client (Python) = [Joueur.py](https://github.com/JacobFischer/Joueur.py)
+* Client (JavaScript) = [Joueur.js](https://github.com/JacobFischer/Joueur.js)
+
+
+## Example
+
+I've put up an example game server ([Cerveau](https://github.com/JacobFischer/Cerveau)) at:
+
+http://home.jacobfischer.me:3000/
+
+Please don't try to crash it. This is Proof of Concept level, not completely stable.
+
+
 ## Other notes
 
 This is a polished proof-of-concept part of the Cadre framework. There are plently of bugs and issues present. The purpose at this time is not to be perfect, but to show that this framework is robust and meets all the needs of MS&T's ACM SIG-GAME.
