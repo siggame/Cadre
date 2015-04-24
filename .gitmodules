@@ -10,3 +10,6 @@
 [submodule "Creer"]
 	path = Creer
 	url = https://github.com/JacobFischer/Creer
+[submodule "Joueur.lua"]
+	path = Joueur.lua
+	url = https://github.com/JacobFischer/Joueur.lua.git

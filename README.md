@@ -9,9 +9,9 @@ All inspiration taken from [MST's SIG-GAME framework](https://github.com/siggame
 
 * Multi-Game Framework
   * One server instance can host multiple games at the same time, and the games can be completely different games.
-  * Most clients support this as well.
+  * All clients support this as well.
   * e.g. One server could host Chess, Checkers, Go, etc all at the same time and clients can choose which games to play.
-* A mix of JavaScript (via Node.js) and Python 3.4
+* A mix of JavaScript (via Node.js) and Python 3.4 to go from game concept to running engine
 * Easy generation of new games using the [Creer](https://github.com/JacobFischer/Creer) codegen
 * Games can be turn based or real time, with turn based code abstracted into an inheritable class.
   * More game prototypes can be added easily as new classes for re-use
@@ -19,22 +19,25 @@ All inspiration taken from [MST's SIG-GAME framework](https://github.com/siggame
 * Web interface on the server
   * Gamelog viewer with visualizer for all games
   * Automatic general game documentation generation
-* Networking via Socket IO
+* Networking via TCP Sockets
   * Communication via json strings with support for cycles within game references
   * Only deltas in states are send over the network
-* Automatic gamelog generation as a json structure of deltas
+* Automatic gamelog generation as a json structure of delta states
 * Extra fields present for Arena and Data Mining purposes
-* Clients can be adapted for human players, and if continued development a standalone visualizer would support this
+* Clients can be adapted for human players, and if continued development a standalone visualizer could support this
 
 
 ## What's what?
 
-The naming scheme is simple, French:
+The naming scheme is simple, *French*:
 
 * Server = [Cerveau](https://github.com/JacobFischer/Cerveau)
 * Codegen = [Creer](https://github.com/JacobFischer/Creer)
-* Client (Python) = [Joueur.py](https://github.com/JacobFischer/Joueur.py)
 * Client (JavaScript) = [Joueur.js](https://github.com/JacobFischer/Joueur.js)
+* Client (Lua) = [Joueur.lua](https://github.com/JacobFischer/Joueur.lua)
+* Client (Python) = [Joueur.py](https://github.com/JacobFischer/Joueur.py)
+
+Clients in C++, C#, and Java are easily possible. So long as the language support TCP Sockets it is simple to add to Cadre.
 
 
 ## Example
