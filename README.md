@@ -11,7 +11,7 @@ All inspiration taken from [MST's SIG-GAME framework](https://github.com/siggame
   * One server instance can host multiple games at the same time, and the games can be completely different games.
   * All clients support this as well.
   * e.g. One server could host Chess, Checkers, Go, etc all at the same time and clients can choose which games to play.
-* A mix of JavaScript (via Node.js) and Python 3.4 to go from game concept to running engine
+* A mix of JavaScript (via Node.js) and Python 3.4 to go from game concept to running engine. With clients in a variety of languages
 * Easy generation of new games using the [Creer](https://github.com/JacobFischer/Creer) codegen
 * Games can be turn based or real time, with turn based code abstracted into an inheritable class.
   * More game prototypes can be added easily as new classes for re-use
@@ -21,8 +21,9 @@ All inspiration taken from [MST's SIG-GAME framework](https://github.com/siggame
   * Automatic general game documentation generation
 * Networking via TCP Sockets
   * Communication via json strings with support for cycles within game references
-  * Only deltas in states are send over the network
+  * Only deltas in states are send over the network, never entire states, to maximize bandwidth and speed.
 * Automatic gamelog generation as a json structure of delta states
+* Every game isntance is a seperate thread, so slower games don't block faster ones.
 * Extra fields present for Arena and Data Mining purposes
 * Clients can be adapted for human players, and if continued development a standalone visualizer could support this
 
