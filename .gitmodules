@@ -13,3 +13,6 @@
 [submodule "Joueur.lua"]
 	path = Joueur.lua
 	url = https://github.com/JacobFischer/Joueur.lua.git
+[submodule "Joueur.cs"]
+	path = Joueur.cs
+	url = https://github.com/JacobFischer/Joueur.cs.git
