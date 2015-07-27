@@ -16,3 +16,6 @@
 [submodule "Joueur.cs"]
 	path = Joueur.cs
 	url = https://github.com/JacobFischer/Joueur.cs.git
+[submodule "Joueur.java"]
+	path = Joueur.java
+	url = https://github.com/JacobFischer/Joueur.java.git
