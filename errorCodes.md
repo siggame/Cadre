@@ -5,17 +5,17 @@ All clients (Joueurs) in the Cadre framework are expected to return error code d
 ```json
 NONE: 0,
 INVALID_ARGS: 20,
-COULD_NOT_CONNECT:  21,
-DISCONNECTED_UNEXPECTEDLY:  22,
-CANNOT_READ_SOCKET:  23,
-DELTA_MERGE_FAILURE:  24,
-REFLECTION_FAILED:  25,
-UNKNOWN_EVENT_FROM_SERVER:  26,
-SERVER_TIMEOUT:  27,
-INVALID_EVENT:  28,
-GAME_NOT_FOUND:  29,
-MALFORMED_JSON:  30,
-AI_ERRORED:  42
+COULD_NOT_CONNECT: 21,
+DISCONNECTED_UNEXPECTEDLY: 22,
+CANNOT_READ_SOCKET: 23,
+DELTA_MERGE_FAILURE: 24,
+REFLECTION_FAILED: 25,
+UNKNOWN_EVENT_FROM_SERVER: 26,
+SERVER_TIMEOUT: 27,
+INVALID_EVENT: 28,
+GAME_NOT_FOUND: 29,
+MALFORMED_JSON: 30,
+AI_ERRORED: 42
 ```
 
 The names describe exactly what happened. In addition, clients should try to print to the *error* output stream information about why it returned what it did.
