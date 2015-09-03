@@ -22,3 +22,6 @@
 [submodule "Joueur.cpp"]
 	path = Joueur.cpp
 	url = https://github.com/JacobFischer/Joueur.cpp.git
+[submodule "Dossier"]
+	path = Dossier
+	url = https://github.com/JacobFischer/Dossier.git
