@@ -25,3 +25,6 @@
 [submodule "Dossier"]
 	path = Dossier
 	url = https://github.com/JacobFischer/Dossier.git
+[submodule "Grappe"]
+	path = Grappe
+	url = https://github.com/JacobFischer/Grappe.git
