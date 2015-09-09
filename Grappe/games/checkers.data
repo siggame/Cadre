@@ -1,0 +1,17 @@
+[
+    {
+        "attributeName": "checkerMoved",
+        "gameObjectName": "Game",
+        "type": "sum"
+    },
+    {
+        "attributeName": "checkerMovedJumped",
+        "gameObjectName": "Game",
+        "type": "sum"
+    },
+    {
+        "attributeName": "kinged",
+        "gameObjectName": "Checker",
+        "type": "sum"
+    }
+]

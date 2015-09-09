@@ -1,0 +1,18 @@
+<%
+    def get_k_means(obj_name, obj):
+        kmeans = []
+        for attr_name in obj['attribute_names']:
+            attr_parms = obj['attributes'][attr_name]
+            if "k-means" in attr_parms:
+                kmeans.append({
+                    'type': attr_parms['k-means'],
+                    'attributeName': attr_name,
+                    'gameObjectName': obj_name
+                })
+        return kmeans
+
+    kmeans = get_k_means("Game", game)
+
+    for obj_name in game_obj_names:
+        kmeans.extend(get_k_means(obj_name, game_objs[obj_name]))
+%>${json.dumps(kmeans, indent=4, sort_keys=True)}

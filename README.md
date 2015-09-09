@@ -28,6 +28,7 @@ All inspiration taken from [MST's SIG-GAME framework](https://github.com/siggame
 * Every game instance is a seperate thread, so slower games don't block faster ones.
 * Extra fields present for Arena and Data Mining purposes
 * Clients can be adapted for human players, and if continued development a standalone visualizer could support this
+* Hooks to and for the Arena
 
 ## What's what?
 
@@ -42,6 +43,7 @@ The naming scheme is simple, *French*:
 * Client (JavaScript) = [Joueur.js](https://github.com/JacobFischer/Joueur.js)
 * Client (Lua) = [Joueur.lua](https://github.com/JacobFischer/Joueur.lua)
 * Client (Python) = [Joueur.py](https://github.com/JacobFischer/Joueur.py)
+* *New* Arena K-Means = [Grappe](https://github.com/JacobFischer/Grappe)
 
 Clients in Ruby, PHP, D, and Go are easily possible. In fact, so long as the language support json and tcp communication it should be easy to add a client in that language to this framework.
 
