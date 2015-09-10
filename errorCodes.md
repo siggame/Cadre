@@ -15,6 +15,7 @@ SERVER_TIMEOUT: 27,
 INVALID_EVENT: 28,
 GAME_NOT_FOUND: 29,
 MALFORMED_JSON: 30,
+UNAUTHENTICATED: 31,
 AI_ERRORED: 42
 ```
 
@@ -22,12 +23,12 @@ The names describe exactly what happened. In addition, clients should try to pri
 
 ## NONE: 0
 
-A return code of 0, as expected, is *not* an error. This should happen when a client plays and the game ends without any errors.
+A return code of 0, as expected, is *not* an error. This should happen when a client plays a game, and the game ends without any errors.
 
 ## 20-40
 
-Error in this range are client side errors relating to the client code failing, and *probably* not the competitor's fault.
+Errors in this range are client side errors relating to the client code failing, and *probably* not the competitor's fault.
 
 ## AI_ERRORED: 42
 
-This should be what happens when a competitor's AI code breaks.
+This should be what happens when a competitor's AI code breaks, because their code threw an uncaught exception.
