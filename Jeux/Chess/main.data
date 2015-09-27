@@ -1,0 +1,143 @@
+{
+    "_parentDatas": ["turnBased"],
+
+    "Game": {
+        "name": "Chess",
+        "description": "The traditional 8x8 cboard with pieces.",
+
+        "attributes": {
+            "ranks": {
+                "type": "int",
+                "description": "How many chess tiles horizontally there are making rows.",
+                "default": 8
+            },
+            "files": {
+                "type": "int",
+                "description": "How many chess tiles vertically there are making columns. Traditionally represented by a letter for humans.",
+                "default": 8
+            },
+            "pieces": {
+                "type": {
+                    "name": "list",
+                    "valueType": "Piece"
+                },
+                "description": "All the pieces currently in the game."
+            },
+            "moves": {
+                "type": {
+                    "name": "list",
+                    "valueType": "Move"
+                },
+                "description": "Each move made in the game. Indexed by turn number."
+            },
+            "turnsToStalemate": {
+                "type": "int",
+                "description": "How many turns until the game ends because no pawn has moved and no piece has been taken"
+            }
+        }
+    },
+
+    "Piece": {
+        "description": "A chess piece",
+        "attributes": {
+            "owner": {
+                "type": "Player",
+                "description": "The player that controls this chess Piece."
+            },
+            "rank": {
+                "type": "int",
+                "description": "The rank (x) coordinate of the checker."
+            },
+            "file": {
+                "type": "int",
+                "description": "The file (y) coordinate of the checker."
+            },
+            "type": {
+                "type": "string",
+                "description": "The type of chess piece this is, either: King, Queen, Knight, Rook, Bishop, or Pawn"
+            },
+            "hasMoved": {
+                "type": "boolean",
+                "description": "If the checker has moved this turn.",
+                "default": false,
+                "arenaInterest": "sum"
+            }
+        },
+        "functions": {
+            "move": {
+                "description": "Moves the piece from its current location to the given rank and file.",
+                "altersState": true,
+                "arguments": [
+                    {
+                        "name": "rank",
+                        "type": "int",
+                        "description": "The rank (x) coordinate to move to."
+                    },
+                    {
+                        "name": "file",
+                        "type": "int",
+                        "description": "The file (y) coordinate to move to."
+                    }
+                ],
+                "returns": {
+                    "type": "Move",
+                    "description": "Returns the Move with data about the move if successful. null otherwise."
+                }
+            }
+        }
+    },
+
+    "Move": {
+        "description": "A log of what happened the turn this move represents.",
+        "attributes": {
+            "turnNumber": {
+                "type": "int",
+                "description": "The turn on which this move happened."
+            },
+            "player": {
+                "type": "Player",
+                "description": "The player that made this move."
+            },
+            "piece": {
+                "type": "Piece",
+                "description": "The piece that was moved."
+            },
+            "promotionToType": {
+                "type": "string",
+                "description": "null or empty if there was no promotion, otherwise the type that the piece was promoted to."
+            },
+            "fromRank": {
+                "type": "int",
+                "description": "rank (x) coordinate the piece moved from."
+            },
+            "fromFile": {
+                "type": "int",
+                "description": "file (y) coordinate the piece moved from."
+            },
+            "toRank": {
+                "type": "int",
+                "description": "rank (x) coordinate the piece moved to."
+            },
+            "toFile": {
+                "type": "int",
+                "description": "file (y) coordinate the piece moved to."
+            }
+        }
+    },
+
+    "Player": {
+        "attributes": {
+            "pieces": {
+                "type": {
+                    "name": "list",
+                    "valueType": "Piece"
+                },
+                "description": "All the chess pieces currently in the game owned by this player"
+            },
+            "fileDirection": {
+                "type": "int",
+                "description": "The direction your checkers must go along the file (y) axis until they reach the other side."
+            }
+        }
+    }
+}
