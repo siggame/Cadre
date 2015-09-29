@@ -47,15 +47,6 @@ The naming scheme is simple, *French*:
 
 Clients in Ruby, PHP, D, and Go are easily possible. In fact, so long as the language support json and tcp communication it should be easy to add a client in that language to this framework.
 
-## Example
+## How to Play
 
-I've put up an example game server ([Cerveau](https://github.com/JacobFischer/Cerveau)) at:
-
-http://home.jacobfischer.me:3000/
-
-Please don't try to crash it. This is Proof of Concept level, not completely stable.
-
-## Documentation.
-
-The built in server generates "generic" documentation akin to psedu-code. However all clients should generate doc strings for all classes/functions/attributes as appriopriate for that language, which then the auto-doc tool [Dossier](https://github.com/JacobFischer/Dossier) can generate the documentation to html files.
-
+For a detailed tutorial on how to play games using this framework see the `howToPlay.md` file alongside this README.
