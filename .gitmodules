@@ -1,30 +1,30 @@
 [submodule "Cerveau"]
 	path = Cerveau
-	url = https://github.com/JacobFischer/Cerveau.git
+	url = https://github.com/siggame/Cerveau.git
 [submodule "Joueur.py"]
 	path = Joueur.py
-	url = https://github.com/JacobFischer/Joueur.py
+	url = https://github.com/siggame/Joueur.py
 [submodule "Joueur.js"]
 	path = Joueur.js
-	url = https://github.com/JacobFischer/Joueur.js
+	url = https://github.com/siggame/Joueur.js
 [submodule "Creer"]
 	path = Creer
-	url = https://github.com/JacobFischer/Creer
+	url = https://github.com/siggame/Creer
 [submodule "Joueur.lua"]
 	path = Joueur.lua
-	url = https://github.com/JacobFischer/Joueur.lua.git
+	url = https://github.com/siggame/Joueur.lua.git
 [submodule "Joueur.cs"]
 	path = Joueur.cs
-	url = https://github.com/JacobFischer/Joueur.cs.git
+	url = https://github.com/siggame/Joueur.cs.git
 [submodule "Joueur.java"]
 	path = Joueur.java
-	url = https://github.com/JacobFischer/Joueur.java.git
+	url = https://github.com/siggame/Joueur.java.git
 [submodule "Joueur.cpp"]
 	path = Joueur.cpp
-	url = https://github.com/JacobFischer/Joueur.cpp.git
+	url = https://github.com/siggame/Joueur.cpp.git
 [submodule "Dossier"]
 	path = Dossier
-	url = https://github.com/JacobFischer/Dossier.git
+	url = https://github.com/siggame/Dossier.git
 [submodule "Grappe"]
 	path = Grappe
-	url = https://github.com/JacobFischer/Grappe.git
+	url = https://github.com/siggame/Grappe.git
