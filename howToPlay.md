@@ -13,6 +13,7 @@ Now we'll get a server up and running for clients to play games on. The server, 
 So from inside the Cerveau director just run:
 
 ```
+npm install
 node main.js
 ```
 
