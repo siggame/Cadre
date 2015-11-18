@@ -1,0 +1,1 @@
+The time has finally come. It's time to burn this city to the ground! You "losely" control an anarchist group that finally has the political and material connections to bring this city down. The only problem is anarchy within the anarchists and it splinters under two leaders, both who want to burn the city down, well except the half they live on.
