@@ -1,34 +1,24 @@
 {
-    "_parentDatas": ["turnBased"],
+    "_parentDatas": ["twoPlayer", "turnBased"],
 
     "Game": {
         "name": "Chess",
-        "description": "The traditional 8x8 cboard with pieces.",
+        "description": "The traditional 8x8 chess board with pieces.",
 
         "attributes": {
-            "ranks": {
-                "type": "int",
-                "description": "How many chess tiles horizontally there are making rows.",
-                "default": 8
-            },
-            "files": {
-                "type": "int",
-                "description": "How many chess tiles vertically there are making columns. Traditionally represented by a letter for humans.",
-                "default": 8
-            },
             "pieces": {
                 "type": {
                     "name": "list",
                     "valueType": "Piece"
                 },
-                "description": "All the pieces currently in the game."
+                "description": "All the uncaptured pieces in the game."
             },
             "moves": {
                 "type": {
                     "name": "list",
-                    "valueType": "Move"
+                    "valueType": "string"
                 },
-                "description": "Each move made in the game. Indexed by turn number."
+                "description": " The list of moves in standard algebraic notation (SAN)."
             },
             "turnsToStalemate": {
                 "type": "int",
@@ -45,21 +35,24 @@
                 "description": "The player that controls this chess Piece."
             },
             "rank": {
-                "type": "int",
-                "description": "The rank (x) coordinate of the checker."
+                "type": "string",
+                "description": "The rank (x) coordinate of the checker represented as a letter [a-h]."
             },
             "file": {
                 "type": "int",
-                "description": "The file (y) coordinate of the checker."
+                "description": "The file (y) coordinate of the checker represented as a number [1-8]."
             },
             "type": {
                 "type": "string",
-                "description": "The type of chess piece this is, either: King, Queen, Knight, Rook, Bishop, or Pawn"
+                "description": "The type of chess piece this is, either: 'King', 'Queen', 'Knight', 'Rook', 'Bishop', or 'Pawn'"
+            },
+            "captured": {
+                "type": "boolean",
+                "description": "When the piece has been captured (removed from the board) this is true. Otherwise false."
             },
             "hasMoved": {
                 "type": "boolean",
-                "description": "If the checker has moved this turn.",
-                "default": false,
+                "description": "If the piece has moved from its starting position.",
                 "arenaInterest": "sum"
             }
         },
@@ -70,57 +63,25 @@
                 "arguments": [
                     {
                         "name": "rank",
-                        "type": "int",
-                        "description": "The rank (x) coordinate to move to."
+                        "type": "string",
+                        "description": "The rank (x) coordinate to move to. Must be [a-h]."
                     },
                     {
                         "name": "file",
                         "type": "int",
-                        "description": "The file (y) coordinate to move to."
+                        "description": "The file (y) coordinate to move to. Must be [1-8]."
+                    },
+                    {
+                        "name": "promotionType",
+                        "type": "string",
+                        "default": "",
+                        "description": "If this is a Pawn moving to the end of the board then this parameter is what to promote it to."
                     }
                 ],
                 "returns": {
-                    "type": "Move",
-                    "description": "Returns the Move with data about the move if successful. null otherwise."
+                    "type": "string",
+                    "description": "The standard algebraic notation (SAN) representation of the move if successful, empty string otherwise. In addition if you fail your move you lose."
                 }
-            }
-        }
-    },
-
-    "Move": {
-        "description": "A log of what happened the turn this move represents.",
-        "attributes": {
-            "turnNumber": {
-                "type": "int",
-                "description": "The turn on which this move happened."
-            },
-            "player": {
-                "type": "Player",
-                "description": "The player that made this move."
-            },
-            "piece": {
-                "type": "Piece",
-                "description": "The piece that was moved."
-            },
-            "promotionToType": {
-                "type": "string",
-                "description": "null or empty if there was no promotion, otherwise the type that the piece was promoted to."
-            },
-            "fromRank": {
-                "type": "int",
-                "description": "rank (x) coordinate the piece moved from."
-            },
-            "fromFile": {
-                "type": "int",
-                "description": "file (y) coordinate the piece moved from."
-            },
-            "toRank": {
-                "type": "int",
-                "description": "rank (x) coordinate the piece moved to."
-            },
-            "toFile": {
-                "type": "int",
-                "description": "file (y) coordinate the piece moved to."
             }
         }
     },
@@ -132,11 +93,23 @@
                     "name": "list",
                     "valueType": "Piece"
                 },
-                "description": "All the chess pieces currently in the game owned by this player"
+                "description": "All the unpcaptured chess pieces owned by this player."
+            },
+            "madeMove": {
+                "type": "boolean",
+                "description": "If the Player has made thier move for the turn. true means they can no longer move a piece this turn."
             },
             "fileDirection": {
                 "type": "int",
                 "description": "The direction your checkers must go along the file (y) axis until they reach the other side."
+            },
+            "color": {
+                "type": "String",
+                "description": "The color (side) of this player. Either 'White' or 'Black', with the 'White' player having the first move."
+            },
+            "inCheck": {
+                "type": "boolean",
+                "description": "true if this player is currently in check, and must move out of check."
             }
         }
     }
