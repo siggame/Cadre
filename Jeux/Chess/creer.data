@@ -20,9 +20,9 @@
                 },
                 "description": " The list of moves in standard algebraic notation (SAN)."
             },
-            "turnsToStalemate": {
+            "turnsToDraw": {
                 "type": "int",
-                "description": "How many turns until the game ends because no pawn has moved and no piece has been taken"
+                "description": "How many turns until the game ends because no pawn has moved and no piece has been taken."
             }
         }
     },
@@ -44,7 +44,7 @@
             },
             "type": {
                 "type": "string",
-                "description": "The type of chess piece this is, either: 'King', 'Queen', 'Knight', 'Rook', 'Bishop', or 'Pawn'"
+                "description": "The type of chess piece this is, either: 'King', 'Queen', 'Knight', 'Rook', 'Bishop', or 'Pawn'."
             },
             "captured": {
                 "type": "boolean",
@@ -97,14 +97,14 @@
             },
             "madeMove": {
                 "type": "boolean",
-                "description": "If the Player has made thier move for the turn. true means they can no longer move a piece this turn."
+                "description": "If the Player has made their move for the turn. true means they can no longer move a piece this turn."
             },
             "fileDirection": {
                 "type": "int",
                 "description": "The direction your checkers must go along the file (y) axis until they reach the other side."
             },
             "color": {
-                "type": "String",
+                "type": "string",
                 "description": "The color (side) of this player. Either 'White' or 'Black', with the 'White' player having the first move."
             },
             "inCheck": {
