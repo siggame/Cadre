@@ -2,7 +2,7 @@
 
 When preparing each client for competitors you will need to do a few things. You'll need to repeat these steps for every `Joueur.language/`, where `language` can be any of the programming languages
 
-1. Delete the `_creer/` directory. It's just templates to generate code. Competitors do not need that.
+1. Delete the `_creer/` directory, and the `_dossier.data` file if it exists. They are just templates to generate code. Competitors do not need that, as we should have already generated the files for them.
 2. Delete all other game directories in `games/` besides the game you are preparing this client for.
 3. Update in `testRun` the line `./run GAME_NAME ...` replacing GAME_NAME with the game's name.
 4. Update `README.md` replacing all GAME_NAMEs in there with the game name. Pay attention to casing, as `game_name` is probably the lowercased version of the game name (usually representing directory names).
