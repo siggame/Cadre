@@ -16,9 +16,9 @@
             "moves": {
                 "type": {
                     "name": "list",
-                    "valueType": "string"
+                    "valueType": "Move"
                 },
-                "description": " The list of moves in standard algebraic notation (SAN)."
+                "description": " The list of Moves that have occured, in order."
             },
             "turnsToDraw": {
                 "type": "int",
@@ -79,9 +79,47 @@
                     }
                 ],
                 "returns": {
-                    "type": "string",
-                    "description": "The standard algebraic notation (SAN) representation of the move if successful, empty string otherwise. In addition if you fail your move you lose."
+                    "type": "Move",
+                    "description": "The Move you did if successful, otherwise null if invalid. In addition if your move was invalid you will lose."
                 }
+            }
+        }
+    },
+
+    "Move": {
+        "description": "Contains all details about a Piece's move in the game.",
+        "attributes": {
+            "san": {
+                "type": "string",
+                "description": "The standard algebraic notation (SAN) representation of the move."
+            },
+            "piece": {
+                "type": "Piece",
+                "description": "The Piece that was moved."
+            },
+            "fromRank": {
+                "type": "string",
+                "description": "The rank the Piece moved from."
+            },
+            "fromFile": {
+                "type": "int",
+                "description": "The file the Piece moved from."
+            },
+            "toRank": {
+                "type": "string",
+                "description": "The rank the Piece moved to."
+            },
+            "toFile": {
+                "type": "int",
+                "description": "The file the Piece moved to."
+            },
+            "captured": {
+                "type": "Piece",
+                "description": "The Piece captured by this Move, null if no capture."
+            },
+            "promotion": {
+                "type": "string",
+                "description": "The Piece type this Move's piece was promoted to from a Pawn, empty string if no promotion occured."
             }
         }
     },
