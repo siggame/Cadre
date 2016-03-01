@@ -11,7 +11,7 @@
                     "name": "list",
                     "valueType": "Piece"
                 },
-                "description": "All the uncaptured pieces in the game."
+                "description": "All the uncaptured Pieces in the game."
             },
             "moves": {
                 "type": {
@@ -22,60 +22,60 @@
             },
             "turnsToDraw": {
                 "type": "int",
-                "description": "How many turns until the game ends because no pawn has moved and no piece has been taken."
+                "description": "How many turns until the game ends because no pawn has moved and no Piece has been taken."
             }
         }
     },
 
     "Piece": {
-        "description": "A chess piece",
+        "description": "A chess piece.",
         "attributes": {
             "owner": {
                 "type": "Player",
                 "description": "The player that controls this chess Piece."
             },
-            "rank": {
-                "type": "string",
-                "description": "The rank (x) coordinate of the checker represented as a letter [a-h]."
-            },
             "file": {
+                "type": "string",
+                "description": "The file (column) coordinate of the Piece represented as a letter [a-h], with 'a' starting at the left of the board."
+            },
+            "rank": {
                 "type": "int",
-                "description": "The file (y) coordinate of the checker represented as a number [1-8]."
+                "description": "The rank (row) coordinate of the Piece represented as a number [1-8], with 1 starting at the bottom of the board."
             },
             "type": {
                 "type": "string",
-                "description": "The type of chess piece this is, either: 'King', 'Queen', 'Knight', 'Rook', 'Bishop', or 'Pawn'."
+                "description": "The type of chess Piece this is, either: 'King', 'Queen', 'Knight', 'Rook', 'Bishop', or 'Pawn'."
             },
             "captured": {
                 "type": "boolean",
-                "description": "When the piece has been captured (removed from the board) this is true. Otherwise false."
+                "description": "When the Piece has been captured (removed from the board) this is true. Otherwise false."
             },
             "hasMoved": {
                 "type": "boolean",
-                "description": "If the piece has moved from its starting position.",
+                "description": "If the Piece has moved from its starting position.",
                 "arenaInterest": "sum"
             }
         },
         "functions": {
             "move": {
-                "description": "Moves the piece from its current location to the given rank and file.",
+                "description": "Moves the Piece from its current location to the given rank and file.",
                 "altersState": true,
                 "arguments": [
                     {
-                        "name": "rank",
+                        "name": "file",
                         "type": "string",
-                        "description": "The rank (x) coordinate to move to. Must be [a-h]."
+                        "description": "The file coordinate to move to. Must be [a-h]."
                     },
                     {
-                        "name": "file",
+                        "name": "rank",
                         "type": "int",
-                        "description": "The file (y) coordinate to move to. Must be [1-8]."
+                        "description": "The rank coordinate to move to. Must be [1-8]."
                     },
                     {
                         "name": "promotionType",
                         "type": "string",
                         "default": "",
-                        "description": "If this is a Pawn moving to the end of the board then this parameter is what to promote it to."
+                        "description": "If this is a Pawn moving to the end of the board then this parameter is what to promote it to. When used must be 'Queen', 'Knight', 'Rook', or 'Bishop'."
                     }
                 ],
                 "returns": {
@@ -98,19 +98,19 @@
                 "description": "The Piece that was moved."
             },
             "fromRank": {
-                "type": "string",
+                "type": "int",
                 "description": "The rank the Piece moved from."
             },
             "fromFile": {
-                "type": "int",
+                "type": "string",
                 "description": "The file the Piece moved from."
             },
             "toRank": {
-                "type": "string",
+                "type": "int",
                 "description": "The rank the Piece moved to."
             },
             "toFile": {
-                "type": "int",
+                "type": "string",
                 "description": "The file the Piece moved to."
             },
             "captured": {
@@ -119,7 +119,7 @@
             },
             "promotion": {
                 "type": "string",
-                "description": "The Piece type this Move's piece was promoted to from a Pawn, empty string if no promotion occured."
+                "description": "The Piece type this Move's Piece was promoted to from a Pawn, empty string if no promotion occured."
             }
         }
     },
@@ -131,15 +131,15 @@
                     "name": "list",
                     "valueType": "Piece"
                 },
-                "description": "All the unpcaptured chess pieces owned by this player."
+                "description": "All the unpcaptured chess Pieces owned by this player."
             },
             "madeMove": {
                 "type": "boolean",
-                "description": "If the Player has made their move for the turn. true means they can no longer move a piece this turn."
+                "description": "If the Player has made their move for the turn. true means they can no longer move a Piece this turn."
             },
-            "fileDirection": {
+            "rankDirection": {
                 "type": "int",
-                "description": "The direction your checkers must go along the file (y) axis until they reach the other side."
+                "description": "The direction your Pieces must go along the rank axis until they reach the other side."
             },
             "color": {
                 "type": "string",
@@ -147,7 +147,7 @@
             },
             "inCheck": {
                 "type": "boolean",
-                "description": "true if this player is currently in check, and must move out of check."
+                "description": "True if this player is currently in check, and must move out of check, false otherwise."
             }
         }
     }
