@@ -3,7 +3,7 @@
 
     "Game": {
         "name": "Checkers",
-        "description": "The simple version of American Checkers. An 8x8 board with 12 checkers on each side that must move diagonally to the opposing side until kinged. Very simple.",
+        "description": "The simple version of American Checkers. An 8x8 board with 12 checkers on each side that must move diagonally to the opposing side until kinged.",
 
         "attributes": {
             "boardWidth": {
@@ -79,11 +79,11 @@
                 }
             },
             "isMine": {
-                "description": "returns if the checker is owned by your player or not",
+                "description": "Returns if the checker is owned by your player or not.",
                 "altersState": false,
                 "returns": {
                     "type": "boolean",
-                    "description": "true if it is yours, false if it is not yours"
+                    "description": "True if it is yours, false if it is not yours."
                 }
             }
         }
@@ -96,11 +96,11 @@
                     "name": "list",
                     "valueType": "Checker"
                 },
-                "description": "All the checkers currently in the game owned by this player"
+                "description": "All the checkers currently in the game owned by this player."
             },
             "yDirection": {
                 "type": "int",
-                "description": "The direction your checkers must go along the y-axis until kinged"
+                "description": "The direction your checkers must go along the y-axis until kinged."
             }
         }
     }

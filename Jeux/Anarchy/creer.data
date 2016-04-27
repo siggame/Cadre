@@ -3,7 +3,7 @@
 
     "Game": {
         "name": "Anarchy",
-        "description": "Two player grid based game where each player tries to burn down the other player's buildings. Let it burn!",
+        "description": "Two player grid based game where each player tries to burn down the other player's buildings. Let it burn.",
         "attributes": {
             "mapWidth": {
                 "type": "int",
@@ -103,7 +103,7 @@
         "attributes": {
             "health": {
                 "type": "int",
-                "description": "How much health this building currently has. When this reaches 0 the Building has been burned down"
+                "description": "How much health this building currently has. When this reaches 0 the Building has been burned down."
             },
             "owner": {
                 "type": "Player",
@@ -111,19 +111,19 @@
             },
             "isHeadquarters": {
                 "type": "boolean",
-                "description": "true if this is the Headquarters of the owning player, false otherwise. Burning this down wins the game for the other Player."
+                "description": "True if this is the Headquarters of the owning player, false otherwise. Burning this down wins the game for the other Player."
             },
             "bribed": {
                 "type": "boolean",
-                "description": "when true this building has already been bribed this turn and cannot be bribed again this turn."
+                "description": "When true this building has already been bribed this turn and cannot be bribed again this turn."
             },
             "x": {
                 "type": "int",
-                "description": "The location of the Building along the x-axis"
+                "description": "The location of the Building along the x-axis."
             },
             "y": {
                 "type": "int",
-                "description": "The location of the Building along the y-axis"
+                "description": "The location of the Building along the y-axis."
             },
             "fire": {
                 "type": "int",
@@ -200,7 +200,7 @@
                 ],
                 "returns": {
                     "type": "boolean",
-                    "description": "true if the bribe worked, false otherwise"
+                    "description": "True if the bribe worked, false otherwise."
                 }
             }
         }
@@ -222,7 +222,7 @@
                 ],
                 "returns": {
                     "type": "boolean",
-                    "description": "true if the rotation worked, false otherwise."
+                    "description": "True if the rotation worked, false otherwise."
                 }
             },
             "intensify": {
@@ -237,7 +237,7 @@
                 ],
                 "returns": {
                     "type": "boolean",
-                    "description": "true if the intensity was changed, false otherwise"
+                    "description": "True if the intensity was changed, false otherwise."
                 }
             }
         }
@@ -269,7 +269,7 @@
         "attributes": {
             "direction": {
                 "type": "string",
-                "description": "The direction the wind will blow fires in. Can be 'north', 'east', 'south', or 'west'"
+                "description": "The direction the wind will blow fires in. Can be 'north', 'east', 'south', or 'west'."
             },
             "intensity": {
                 "type": "int",
