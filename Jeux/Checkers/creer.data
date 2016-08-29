@@ -36,6 +36,22 @@
         }
     },
 
+    "AI": {
+        "functions": {
+            "gotCaptured": {
+                "description": "This is called whenever your checker gets captured (during an opponent's turn).",
+                "arguments": [
+                    {
+                        "type": "Checker",
+                        "name": "checker",
+                        "description": "The checker that was captured.",
+                        "//": "this argument exists mostly as a template for creer templates for an AI function with arguments, and that returns nothing"
+                    }
+                ]
+            }
+        }
+    },
+
     "Checker": {
         "description": "A checker on the game board.",
         "attributes": {
