@@ -22,9 +22,6 @@
 [submodule "Joueur.cpp"]
 	path = Joueur.cpp
 	url = https://github.com/siggame/Joueur.cpp.git
-[submodule "Dossier"]
-	path = Dossier
-	url = https://github.com/siggame/Dossier.git
-[submodule "Grappe"]
-	path = Grappe
-	url = https://github.com/siggame/Grappe.git
+[submodule "Viseur"]
+	path = Viseur
+	url = https://github.com/siggame/Viseur.git
