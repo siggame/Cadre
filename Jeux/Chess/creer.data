@@ -23,6 +23,10 @@
             "turnsToDraw": {
                 "type": "int",
                 "description": "How many turns until the game ends because no pawn has moved and no Piece has been taken."
+            },
+            "fen": {
+                "type": "string",
+                "description": "Forsyth–Edwards Notation, a notation that describes the game board."
             }
         }
     },
