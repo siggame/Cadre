@@ -18,7 +18,7 @@
                     "name": "list",
                     "valueType": "Move"
                 },
-                "description": " The list of Moves that have occured, in order."
+                "description": "The list of Moves that have occurred, in order."
             },
             "turnsToDraw": {
                 "type": "int",
@@ -123,7 +123,7 @@
             },
             "promotion": {
                 "type": "string",
-                "description": "The Piece type this Move's Piece was promoted to from a Pawn, empty string if no promotion occured."
+                "description": "The Piece type this Move's Piece was promoted to from a Pawn, empty string if no promotion occurred."
             }
         }
     },
@@ -135,7 +135,7 @@
                     "name": "list",
                     "valueType": "Piece"
                 },
-                "description": "All the unpcaptured chess Pieces owned by this player."
+                "description": "All the uncaptured chess Pieces owned by this player."
             },
             "madeMove": {
                 "type": "boolean",
