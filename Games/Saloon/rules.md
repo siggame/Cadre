@@ -82,6 +82,8 @@ The `Cowboy` is your main unit type. They can `move(tile)`, where `tile` is the 
 
 The goal is to have your `Cowboy`s `play(piano)`, where `piano` is a Piano. Every time they play an adjacent piano `Furnishing`, they increase their `owner`'s score by 1. When they do this their `turnsBusy` is set to 1, and their `focus` is set to 0. Additionally, the Piano being played is damaged by 1 and its `isPlaying` is set to `true`. Pianos can only be played once per turn.
 
+`Cowboy`s start with 10 health, and can take damage from hazards, Sharpshooters, Brawlers, and called in Young Guns.
+
 ### Drunkenness
 
 ![A drunk Cowboy](http://i.imgur.com/3RCSkB2.png)
