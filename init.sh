@@ -4,5 +4,5 @@
 # master branch for each subrepo
 
 git submodule update --init --recursive
-exec ./fordirs.sh Cerveau/ Creer/ Visuer/ Joueur.* run git checkout master
+exec ./fordirs.sh Cerveau/ Creer/ Viseur/ Joueur.* run git checkout master
 exec ./fordirs.sh Cerveau/ Creer/ Viseur/ Joueur.* run git pull
