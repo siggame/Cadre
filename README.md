@@ -52,10 +52,8 @@ For a detailed tutorial on how to play games using this framework see the `howTo
 
 ## Other Notes
 
-All the submodules are intended to be kept at the most recent commit on the master branch. To easily checkout them all on master do:
+All the submodules are intended to be kept at the most recent commit on the master branch. To easily checkout them all on master just use the init.sh script:
 
 ```
-git clone --recursive https://github.com/siggame/Cadre.git
-cd Cadre
-git submodule foreach --recursive git checkout master
+./init.sh
 ```
