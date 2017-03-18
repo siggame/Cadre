@@ -1,0 +1,89 @@
+_parentDatas:
+- twoPlayer
+- turnBased
+
+Game:
+  name: Checkers
+  description: The simple version of American Checkers. An 8x8 board with 12 checkers
+    on each side that must move diagonally to the opposing side until kinged.
+  attributes:
+    boardWidth:
+      type: int
+      description: The width of the board for X component of a checker.
+      default: 8
+    boardHeight:
+      type: int
+      description: The height of the board for the Y component of a checker.
+      default: 8
+    checkers:
+      type: Checker[]
+      description: All the checkers currently in the game.
+    checkerMoved:
+      type: Checker
+      description: The checker that last moved and must be moved because only one
+        checker can move during each players turn.
+    checkerMovedJumped:
+      type: boolean
+      description: If the last checker that moved jumped, meaning it can move again.
+
+AI:
+  functions:
+    # this argument exists mostly as a template for creer templates for an AI function with arguments, and that returns nothing
+    gotCaptured:
+      description: This is called whenever your checker gets captured (during an opponent's
+        turn).
+      arguments:
+      - type: Checker
+        name: checker
+        description: The checker that was captured.
+
+Player:
+  attributes:
+    checkers:
+      type: Checker[]
+      description: All the checkers currently in the game owned by this player.
+    yDirection:
+      type: int
+      description: The direction your checkers must go along the y-axis until kinged.
+
+
+# new GameObjects
+
+Checker:
+  description: A checker on the game board.
+  attributes:
+    owner:
+      type: Player
+      description: The player that controls this Checker.
+    x:
+      type: int
+      description: The x coordinate of the checker.
+    'y':
+      type: int
+      description: The y coordinate of the checker.
+    kinged:
+      type: boolean
+      description: If the checker has been kinged and can move backwards.
+      default: false
+  functions:
+    move:
+      description: Moves the checker from its current location to the given (x, y).
+      arguments:
+      - name: x
+        type: int
+        description: The x coordinate to move to.
+      - name: 'y'
+        type: int
+        description: The y coordinate to move to.
+      returns:
+        type: Checker
+        description: Returns the same checker that moved if the move was successful. null otherwise.
+        invalidValue: null
+    # this is a silly function showing client side logic that does not effect game state
+    isMine:
+      description: Returns if the checker is owned by your player or not.
+      altersState: false
+      returns:
+        type: boolean
+        description: True if it is yours, false if it is not yours.
+        invalidValue: false # doesn't matter really, won't ever be invalid

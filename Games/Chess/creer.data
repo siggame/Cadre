@@ -84,7 +84,8 @@
                 ],
                 "returns": {
                     "type": "Move",
-                    "description": "The Move you did if successful, otherwise null if invalid. In addition if your move was invalid you will lose."
+                    "description": "The Move you did if successful, otherwise null if invalid. In addition if your move was invalid you will lose.",
+                    "invalidValue": null
                 }
             }
         }

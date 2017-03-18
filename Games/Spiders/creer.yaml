@@ -1,0 +1,251 @@
+_parentDatas:
+- twoPlayer
+- turnBased
+
+Game:
+  name: Spiders
+  description: There's an infestation of enemy spiders challenging your queen broodmother spider! Protect her and attack the other broodmother in this turn based, node based, game.
+  attributes:
+    nests:
+      description: Every Nest in the game.
+      type: Nest[]
+    webs:
+      description: Every Web in the game.
+      type: Web[]
+    movementSpeed:
+      description: The speed at which Spiderlings move on Webs.
+      type: int
+    weaveSpeed:
+      description: The speed at which Weavers work to do strengthens and weakens on Webs.
+      type: int
+    cutSpeed:
+      description: The speed at which Cutters work to do cut Webs.
+      type: int
+    spitSpeed:
+      description: The speed at which Spitters work to spit new Webs.
+      type: int
+    weavePower:
+      description: How much web strength is added or removed from Webs when they are weaved.
+      type: int
+    initialWebStrength:
+      description: The starting strength for Webs.
+      type: int
+    eggsScalar:
+      description: Constant used to calculate how many eggs BroodMothers get on their owner's turns.
+      type: float
+
+Player:
+  attributes:
+    spiders:
+      type: Spider[]
+      description: All the Spiders owned by this player.
+    broodMother:
+      type: BroodMother
+      description: This player's BroodMother. If it dies they lose the game.
+    maxSpiderlings:
+      description: The max number of Spiderlings players can spawn.
+      type: int
+
+
+# new GameObjects
+
+Nest:
+  description: A location (node) connected to other Nests via Webs (edges) in the game that Spiders can converge on, regardless of owner.
+  attributes:
+    webs:
+      description: Webs that connect to this Nest.
+      type: Web[]
+    spiders:
+      description: All the Spiders currently located on this Nest.
+      type: Spider[]
+    x:
+      description: The X coordinate of the Nest. Used for distance calculations.
+      type: int
+    'y':
+      description: The Y coordinate of the Nest. Used for distance calculations.
+      type: int
+
+Web:
+  description: A connection (edge) to a Nest (node) in the game that Spiders can converge on (regardless of owner). Spiders can travel in either direction on Webs.
+  attributes:
+    nestA:
+      description: The first Nest this Web is connected to.
+      type: Nest
+    nestB:
+      description: The second Nest this Web is connected to.
+      type: Nest
+    spiderlings:
+      description: All the Spiderlings currently moving along this Web.
+      type: Spiderling[]
+    strength:
+      description: How much weight this Web can take before snapping and destroying itself and all the Spiders on it.
+      type: int
+    load:
+      description: How much weight this Web currently has on it, which is the sum of all its Spiderlings weight.
+      type: int
+    length:
+      description: How long this Web is, i.e., the distance between its nestA and nestB.
+      type: float
+
+Spider:
+  description: A Spider in the game. The most basic unit.
+  attributes:
+    owner:
+      description: The Player that owns this Spider, and can command it.
+      type: Player
+    nest:
+      description: The Nest that this Spider is currently on. Null when moving on a Web.
+      type: Nest
+    isDead:
+      description: If this Spider is dead and has been removed from the game.
+      type: boolean
+
+BroodMother:
+  parentClasses:
+  - Spider
+  description: The Spider Queen. She alone can spawn Spiderlings for each Player, and if she dies the owner loses.
+  attributes:
+    health:
+      description: How much health this BroodMother has left. When it reaches 0, she dies and her owner loses.
+      type: int
+    eggs:
+      description: How many eggs the BroodMother has to spawn Spiderlings this turn.
+      type: float
+  functions:
+    consume:
+      description: Consumes a Spiderling of the same owner to regain some eggs to spawn more Spiderlings.
+      arguments:
+      - name: spiderling
+        type: Spiderling
+        description: The Spiderling to consume. It must be on the same Nest as this BroodMother.
+      returns:
+        type: boolean
+        description: True if the Spiderling was consumed. False otherwise.
+        invalidValue: false
+    spawn:
+      description: Spawns a new Spiderling on the same Nest as this BroodMother, consuming
+        an egg.
+      arguments:
+      - name: spiderlingType
+        description: The string name of the Spiderling class you want to Spawn. Must be 'Spitter', 'Weaver', or 'Cutter'.
+        type: string
+      returns:
+        description: The newly spwaned Spiderling if successful. Null otherwise.
+        type: Spiderling
+        invalidValue: null
+
+Spiderling:
+  parentClasses:
+  - Spider
+  description: A Spider spawned by the BroodMother.
+  attributes:
+    busy:
+      description: When empty string this Spiderling is not busy, and can act. Otherwise a string representing what it is busy with, e.g. 'Moving', 'Attacking'.
+      type: string
+    workRemaining:
+      description: How much work needs to be done for this Spiderling to finish being busy. See docs for the Work forumla.
+      type: float
+    numberOfCoworkers:
+      description: The number of Spiderlings busy with the same work this Spiderling is doing, speeding up the task.
+      type: int
+    movingOnWeb:
+      description: The Web this Spiderling is using to move. Null if it is not moving.
+      type: Web
+    movingToNest:
+      description: The Nest this Spiderling is moving to. Null if it is not moving.
+      type: Nest
+  functions:
+    move:
+      description: Starts moving the Spiderling across a Web to another Nest.
+      arguments:
+      - name: web
+        type: Web
+        description: The Web you want to move across to the other Nest.
+      returns:
+        type: boolean
+        description: True if the move was successful, false otherwise.
+        invalidValue: false
+    attack:
+      description: Attacks another Spiderling
+      arguments:
+      - name: spiderling
+        type: Spiderling
+        description: The Spiderling to attack.
+      returns:
+        type: boolean
+        description: True if the attack was successful, false otherwise.
+        invalidValue: false
+
+Spitter:
+  parentClasses:
+  - Spiderling
+  description: A Spiderling that creates and spits new Webs from the Nest it is on to another Nest, connecting them.
+  attributes:
+    spittingWebToNest:
+      description: The Nest that this Spitter is creating a Web to spit at, thus connecting them. Null if not spitting.
+      type: Nest
+  functions:
+    spit:
+      description: Creates and spits a new Web from the Nest the Spitter is on to
+        another Nest, connecting them.
+      arguments:
+      - name: nest
+        type: Nest
+        description: The Nest you want to spit a Web to, thus connecting that Nest and the one the Spitter is on.
+      returns:
+        type: boolean
+        description: True if the spit was successful, false otherwise.
+        invalidValue: false
+
+Weaver:
+  parentClasses:
+  - Spiderling
+  description: A Spiderling that can alter existing Webs by weaving to add or remove silk from the Webs, thus altering its strength.
+  attributes:
+    strengtheningWeb:
+      description: The Web that this Weaver is strengthening. Null if not strengthening.
+      type: Web
+    weakeningWeb:
+      description: The Web that this Weaver is weakening. Null if not weakening.
+      type: Web
+  functions:
+    strengthen:
+      description: Weaves more silk into an existing Web to strengthen it.
+      arguments:
+      - name: web
+        type: Web
+        description: The web you want to strengthen. Must be connected to the Nest this Weaver is currently on.
+      returns:
+        type: boolean
+        description: True if the strengthen was successfully started, false otherwise.
+        invalidValue: false
+    weaken:
+      description: Weaves more silk into an existing Web to strengthen it.
+      arguments:
+      - name: web
+        type: Web
+        description: The web you want to weaken. Must be connected to the Nest this Weaver is currently on.
+      returns:
+        type: boolean
+        description: True if the weaken was successfully started, false otherwise.
+        invalidValue: false
+
+Cutter:
+  parentClasses:
+  - Spiderling
+  description: A Spiderling that can cut existing Webs.
+  attributes:
+    cuttingWeb:
+      description: The Web that this Cutter is trying to cut. Null if not cutting.
+      type: Web
+  functions:
+    cut:
+      description: Cuts a web, destroying it, and any Spiderlings on it.
+      arguments:
+      - name: web
+        type: Web
+        description: The web you want to Cut. Must be connected to the Nest this Cutter is currently on.
+      returns:
+        type: boolean
+        description: True if the cut was successfully started, false otherwise.
+        invalidValue: false
