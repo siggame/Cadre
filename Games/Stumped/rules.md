@@ -54,7 +54,7 @@ Beavers have the following attributes:
 
 In addition, Beavers can do things. Such eager beavers!
 
-* **Move**: Moves the Beaver to a nearby adjacent Tile. Costs 2 Actions, or 1 when moving down a river, or 3 when moving up a river.
+* **Move**: Moves the Beaver to a nearby adjacent Tile. Costs 2 Moves, or 1 when moving down a river, or 3 when moving up a river.
 * **Harvest**: Chews on a Tree or munches on Food, must be adjacent.
 * **Attack**: Attacks another Beaver (must be adjacent) for damage to their health.
 * **Build Lodge**: Requires exponential cost. branches to use, and establishes a Lodge on this Tile. The first lodge is free.
