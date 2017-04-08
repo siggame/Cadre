@@ -57,7 +57,7 @@ In addition, Beavers can do things. Such eager beavers!
 * **Move**: Moves the Beaver to a nearby adjacent Tile. Costs 2 Moves, or 1 when moving down a river, or 3 when moving up a river.
 * **Harvest**: Chews on a Tree or munches on Food, must be adjacent.
 * **Attack**: Attacks another Beaver (must be adjacent) for damage to their health.
-* **Build Lodge**: Requires exponential cost. branches to use, and establishes a Lodge on this Tile. The first lodge is free.
+* **Build Lodge**: Requires an exponential cost of branches to use, and establishes a Lodge on this Tile.
 * **Drop**: Drops the some branches/food this Beaver is holding onto the Beavers current tile or a ajacent one. Dropped food in water disappear instantly. Drops branches do not. Food dropped on land die off 1 per turn.
 * **Pickup**: Picks up all the branches/food from the Tile the Beaver is on (must not be holding anything)
 
