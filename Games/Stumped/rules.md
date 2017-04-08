@@ -39,7 +39,7 @@ If a Resource is harvested, it loses 1 health and produces `(2)*(spawner.health)
 
 ### Beavers
 
-Beavers are the the main unit. These cute critters are the things you control to manipulate the map. If you have less than 10 beavers, beavers are free. Otherwise they cost servings of food. Food must first be dropped at a lodge and then the player can use the tile that the lodge is on to spawn a new beaver.
+Beavers are the the main unit. These cute critters are the things you control to manipulate the map. If you have less than 10 beavers, beavers are free. Otherwise they cost servings of food. Food must first be dropped at a lodge and then the player can use the tile that the lodge is on to spawn a new beaver. Before the newly spawned beaver can do anything, they need to be offically recruited to your team. This means whenever a beaver is recruited, you won't be able to do anything with it until 1 turn has passed. The variable `beaver.recruited` will return a bool value telling you whether or not the calling beaver has been recruited.
 
 Beavers have the following attributes:
 
