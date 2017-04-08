@@ -20,24 +20,26 @@ The basic map component.
 * **Spawner**: The Resource on this Tile, if present
 * **Lodge Owner**: The owner of the beaver Lodge on this Tile, if anyone
 * **Branches**: The number of branches dropped on this Tile, if any
+* **Lodge**: A Lodge is completed when a requisite amount of branches are gathered on a tile, and can spawn beavers
 * **Food**: The amount of food dropped on this Tile, if any
 
-If a Tile has been turned into a lodge by a player, that player can spawn beavers there. Any resource on that tile is destroyed by the creation of the lodge however. A lodge is complete when the tile has been brought 100 branches.
+The player will be spawned with one branch and the first lodge will cost 1 branch to build. If a Tile has been turned into a lodge by a player, that player can spawn beavers there. A lodge will cost `ceiling(`**phi**`^n)`, where `n` is the current number of lodges controlled by a player and **phi** is the golden ratio (1.61803...). A lodge has health determined by the current number of branches on it. As soon as the branches on a lodge tile reaches 0, then the lodge is destroyed.
+
+_Note_: The **phi** constant is made available during gameplay.
 
 ### Resource
 
-A resource is basically something on the map that generates branches/food and can be harvested, e.g. a Tree or group of cattails.
+A resource is basically something on the map that produces branches/food and can be harvested, e.g. a Tree or group of cattails.
 
 * **Health**: How much of the "thing" there is. This increases once per turn if not harvested.
 * **Tile**: The location of this Resource
 * **Type**: The type of item you get from this Resource, either 'Food' or 'Branch'
 
-If a Resource is harvested, it is is damaged for 1 and generates **phi**^`h` items, where `h` was the health of the resource prior to chopping it and **phi** is the golden ratio (1.61803...). When a resource it not damaged during a turn it grows by 1.  
-_Note_: The **phi** constant is made available during gameplay.
+If a Resource is harvested, it loses 1 health and produces 2^`h` items, where `h` was the health of the resource prior to chopping it; with a maximum health of 5. When a resource it not damaged during a turn it grows by 1.
 
 ### Beavers
 
-Beavers are the the main unit. These cute critters are the things you control to manipulate the map. If you have less than 10 beavers, beavers are free. Otherwise they cost servings of food. Food must be at the lodge they are spawned at.
+Beavers are the the main unit. These cute critters are the things you control to manipulate the map. If you have less than 10 beavers, beavers are free. Otherwise they cost servings of food. Food must first be dropped at a lodge and then the player can use the tile that the lodge is on to spawn a new beaver.
 
 Beavers have the following attributes:
 
@@ -53,11 +55,11 @@ Beavers have the following attributes:
 In addition, Beavers can do things. Such eager beavers!
 
 * **Move**: Moves the Beaver to a nearby adjacent Tile. Costs 2 Actions, or 1 when moving down a river, or 3 when moving up a river.
-* **Harvest** Chews on a Tree or munches on Food, must be adjacent.
-* **Attack** Attacks another Beaver (must be adjacent) for damage to their health.
-* **Build Lodge** Requires exponential cost. branches to use, and establishes a Lodge on this Tile. The first lodge is free.
-* **Drop** Drops the some branches/food this Beaver is holding onto the Beavers current tile or a ajacent one. Dropped food in water disappear instantly. Drops branches do not. Food dropped on land die off 1 per turn.
-* **Pickup** Picks up all the branches/food from the Tile the Beaver is on (must not be holding anything)
+* **Harvest**: Chews on a Tree or munches on Food, must be adjacent.
+* **Attack**: Attacks another Beaver (must be adjacent) for damage to their health.
+* **Build Lodge**: Requires exponential cost. branches to use, and establishes a Lodge on this Tile. The first lodge is free.
+* **Drop**: Drops the some branches/food this Beaver is holding onto the Beavers current tile or a ajacent one. Dropped food in water disappear instantly. Drops branches do not. Food dropped on land die off 1 per turn.
+* **Pickup**: Picks up all the branches/food from the Tile the Beaver is on (must not be holding anything)
 
 ### Job
 
@@ -78,20 +80,20 @@ A Job is a container class that holds base information about a Beaver's job.
 
 _(assume basic beaver stats if not stated)_
 
-| Beaver Type | Cost | Damage | Health | Moves | Actions | Chopping | Munching | Distraction (cost:duration) | Carry Capacity |
+| Beaver Type | Cost | Damage | Health | Moves | Actions | Chopping | Munching | Distraction (duration) | Carry Capacity |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| **Basic** | 3 | 1 | 3 | 3 | 1 | 1 | 1 | no distract | 3 |
-| **Fighter** | 12 | 3 | 4 | 2 | | | | | 6 |
-| **Bulky** | 12 | 2 | 10 | | 2 | | | | | 2 |
-| **Hungry** | 12 | | | | | | 3 | 2 : 1 | |
-| **Swift** | 6 | | | 5 | | | 2 | | 2 |
-| **Hot Lady** | 15 | | | | | | | 1 : 3 | 1 |
-| **Builder** | 6 | | | | | 3 | | | |
+| **Basic** | 3 | 1 | 3 | 3 | 1 | 1 | 1 | 0 | 3 |
+| **Fighter** | 12 | 3 | 4 | 2 | 1 | 1 | 1 | 0 | 6 |
+| **Bulky** | 12 | 2 | 10 | 2 | 2 | 1 | 1 | 1 | 0 | 2 |
+| **Hungry** | 8 | 1 | 3 | 3 | 1 | 1 | 3 | 2 | 15 |
+| **Swift** | 6 | 1 | 3 | 5 | 1 | 1 | 2 | 0 | 2 |
+| **Hot Lady** | 15 | 1 | 3 | 3 | 1 | 1 | 1 | 3 | 1 |
+| **Builder** | 6 | 1 | 3 | 3 | 1 | 3 | 1 | 0 | 3 |
 
 ## Other
 
 #### Start
-you get 1 beaver and your first lodge is free.
+At the start of the game, you get 1 beaver that is holding 1 branch for use to build your first lodge.
 
 #### Win Conditions
 
