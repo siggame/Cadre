@@ -33,7 +33,7 @@ A resource is basically something on the map that produces branches/food and can
 
 * **Health**: How much of the "thing" there is. This increases once per turn if not harvested.
 * **Tile**: The location of this Resource
-* **Type**: The type of item you get from this Resource, either 'Food' or 'Branch'
+* **Type**: The type of item you get from this Resource, either 'food' or 'branches'
 
 If a Resource is harvested, it loses 1 health and produces `(2)*(spawner.health)*(skillScalar)` items, where `spawner.health` was the health of the resource prior to chopping it (with a maximum health of 5) and skillScalar will be either the beavers munching or chopping power depending on the spawner. When a resource it not damaged during a turn it grows by 1.
 
