@@ -88,7 +88,7 @@ _(assume basic beaver stats if not stated)_
 | **Hungry** | 8 | 1 | 3 | 3 | 1 | 1 | 3 | 2 | 15 |
 | **Swift** | 6 | 1 | 3 | 5 | 1 | 1 | 2 | 0 | 2 |
 | **Hot Lady** | 15 | 1 | 3 | 3 | 1 | 1 | 1 | 3 | 1 |
-| **Builder** | 6 | 1 | 3 | 3 | 1 | 3 | 1 | 0 | 3 |
+| **Builder** | 6 | 1 | 3 | 3 | 1 | 3 | 1 | 0 | 15 |
 
 ## Other
 
