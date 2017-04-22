@@ -109,7 +109,7 @@ The game server logic is largely filling in the functions you defined in the `cr
 
 In general try as hard as possible to invalidate logic, like making sure the given input is valid, and if it is not return a string explaining why not. Then if all that is valid the `functionName` function will be executed, and you can assume the inputs are valid (as you validated them before).
 
-# Visualization
+### Visualization
 
 Each game object can be rendered on screen in it's `render()` function. Fill that in with PIXI.js code. A much more in-depth document for this is in the works.
 
