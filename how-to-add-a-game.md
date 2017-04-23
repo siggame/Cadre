@@ -35,7 +35,8 @@ Creer is out codegen, which means it generates code in all the various Cadre pro
 Now to see if you data file is syntactically valid, do the following from within the Creer directory:
 
 ```bash
-./run GAME_NAME -i ../Cerveau --test
+export GAME_NAME=`name of your game`
+./run ${GAME_NAME} -i ../Cerveau --test
 ```
 
 This will try to template the game files for the game server (Cerveau), but not write any files. Instead it just tests to make sure it can template the files correctly, which includes parsing your data file and making sure it is valid. If it is not, fix it however Creer complains at you.
@@ -43,8 +44,8 @@ This will try to template the game files for the game server (Cerveau), but not 
 Once your data file seems correct and the test passes, it's time to write the files! You can repeat this step any time you need to re-run Creer if you change your data structure
 
 ```bash
-./run GAME_NAME -i ../Cerveau ../Viseur -o ../ --merge
-./run GAME_NAME -i ../Joueur.* -o ../
+./run ${GAME_NAME} -i ../Cerveau ../Viseur -o ../ --merge
+./run ${GAME_NAME} -i ../Joueur.* -o ../
 ```
 
 `-i` are the input directories, and `-o` is the output. Note that it outputs based on input directory name, so `../Cerveau` will output to `../` + `Cerveau`. If you omit the `-o` flag Creer has an `output/` directory it dumps files in by default.
@@ -74,7 +75,7 @@ Now in each player's terminal run the following (we will use js for this example
 ```bash
 cd Joueur.js/
 make
-./run GAME_NAME
+./run ${GAME_NAME}
 ```
 
 All game clients have a Makefile, even if it does nothing. Then you tell it to run `GAME_NAME`, and it will ask the game server running on localhost on the default port to connect it to any game session.
@@ -97,7 +98,7 @@ Then the visualizer should show you your game in it's pure black screen glory! A
 
 ## Step 5: Development starts!
 
-At this point everything is "ready" and now humans need to step in and add some game logic. All Cadre projects follow the paradigm that game files are located in `/games/GAME_NAME/`.
+At this point everything is "ready" and now humans need to step in and add some game logic. All Cadre projects follow the paradigm that game files are located in `/games/${GAME_NAME}/`.
 
 ### Clients
 
