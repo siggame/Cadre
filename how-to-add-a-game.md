@@ -28,7 +28,7 @@ See the [readme in Creer][creer-readme] for more in-depth instructions on what t
 
 ## Step 2: Running Creer
 
-Creer is out codegen, which means it generates code in all the various Cadre projects based on the game structure you defined in Step 1. Pretty neat eh.
+Creer is our codegen, which means it generates code in all the various Cadre projects based on the game structure you defined in Step 1. Pretty neat eh.
 
 [Creer's readme][creer-readme] has more in depth instructions for what requirements it needs, so follow those.
 
@@ -82,7 +82,7 @@ All game clients have a Makefile, even if it does nothing. Then you tell it to r
 
 If they both connect successfully (and if it is a turn based game), the game will just consist of doing nothing for 500 turns, then someone will win via coin flip!
 
-It will probably also tell you your gamelog is available to view at `http://vis.siggame.io/` but that is a lie. the Viseur instance there has no concept of the new game you just made, so it can't render it.
+It will probably also tell you your gamelog is available to view at `http://vis.siggame.io/` but that is a lie. The Viseur instance there has no concept of the new game you just made, so it can't render your game.
 
 ## Step 4: "Visualizing" Your Game
 
