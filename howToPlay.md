@@ -5,10 +5,14 @@ This is a more in-depth tutorial on getting Cadre up and running with Client VS 
 First and foremost you'll need to clone Cadre and it's submodoules. the easiest way is with the recurisve flag with git:
 
 ```
-git clone --recursive git@github.com:JacobFischer/Cadre.git
+git clone git@github.com:siggame/Cadre.git
+cd Cadre
+./init.sh
 ```
 
-Now we'll get a server up and running for clients to play games on. The server, called [Cerveau](https://github.com/JacobFischer/Cerveau), runs on [Node.js](https://nodejs.org/en/). Make sure that is installed, then open a terminal in `Cadre/Cerveau/`.
+This clones the framework, and then checks out all the submodules to the latest version on their `master` branches.
+
+Now we'll get a server up and running for clients to play games on. The server, called [Cerveau](https://github.com/siggame/Cerveau), runs on [Node.js](https://nodejs.org/en/). Make sure that is installed, then open a terminal in `Cadre/Cerveau/`.
 
 So from inside the Cerveau director just run:
 
