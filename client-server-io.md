@@ -171,7 +171,7 @@ Sent from the game server instructing them to fulfill some order. Probably "runT
 ```json
 {
     "event":"order",
-    "data":{
+    "data": {
         "name":"runTurn",
         "index":0,
         "args":[]
@@ -194,8 +194,8 @@ Sent from a client to the server as the result of an "order" event. This is basi
 {
     "event": "finished",
     "data": {
-        orderIndex: 0,
-        returned: true,
+        "orderIndex": 0,
+        "returned": true,
     }
 }
 ```
@@ -298,7 +298,7 @@ The `data` will always be the JavaScript Error thrown. However it is expected Er
 
 ```json
 {
-    "event": "fatal"
+    "event": "fatal",
     "data": {
         "message": "An un-handled fatal error has occurred on the server."
     }
