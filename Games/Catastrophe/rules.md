@@ -59,7 +59,7 @@ A structure is a building that is on a tile. Each structure has its own function
 | Type | Materials Needed | Effect Radius | Effect |
 | --- | --- | --- | --- |
 | **"wall"** | 75 | 0 (N/A) | These can be used to defend a structure by forcing the enemy to break through the wall or walk around it. |
-| **"shelter"** | 50 | 1 (3x3) | Friendly units in range of shelters can change jobs when they're at max energy, and food can be dropped on a friendly shelter to add it to the player's food pool. Additionally, Gatherers can steal food from enemy shelters. |
+| **"shelter"** | 50 | 1 (3x3) | Food can be dropped on a friendly shelter to add it to the player's food pool. Additionally, Gatherers can steal food from enemy shelters. |
 | **"monument"** | 150 | 3 (7x7) | Friendly units in range of friendly monuments spend half as much energy per action. This does not apply to picking up resources. |
 | **"neutral"** | 200 (cannot be created) | 0 (N/A) | A structure that is owned by nobody. These can be deconstructed for materials. |
 | **"road"** | 0 (cannot be created) | 0 (N/A) | Roads cannot be destroyed or built on top of. Neutral fresh humans will walk across this every 15 days (30 turns). Roads are 2 wide to fit both of the neutral fresh humans. These cannot be attacked or deconstructed. |
@@ -95,7 +95,7 @@ Additionally, units can do the following:
 * **Pickup**: Picks up "materials" or "food" on an adjacent tile. Can be performed multiple times per turn. Does not count as an action. Costs 1 energy per item picked up.
 * **ChangeJob**: Changes this unit's job. It requires the Unit:
   * be at max energy (does not cost energy though, as in, it won't lose energy from changing jobs)
-  * must be next to the Cat Overlord to change its job.
+  * must be adjacent or diagonal to the Cat Overlord to change its job.
   * Additionally, the Unit cannot move after performing this action and will drop all of their "food" and "materials" when performing changing jobs (to safegaurd against Units carrying more than their carry limit).
 * **Rest**: Regenerates energy for the unit equal to this unit's job's `regenRate` value. Must be in range of a shelter. It regenerates twice as much energy if the Cat Overlord is in that shelter. However, it regenerates half as much energy if it is starving. Units cannot move after performing this action.
   * If the unit is starving and rests in a shelter with the Cat Overlord, they will regenerate energy equal to their `regenRate`.
