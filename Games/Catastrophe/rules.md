@@ -4,7 +4,7 @@ Note: If this file does not match what's in game, please let a SIG-Game develope
 
 ## The Map
 
-The map is a 25x18 grid based board. Tiles can contain structures on them. A unit can occupy the same space as some structures. Players will start on either side (left or right) of the map at a random height. A road will go through the center of the map, horizontally.
+The map is a 26x18 grid based board. Tiles can contain structures on them. A unit can occupy the same space as some structures. Players will start on either side (left or right) of the map at a random height. A road will go through the center of the map, horizontally.
 
 The player will be spawned on either side of the map with a shelter. Each player will have a friendly Cat Overlord in their shelter, and 3 friendly fresh humans. They can immediately change the fresh humans' jobs and send them out to gather resources.
 
