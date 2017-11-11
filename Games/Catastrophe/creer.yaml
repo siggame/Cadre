@@ -1,0 +1,288 @@
+_parentDatas:
+- twoPlayer
+- turnBased
+- tiled
+
+Game:
+  name: Catastrophe
+  description: Convert as many humans to as you can to survive in this post-apocalyptic wasteland.
+  attributes:
+    units:
+      description: Every Unit in the game.
+      type: Unit[]
+    structures:
+      description: Every Structure in the game.
+      type: Structure[]
+    jobs:
+      description: All the Jobs that Units can have in the game.
+      type: Job[]
+    catEnergyMult:
+      description: The multiplier for the amount of energy regenerated when resting in a shelter with the cat overlord.
+      type: float
+    starvingEnergyMult:
+      description: The multiplier for the amount of energy regenerated when resting while starving.
+      type: float
+    monumentCostMult:
+      description: The multiplier for the cost of actions when performing them in range of a monument. Does not effect pickup cost.
+      type: float
+    harvestCooldown:
+      description: The amount of turns it takes for a Tile that was just harvested to grow food again.
+      type: int
+    turnsToCreateHuman:
+      description: The number of turns between fresh humans being spawned on the road.
+      type: int
+    turnsToLowerHarvest:
+      description: The number of turns before the harvest rate is lowered (length of each season basically).
+      type: int
+    lowerHarvestAmount:
+      description: The amount that the harvest rate is lowered each season.
+      type: int
+    turnsBetweenHarvests:
+      description: After a food tile is harvested, the number of turns before it can be harvested again.
+      type: int
+    neutralMaterials:
+      description: The number of materials in a neutral Structure.
+      type: int
+    wallMaterials:
+      description: The number of materials in a wall.
+      type: int
+    shelterMaterials:
+      description: The number of materials in a shelter.
+      type: int
+    monumentMaterials:
+      description: The number of materials in a monument.
+      type: int
+
+Player:
+  attributes:
+    units:
+      description: Every Unit owned by this Player.
+      type: Unit[]
+    cat:
+      description: The overlord cat Unit owned by this Player.
+      type: Unit
+    upkeep:
+      description: The total upkeep of every Unit owned by this Player. If there isn't enough food for every Unit, all Units become starved and do not consume food.
+      type: int
+    structures:
+      description: Every Structure owned by this Player.
+      type: Structure[]
+    food:
+      description: The amount of food owned by this player.
+      type: int
+
+Tile:
+  attributes:
+    unit:
+      description: The Unit on this Tile if present, otherwise null.
+      type: Unit
+    structure:
+      description: The Structure on this Tile if present, otherwise null.
+      type: Structure
+    harvestRate:
+      description: The amount of food that can be harvested from this Tile per turn.
+      type: int
+    turnsToHarvest:
+      description: The amount of turns before this resource can be harvested.
+      type: int
+    materials:
+      description: The number of materials dropped on this Tile.
+      type: int
+    food:
+      description: The number of food dropped on this Tile.
+      type: int
+
+Structure:
+  description: A structure on a Tile.
+  attributes:
+    type:
+      description: The type of Structure this is ('shelter', 'monument', 'wall', 'road', 'neutral').
+      type: string
+    tile:
+      description: The Tile this Structure is on.
+      type: Tile
+    owner:
+      description: The owner of this Structure if any, otherwise null.
+      type: Player
+    materials:
+      description: The number of materials in this Structure. Once this number reaches 0, this Structure is destroyed.
+      type: int
+    effectRadius:
+      description: The range of this Structure's effect. For example, a radius of 1 means this Structure affects a 3x3 square centered on this Structure.
+      type: int
+      
+Unit:
+  description: A unit in the game.
+  attributes:
+    owner:
+      description: The Player that owns and can control this Unit, or null if the Unit is neutral.
+      type: Player
+    tile:
+      description: The Tile this Unit is on.
+      type: Tile
+    job:
+      description: The Job this Unit was recruited to do.
+      type: Job
+    moves:
+      description: How many moves this Unit has left this turn.
+      type: int
+    energy:
+      description: The amount of energy this Unit has (from 0.0 to 100.0).
+      type: float
+    squad:
+      description: The Units in the same squad as this Unit. Units in the same squad attack and defend together.
+      type: Unit[]
+    acted:
+      description: Whether this Unit has performed its action this turn.
+      type: boolean
+    food:
+      description: The amount of food this Unit is holding.
+      type: int
+    materials:
+      description: The amount of materials this Unit is holding.
+      type: int
+    starving:
+      description: Whether this Unit is starving. Starving Units regenerate energy at half the rate they normally would while resting.
+      type: boolean
+    turnsToDie:
+      description: The number of turns before this Unit dies. This only applies to neutral fresh humans created from combat. Otherwise, 0.
+      type: int
+    movementTarget:
+      description: The tile this Unit is moving to. This only applies to neutral fresh humans spawned on the road. Otherwise, the tile this Unit is on.
+      type: Tile
+  functions:
+    move:
+      description: Moves this Unit from its current Tile to an adjacent Tile.
+      arguments:
+      - name: tile
+        type: Tile
+        description: The Tile this Unit should move to.
+      returns:
+        type: boolean
+        description: True if it moved, false otherwise.
+        invalidValue: false
+    harvest:
+      description: Harvests the food on an adjacent Tile.
+      arguments:
+      - name: tile
+        type: Tile
+        description: The Tile you want to harvest.
+      returns:
+        type: boolean
+        description: True if successfully harvested, false otherwise.
+        invalidValue: false
+    attack:
+      description: Attacks an adjacent Tile. Costs an action for each Unit in this Unit's squad. Units in the squad without an action don't participate in combat. Units in combat cannot move afterwards. Attacking structures will not give materials.
+      arguments:
+      - name: tile
+        type: Tile
+        description: The Tile to attack.
+      returns:
+        type: boolean
+        description: True if successfully attacked, false otherwise.
+        invalidValue: false
+    convert:
+      description: Converts an adjacent Unit to your side.
+      arguments:
+      - name: tile
+        type: Tile
+        description: The Tile with the Unit to convert.
+      returns:
+        type: boolean
+        description: True if successfully converted, false otherwise.
+        invalidValue: false
+    construct:
+      description: Constructs a Structure on an adjacent Tile.
+      arguments:
+      - name: tile
+        type: Tile
+        description: The Tile to construct the Structure on. It must have enough materials on it for a Structure to be constructed.
+      - name: type
+        type: string
+        description: The type of Structure to construct on that Tile.
+      returns:
+        type: boolean
+        description: True if successfully constructed a structure, false otherwise.
+        invalidValue: false
+    deconstruct:
+      description: Removes materials from an adjacent Tile's Structure. You cannot deconstruct friendly structures (see Unit.attack).
+      arguments:
+      - name: tile
+        type: Tile
+        description: The Tile to deconstruct. It must have a Structure on it.
+      returns:
+        type: boolean
+        description: True if successfully deconstructed, false otherwise.
+        invalidValue: false
+    drop:
+      description: Drops some of the given resource on or adjacent to the Unit's Tile. Does not count as an action.
+      arguments:
+      - name: tile
+        type: Tile
+        description: The Tile to drop materials/food on.
+      - name: resource
+        type: string
+        description: The type of resource to drop ('material' or 'food').
+      - name: amount
+        type: int
+        description: The amount of the resource to drop. Amounts <= 0 will drop as much as possible.
+        default: 0
+      returns:
+        type: boolean
+        description: True if successfully dropped the resource, false otherwise.
+        invalidValue: false
+    pickup:
+      description: Picks up some materials or food on or adjacent to the Unit's Tile. Does not count as an action.
+      arguments:
+      - name: tile
+        type: Tile
+        description: The Tile to pickup materials/food from.
+      - name: resource
+        type: string
+        description: The type of resource to pickup ('material' or 'food').
+      - name: amount
+        type: int
+        description: The amount of the resource to pickup. Amounts <= 0 will pickup as much as possible.
+        default: 0
+      returns:
+        type: boolean
+        description: True if successfully picked up a resource, false otherwise.
+        invalidValue: false
+    changeJob:
+      description: Changes this Unit's Job. Must be at max energy (100.0) to change Jobs.
+      arguments:
+      - name: job
+        type: string
+        description: The name of the Job to change to.
+      returns:
+        type: boolean
+        description: True if successfully changed Jobs, false otherwise.
+        invalidValue: false
+    rest:
+      description: Regenerates energy. Must be in range of a friendly shelter to rest. Costs an action. Units cannot move after resting.
+      returns:
+        type: boolean
+        description: True if successfully rested, false otherwise.
+        invalidValue: false
+
+Job:
+  description: Information about a Unit's job.
+  attributes:
+    title:
+      description: The Job title.
+      type: string
+    moves:
+      description: The number of moves this Job can make per turn.
+      type: int
+    actionCost:
+      description: The amount of energy this Job normally uses to perform its actions.
+      type: float
+    regenRate:
+      description: The amount of energy normally regenerated when resting at a shelter.
+      type: float
+    carryLimit:
+      description: How many combined resources a Unit with this Job can hold at once.
+      type: int
+    upkeep:
+      description: The amount of food per turn this Unit consumes. If there isn't enough food for every Unit, all Units become starved and do not consume food.
+      type: int
