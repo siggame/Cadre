@@ -62,7 +62,7 @@ A structure is a building that is on a tile. Each structure has its own function
 | **"shelter"** | 50 | 1 (3x3) | Friendly units in range of shelters can change jobs when they're at max energy, and food can be dropped on a friendly shelter to add it to the player's food pool. Additionally, Gatherers can steal food from enemy shelters. |
 | **"monument"** | 150 | 3 (7x7) | Friendly units in range of friendly monuments spend half as much energy per action. This does not apply to picking up resources. |
 | **"neutral"** | 200 (cannot be created) | 0 (N/A) | A structure that is owned by nobody. These can be deconstructed for materials. |
-| **"road"** | 0 (cannot be created) | 0 (N/A) | Roads cannot be destroyed or built on top of. Neutral fresh humans will walk across this every 7 days. Roads are 2 wide to fit both of the neutral fresh humans. These cannot be attacked or deconstructed. |
+| **"road"** | 0 (cannot be created) | 0 (N/A) | Roads cannot be destroyed or built on top of. Neutral fresh humans will walk across this every 15 days. Roads are 2 wide to fit both of the neutral fresh humans. These cannot be attacked or deconstructed. |
 
 ### Unit
 
