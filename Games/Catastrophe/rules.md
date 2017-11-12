@@ -139,7 +139,7 @@ A Job is a container class that holds base information about a Unit's job.
 * **ActionCost**: The amount of energy it costs for this unit to perform an action.
 * **RegenRate**: How much energy this unit regenerates while resting. This is doubled if resting in a shelter the Cat Overlord is in range of.
 * **CarryLimit**: The total amount of combined materials/food this unit can carry at once.
-* **Upkeep**: The amount of food this unit consumes every turn.
+* **Upkeep**: The amount of food this unit consumes at the start of your turn.
 
 #### Specific Jobs
 
