@@ -143,6 +143,8 @@ A Job is a container class that holds base information about a Unit's job.
 
 #### Specific Jobs
 
+Here's the official stats used by the game server: https://github.com/siggame/Cerveau/blob/master/games/catastrophe/jobStats.json
+
 | Type (title) | Moves | Action Cost | Regen Rate | Carry Limit | Upkeep | Details |
 | --- | --- | --- | --- | --- | --- | --- |
 | **"cat overlord"** | 2 | N/A | 10/turn | 10 | 0 | Units who rest near a shelter with the cat overlord in it regenerate twice as much energy. This unit cannot change jobs. Units cannot change to this job.
