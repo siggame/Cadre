@@ -66,7 +66,7 @@ A structure is a building that is on a tile. Each structure has its own function
 
 ### Unit
 
-Units do all of the actions in the game. Aside from each player's Cat Overlord, all units can change to any job in the game (except "cat overlord") as long as they're in range of a shelter and at max energy. Most actions they perform cost energy. They can regenerate energy by resting in range of a shelter. Additionally, all units have a food upkeep cost. At the beginning of your turn, if you can pay your total unit upkeep, the upkeep will be deducted from your player's food stash and your units will be fed. If you can't pay for your unit upkeep, you will not lose food, and your units will become starving and will regenerate half as much energy that turn if they rest. New units can be obtained by converting neutral fresh humans to friendly ones and changing their job.
+Units do all of the actions in the game. Aside from each player's Cat Overlord, all units can change to any job in the game (except "cat overlord") as long as they're adjacent or diagonal to the Cat Overlord and at max energy. Most actions they perform cost energy. They can regenerate energy by resting in range of a shelter. Additionally, all units have a food upkeep cost. At the beginning of your turn, if you can pay your total unit upkeep, the upkeep will be deducted from your player's food stash and your units will be fed. If you can't pay for your unit upkeep, you will not lose food, and your units will become starving and will regenerate half as much energy that turn if they rest. New units can be obtained by converting neutral fresh humans to friendly ones and changing their job.
 
 Units have the following attributes:
 
