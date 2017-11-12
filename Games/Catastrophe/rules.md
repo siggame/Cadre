@@ -60,13 +60,13 @@ A structure is a building that is on a tile. Each structure has its own function
 | --- | --- | --- | --- |
 | **"wall"** | 75 | 0 (N/A) | These can be used to defend a structure by forcing the enemy to break through the wall or walk around it. |
 | **"shelter"** | 50 | 1 (3x3) | Food can be dropped on a friendly shelter to add it to the player's food pool. Additionally, Gatherers can steal food from enemy shelters. |
-| **"monument"** | 150 | 3 (7x7) | Friendly units in range of friendly monuments spend half as much energy per action. This does not apply to picking up resources. |
+| **"monument"** | 100 | 3 (7x7) | Friendly units in range of friendly monuments spend half as much energy per action. This does not apply to picking up resources. |
 | **"neutral"** | 200 (cannot be created) | 0 (N/A) | A structure that is owned by nobody. These can be deconstructed for materials. |
 | **"road"** | 0 (cannot be created) | 0 (N/A) | Roads cannot be destroyed or built on top of. Neutral fresh humans will walk across this every 15 days (30 turns). Roads are 2 wide to fit both of the neutral fresh humans. These cannot be attacked or deconstructed. |
 
 ### Unit
 
-Units do all of the actions in the game. Aside from each player's Cat Overlord, all units can change to any job in the game (except "cat overlord") as long as they're adjacent or diagonal to the Cat Overlord and at max energy. Most actions they perform cost energy. They can regenerate energy by resting in range of a shelter. Additionally, all units have a food upkeep cost. At the beginning of your turn, if you can pay your total unit upkeep, the upkeep will be deducted from your player's food stash and your units will be fed. If you can't pay for your unit upkeep, you will not lose food, and your units will become starving and will regenerate half as much energy that turn if they rest. New units can be obtained by converting neutral fresh humans to friendly ones and changing their job.
+Units do all of the actions in the game. Aside from each player's Cat Overlord, all units can change to any job in the game (except "cat overlord") as long as they're adjacent or diagonal to the Cat Overlord and at max energy. Most actions they perform cost energy. They can regenerate energy by resting in range of a shelter. Additionally, all units have a food upkeep cost. At the beginning of your turn, if you can pay your total unit upkeep, the upkeep will be deducted from your player's food stash and your units will be fed. If you can't pay for your unit upkeep, you will not lose food, and your units will become starving and will regenerate 0.25 times as much energy that turn if they rest. New units can be obtained by converting neutral fresh humans to friendly ones and changing their job.
 
 Units have the following attributes:
 
@@ -97,8 +97,8 @@ Additionally, units can do the following:
   * be at max energy (does not cost energy though, as in, it won't lose energy from changing jobs)
   * must be adjacent or diagonal to the Cat Overlord to change its job.
   * Additionally, the Unit cannot move after performing this action and will drop all of their "food" and "materials" when performing changing jobs (to safegaurd against Units carrying more than their carry limit).
-* **Rest**: Regenerates energy for the unit equal to this unit's job's `regenRate` value. Must be in range of a shelter. It regenerates twice as much energy if the Cat Overlord is in that shelter. However, it regenerates half as much energy if it is starving. Units cannot move after performing this action.
-  * If the unit is starving and rests in a shelter that the Cat Overlord is in range of, they will regenerate energy equal to their `regenRate`.
+* **Rest**: Regenerates energy for the unit equal to this unit's job's `regenRate` value. Must be in range of a shelter. It regenerates 2.0 times as much energy if the Cat Overlord is in that shelter. However, it regenerates 0.5 times as much energy if it is starving. Units cannot move after performing this action.
+  * If the unit is starving and rests in a shelter that the Cat Overlord is in range of, they will regenerate energy equal to 0.5 times their `regenRate`.
 
 #### Combat
 
@@ -149,8 +149,8 @@ Here's the official stats used by the game server: https://github.com/siggame/Ce
 | --- | --- | --- | --- | --- | --- | --- |
 | **"cat overlord"** | 2 | N/A | 10/turn | 10 | 0 | Units who rest near a shelter with the cat overlord in it regenerate twice as much energy. This unit cannot change jobs. Units cannot change to this job.
 | **"soldier"** | 3 | 25 | 25/turn | 10 | 3/turn | Can attack other units or structures. |
-| **"gatherer"** | 4 | 75 | 50/turn | 100 | 3/turn | Can harvest and steal food. |
-| **"builder"** | 4 | 75 | 50/turn | 50 | 2/turn | Can construct and deconstruct. |
+| **"gatherer"** | 4 | 75 | 50/turn | 100 | 1/turn | Can harvest and steal food. |
+| **"builder"** | 4 | 75 | 50/turn | 75 | 2/turn | Can construct and deconstruct. |
 | **"missionary"** | 4 | 75 | 50/turn | 10 | 2/turn | Can convert neutral fresh humans to friendly fresh humans. |
 | **"fresh human"** | 4 | N/A | 50/turn | 10 | 1/turn | Low upkeep, but can't really do anything. |
 
