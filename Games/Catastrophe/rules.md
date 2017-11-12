@@ -146,11 +146,11 @@ A Job is a container class that holds base information about a Unit's job.
 | Type (title) | Moves | Action Cost | Regen Rate | Carry Limit | Upkeep | Details |
 | --- | --- | --- | --- | --- | --- | --- |
 | **"cat overlord"** | 2 | N/A | 10/turn | 10 | 0 | Units who rest near a shelter with the cat overlord in it regenerate twice as much energy. This unit cannot change jobs. Units cannot change to this job.
-| **"soldier"** | 3 | 25 | 25/turn | 10 | 5/turn | Can attack other units or structures. |
+| **"soldier"** | 3 | 25 | 25/turn | 10 | 3/turn | Can attack other units or structures. |
 | **"gatherer"** | 4 | 75 | 50/turn | 100 | 3/turn | Can harvest and steal food. |
-| **"builder"** | 4 | 75 | 50/turn | 50 | 3/turn | Can construct and deconstruct. |
+| **"builder"** | 4 | 75 | 50/turn | 50 | 2/turn | Can construct and deconstruct. |
 | **"missionary"** | 4 | 75 | 25/turn | 10 | 2/turn | Can convert neutral fresh humans to friendly fresh humans. |
-| **"fresh human"** | 4 | N/A | 50/turn | 10 | 2/turn | Low upkeep, but can't really do anything. |
+| **"fresh human"** | 4 | N/A | 50/turn | 10 | 1/turn | Low upkeep, but can't really do anything. |
 
 #### Stealing
 
