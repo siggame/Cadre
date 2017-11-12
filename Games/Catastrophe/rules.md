@@ -149,7 +149,7 @@ A Job is a container class that holds base information about a Unit's job.
 | **"soldier"** | 3 | 25 | 25/turn | 10 | 3/turn | Can attack other units or structures. |
 | **"gatherer"** | 4 | 75 | 50/turn | 100 | 3/turn | Can harvest and steal food. |
 | **"builder"** | 4 | 75 | 50/turn | 50 | 2/turn | Can construct and deconstruct. |
-| **"missionary"** | 4 | 75 | 25/turn | 10 | 2/turn | Can convert neutral fresh humans to friendly fresh humans. |
+| **"missionary"** | 4 | 75 | 50/turn | 10 | 2/turn | Can convert neutral fresh humans to friendly fresh humans. |
 | **"fresh human"** | 4 | N/A | 50/turn | 10 | 1/turn | Low upkeep, but can't really do anything. |
 
 #### Stealing
