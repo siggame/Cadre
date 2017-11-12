@@ -98,7 +98,7 @@ Additionally, units can do the following:
   * must be adjacent or diagonal to the Cat Overlord to change its job.
   * Additionally, the Unit cannot move after performing this action and will drop all of their "food" and "materials" when performing changing jobs (to safegaurd against Units carrying more than their carry limit).
 * **Rest**: Regenerates energy for the unit equal to this unit's job's `regenRate` value. Must be in range of a shelter. It regenerates twice as much energy if the Cat Overlord is in that shelter. However, it regenerates half as much energy if it is starving. Units cannot move after performing this action.
-  * If the unit is starving and rests in a shelter with the Cat Overlord, they will regenerate energy equal to their `regenRate`.
+  * If the unit is starving and rests in a shelter that the Cat Overlord is in range of, they will regenerate energy equal to their `regenRate`.
 
 #### Combat
 
@@ -137,7 +137,7 @@ A Job is a container class that holds base information about a Unit's job.
 * **Title**: The job title ("cat overlord", "soldier", "gatherer", "builder", "missionary", "fresh human").
 * **Moves**: The number of times a unit with this job can move per turn.
 * **ActionCost**: The amount of energy it costs for this unit to perform an action.
-* **RegenRate**: How much energy this unit regenerates while resting. This is doubled if resting in a shelter with the Cat Overlord.
+* **RegenRate**: How much energy this unit regenerates while resting. This is doubled if resting in a shelter the Cat Overlord is in range of.
 * **CarryLimit**: The total amount of combined materials/food this unit can carry at once.
 * **Upkeep**: The amount of food this unit consumes every turn.
 
