@@ -267,7 +267,7 @@ Clients will be contains in these lists, expect a client to have:
 
 | Field | Type   | Description |
 |-------|--------|-------------|
-| index | int    | The index of the player in the game's players. should be <= 0 |
+| index | int    | The index of the player in the game's players. should be >= 0 |
 | id    | string | The id of the player as the player GameObject, if you need more information look in the deltas using this |
 | name  | string | The name of the player/client |
 
