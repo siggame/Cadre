@@ -42,6 +42,7 @@ The naming scheme is simple, *French*:
 * Game Client (JavaScript) = [Joueur.js](https://github.com/siggame/Joueur.js)
 * Game Client (Lua) = [Joueur.lua](https://github.com/siggame/Joueur.lua)
 * Game Client (Python) = [Joueur.py](https://github.com/siggame/Joueur.py)
+* Game Client (TypeScript) = [Joueur.ts](https://github.com/siggame/Joueur.ts)
 * Visualizer = [Visuer](https://github.com/siggame/Viseur) - renders the game
 
 Clients in Ruby, PHP, D, and Go are easily possible. In fact, so long as the language support json and tcp communication it should be easy to add a client in that language to this framework.

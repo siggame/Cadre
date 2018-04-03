@@ -1,30 +1,30 @@
 [submodule "Cerveau"]
 	path = Cerveau
-	url = https://github.com/siggame/Cerveau.git
-[submodule "Joueur.py"]
-	path = Joueur.py
-	url = https://github.com/siggame/Joueur.py
-[submodule "Joueur.js"]
-	path = Joueur.js
-	url = https://github.com/siggame/Joueur.js
+	url = git@github.com:siggame/Cerveau.git
 [submodule "Creer"]
 	path = Creer
-	url = https://github.com/siggame/Creer
-[submodule "Joueur.lua"]
-	path = Joueur.lua
-	url = https://github.com/siggame/Joueur.lua.git
-[submodule "Joueur.cs"]
-	path = Joueur.cs
-	url = https://github.com/siggame/Joueur.cs.git
-[submodule "Joueur.java"]
-	path = Joueur.java
-	url = https://github.com/siggame/Joueur.java.git
-[submodule "Joueur.cpp"]
-	path = Joueur.cpp
-	url = https://github.com/siggame/Joueur.cpp.git
+	url = git@github.com:siggame/Creer
 [submodule "Viseur"]
 	path = Viseur
-	url = https://github.com/siggame/Viseur.git
+	url = git@github.com:siggame/Viseur.git
+[submodule "Joueur.cpp"]
+	path = Joueur.cpp
+	url = git@github.com:siggame/Joueur.cpp.git
+[submodule "Joueur.cs"]
+	path = Joueur.cs
+	url = git@github.com:siggame/Joueur.cs.git
+[submodule "Joueur.java"]
+	path = Joueur.java
+	url = git@github.com:siggame/Joueur.java.git
+[submodule "Joueur.js"]
+	path = Joueur.js
+	url = git@github.com:siggame/Joueur.js
+[submodule "Joueur.lua"]
+	path = Joueur.lua
+	url = git@github.com:siggame/Joueur.lua.git
+[submodule "Joueur.py"]
+	path = Joueur.py
+	url = git@github.com:siggame/Joueur.py
 [submodule "Joueur.ts"]
 	path = Joueur.ts
-	url = https://github.com/siggame/Joueur.ts
+	url = git@github.com:siggame/Joueur.ts
