@@ -25,3 +25,6 @@
 [submodule "Viseur"]
 	path = Viseur
 	url = https://github.com/siggame/Viseur.git
+[submodule "Joueur.ts"]
+	path = Joueur.ts
+	url = https://github.com/siggame/Joueur.ts
