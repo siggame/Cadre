@@ -69,13 +69,13 @@ Units are created at the friendly port. They can carry any amount of gold. They 
 | Name | Unit | Details |
 |---|---|--|
 | Move | Any | Costs 1 move. Move to an adjacent (not diagonal) tile. If crew moving onto a ship, costs an action. |
-| Attack | Any | Attack any unit in range. Must specify if attacking 'crew' or 'ship'. Costs an action, and consumes any remaining moves. |
+| Attack | Any | Attack any unit in range. Must specify if attacking 'crew' or 'ship'. Costs an action, and consumes any remaining moves. If all the crew on a ship are killed, that ship's health is set to 1. |
 | Bury | Crew | Bury any amount of gold on the unit's tile. Must be performed at least 10 tiles away from the home port, **using circular distance**. Formulas are provided below. |
 | Dig | Crew | Dig up gold buried on this unit's tile. |
 | Deposit | Any | Put gold into the player's gold pool. Must be used adjacent to (or on top of) its owner's port. If near a merchant port, invests money into the merchant port instead. (If in range of both somehow, then deposits into the player's gold pool) |
 | Withdraw | Any | Take gold from the player's gold pool. Must be used adjacent to (or on top of) its owner's port. |
 | Split | Any | Move some crew off of this unit. The crew that move consume a move. Crew health is split proportional to the number of crew being moved. Those crew may also take gold with them. Crew may be split onto other units, causing the other unit to merge with the crew. If crew splitting onto a ship, costs an action. |
-| Rest | Any | Heals the unit. This also repairs ships. Must be used adjacent to (or on top of) its owner's port. |
+| Rest | Any | Heals the unit. This also repairs ships. Must be used adjacent to (or on top of) its owner's port. Heals 25% of the ships health and max crew health, rounded up. |
 
 ## [Ports][Port]
 
@@ -122,7 +122,7 @@ Each turn, this is applied to every tile on the map:
 ```js
 tile.gold = 1.025 * tile.gold;
 ```
-This means that the gold increases by 1.50625 times every two turns. Additionally, the following formula can be used to calculate the gold after any given number of turns:
+This means that the gold increases by 1.050625 times every two turns. Additionally, the following formula can be used to calculate the gold after any given number of turns:
 ```js
 tile.gold = Math.pow(1.025, numberOfTurns) * tile.gold;
 ```
