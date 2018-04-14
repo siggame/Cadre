@@ -135,8 +135,8 @@ ship.crew = 3 + (1.1 * investment) / 200;
 ship.gold = 600 + 1.1 * investment;
 ```
 
-[Pirates]: https://github.com/siggame/Cerveau-MegaMinerAI-Dev/blob/master/games/pirates/
-[Map]:  https://github.com/siggame/Cerveau-MegaMinerAI-Dev/blob/master/games/pirates/game.js
-[Tile]: https://github.com/siggame/Cerveau-MegaMinerAI-Dev/blob/master/games/pirates/tile.js
-[Unit]: https://github.com/siggame/Cerveau-MegaMinerAI-Dev/blob/master/games/pirates/unit.js
-[Port]: https://github.com/siggame/Cerveau-MegaMinerAI-Dev/blob/master/games/pirates/port.js
+[Pirates]: https://github.com/siggame/Cerveau/blob/master/games/pirates/
+[Map]:  https://github.com/siggame/Cerveau/blob/master/games/pirates/game.js
+[Tile]: https://github.com/siggame/Cerveau/blob/master/games/pirates/tile.js
+[Unit]: https://github.com/siggame/Cerveau/blob/master/games/pirates/unit.js
+[Port]: https://github.com/siggame/Cerveau/blob/master/games/pirates/port.js
