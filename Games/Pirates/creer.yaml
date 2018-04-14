@@ -1,0 +1,251 @@
+_parentDatas:
+- twoPlayer
+- turnBased
+- tiled
+
+Game:
+  name: Pirates
+  description: Steal from merchants and become the most infamous pirate.
+  attributes:
+    units:
+      description: Every Unit in the game. Merchant units have targetPort set to a port.
+      type: Unit[]
+    ports:
+      description: Every Port in the game. Merchant ports have owner set to null.
+      type: Port[]
+    crewCost:
+      description: How much gold it costs to construct a single crew.
+      type: int
+    shipCost:
+      description: How much gold it costs to construct a ship.
+      type: int
+    crewDamage:
+      description: How much damage crew deal to each other.
+      type: int
+    shipDamage:
+      description: How much damage ships deal to ships and ports.
+      type: int
+    crewHealth:
+      description: The maximum amount of health a crew member can have.
+      type: int
+    shipHealth:
+      description: The maximum amount of health a ship can have.
+      type: int
+    crewRange:
+      description: A crew's attack range. Range is circular.
+      type: float
+    shipRange:
+      description: A ship's attack range. Range is circular.
+      type: float
+    crewMoves:
+      description: The number of moves Units with only crew are given each turn.
+      type: int
+    shipMoves:
+      description: The number of moves Units with ships are given each turn.
+      type: int
+    restRange:
+      description: How far a Unit can be from a Port to rest. Range is circular.
+      type: float
+    healFactor:
+      description: How much health a Unit recovers when they rest.
+      type: float
+    buryInterestRate:
+      description: The rate buried gold increases each turn.
+      type: float
+    merchantInterestRate:
+      description: When a merchant ship spawns, the amount of additional gold it has relative to the Port's investment.
+      type: float
+    minInterestDistance:
+      description: The Euclidean distance buried gold must be from the Player's Port to accumulate interest.
+      type: float
+    merchantGoldRate:
+      description: How much gold merchant Ports get each turn.
+      type: float
+
+Player:
+  attributes:
+    units:
+      description: Every Unit owned by this Player.
+      type: Unit[]
+    infamy:
+      description: The amount of infamy this Player has.
+      type: int
+    gold:
+      description: The amount of gold this Player has in reserve.
+      type: int
+    port:
+      description: The Port owned by this Player.
+      type: Port
+
+Tile:
+  attributes:
+    unit:
+      description: The Unit on this Tile if present, otherwise null.
+      type: Unit
+    port:
+      description: The Port on this Tile if present, otherwise null.
+      type: Port
+    type:
+      description: The type of Tile this is ('water' or 'land').
+      type: string
+    gold:
+      description: The amount of gold buried on this tile.
+      type: int
+    decoration:
+      description: (Visualizer only) Whether this tile is deep sea or grassy. This has no effect on gameplay, but feel free to use it if you want.
+      type: boolean
+
+Port:
+  description: A port on a Tile.
+  attributes:
+    tile:
+      description: The Tile this Port is on.
+      type: Tile
+    owner:
+      description: The owner of this Port, or null if owned by merchants.
+      type: Player
+    gold:
+      description: For players, how much more gold this Port can spend this turn. For merchants, how much gold this Port has accumulated (it will spawn a ship when the Port can afford one).
+      type: int
+    investment:
+      description: (Merchants only) How much gold was invested into this Port. Investment determines the strength and value of the next ship.
+      type: int
+  functions:
+    spawn:
+      description: Spawn a Unit on this port.
+      arguments:
+      - name: type
+        type: string
+        description: What type of Unit to create ('crew' or 'ship').
+      returns:
+        type: boolean
+        description: True if Unit was created successfully, false otherwise.
+        invalidValue: false
+      
+Unit:
+  description: A unit group in the game. This may consist of a ship and any number of crew.
+  attributes:
+    owner:
+      description: The Player that owns and can control this Unit, or null if the Unit is neutral.
+      type: Player
+    tile:
+      description: The Tile this Unit is on.
+      type: Tile
+    shipHealth:
+      description: If a ship is on this Tile, how much health it has remaining. 0 for no ship.
+      type: int
+    crew:
+      description: How many crew are on this Tile. This number will always be <= crewHealth.
+      type: int
+    crewHealth:
+      description: How much total health the crew on this Tile have.
+      type: int
+    gold:
+      description: How much gold this Unit is carrying.
+      type: int
+    acted:
+      description: Whether this Unit has performed its action this turn.
+      type: boolean
+    moves:
+      description: How many more times this Unit may move this turn.
+      type: int
+    path:
+      description: (Merchants only) The path this Unit will follow. The first element is the Tile this Unit will move to next.
+      type: Tile[]
+    targetPort:
+      description: (Merchants only) The Port this Unit is moving to.
+      type: Port
+    stunTurns:
+      description: (Merchants only) The number of turns this merchant ship won't be able to move. They will still attack. Merchant ships are stunned when they're attacked.
+      type: int
+  functions:
+    move:
+      description: Moves this Unit from its current Tile to an adjacent Tile. If this Unit merges with another one, the other Unit will be destroyed and its tile will be set to null. Make sure to check that your Unit's tile is not null before doing things with it.
+      arguments:
+      - name: tile
+        type: Tile
+        description: The Tile this Unit should move to.
+      returns:
+        type: boolean
+        description: True if it moved, false otherwise.
+        invalidValue: false
+    attack:
+      description: Attacks either the 'crew' or 'ship' on a Tile in range.
+      arguments:
+      - name: tile
+        type: Tile
+        description: The Tile to attack.
+      - name: target
+        type: string
+        description: Whether to attack 'crew' or 'ship'. Crew deal damage to crew and ships deal damage to ships. Consumes any remaining moves.
+      returns:
+        type: boolean
+        description: True if successfully attacked, false otherwise.
+        invalidValue: false
+    bury:
+      description: Buries gold on this Unit's Tile. Gold must be a certain distance away for it to get interest (Game.minInterestDistance).
+      arguments:
+      - name: amount
+        type: int
+        description: How much gold this Unit should bury. Amounts <= 0 will bury as much as possible.
+      returns:
+        type: boolean
+        description: True if successfully buried, false otherwise.
+        invalidValue: false
+    dig:
+      description: Digs up gold on this Unit's Tile.
+      arguments:
+      - name: amount
+        type: int
+        description: How much gold this Unit should take. Amounts <= 0 will dig up as much as possible.
+        default: 0
+      returns:
+        type: boolean
+        description: True if successfully dug up, false otherwise.
+        invalidValue: false
+    deposit:
+      description: Puts gold into an adjacent Port. If that Port is the Player's port, the gold is added to that Player. If that Port is owned by merchants, it adds to that Port's investment.
+      arguments:
+      - name: amount
+        type: int
+        description: The amount of gold to deposit. Amounts <= 0 will deposit all the gold on this Unit.
+        default: 0
+      returns:
+        type: boolean
+        description: True if successfully deposited, false otherwise.
+        invalidValue: false
+    withdraw:
+      description: Takes gold from the Player. You can only withdraw from your own Port.
+      arguments:
+      - name: amount
+        type: int
+        description: The amount of gold to withdraw. Amounts <= 0 will withdraw everything.
+        default: 0
+      returns:
+        type: boolean
+        description: True if successfully withdrawn, false otherwise.
+        invalidValue: false
+    split:
+      description: Moves a number of crew from this Unit to the given Tile. This will consume a move from those crew.
+      arguments:
+      - name: tile
+        type: Tile
+        description: The Tile to move the crew to.
+      - name: amount
+        type: int
+        description: The number of crew to move onto that Tile. Amount <= 0 will move all the crew to that Tile.
+        default: 1
+      - name: gold
+        type: int
+        description: The amount of gold the crew should take with them. Gold < 0 will move all the gold to that Tile.
+        default: 0
+      returns:
+        type: boolean
+        description: True if successfully split, false otherwise.
+        invalidValue: false
+    rest:
+      description: Regenerates this Unit's health. Must be used in range of a port.
+      returns:
+        type: boolean
+        description: True if successfully rested, false otherwise.
+        invalidValue: false
