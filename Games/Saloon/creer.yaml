@@ -21,25 +21,25 @@ Game:
       type: Bottle[]
     rowdinessToSiesta:
       description: When a player's rowdiness reaches or exceeds this number their Cowboys take a collective siesta.
-      type: int
+      type: const int
     siestaLength:
       description: How long siestas are for a player's team.
-      type: int
+      type: const int
     maxCowboysPerJob:
       description: The maximum number of Cowboys a Player can bring into the saloon of each specific job.
-      type: int
+      type: const int
     sharpshooterDamage:
       description: How much damage is applied to things hit by Sharpshooters when they act.
-      type: int
+      type: const int
     brawlerDamage:
       description: How much damage is applied to neighboring things bit by the Sharpshooter between turns.
-      type: int
+      type: const int
     turnsDrunk:
       description: How many turns a Cowboy will be drunk for if a bottle breaks on it.
-      type: int
+      type: const int
     bartenderCooldown:
       description: How many turns a Bartender will be busy for after throwing a Bottle.
-      type: int
+      type: const int
 
 Player:
   attributes:
@@ -57,7 +57,7 @@ Player:
       type: Cowboy[]
     youngGun:
       description: The YoungGun this Player uses to call in new Cowboys.
-      type: YoungGun
+      type: const YoungGun!
     siesta:
       description: 0 when not having a team siesta. When greater than 0 represents how many turns left for the team siesta to complete.
       type: int
@@ -66,10 +66,10 @@ Tile:
   attributes:
     cowboy:
       description: The Cowboy that is on this Tile, null otherwise.
-      type: Cowboy
+      type: Cowboy?
     furnishing:
       description: The furnishing that is on this Tile, null otherwise.
-      type: Furnishing
+      type: Furnishing?
     isBalcony:
       description: If this Tile is a balcony of the Saloon that YoungGuns walk around on, and can never be pathed through by Cowboys.
       type: boolean
@@ -77,11 +77,11 @@ Tile:
       description: If this Tile is pathable, but has a hazard that damages Cowboys that path through it.
       type: boolean
     bottle:
-      description: The beer Bottle currently flying over this Tile.
-      type: Bottle
+      description: The beer Bottle currently flying over this Tile, null otherwise.
+      type: Bottle?
     youngGun:
       description: The YoungGun on this tile, null otherwise.
-      type: YoungGun
+      type: YoungGun?
 
 
 # new Game Objects
@@ -94,19 +94,19 @@ Cowboy:
       type: int
     owner:
       description: The Player that owns and can control this Cowboy.
-      type: Player
+      type: const Player!
     isDead:
       description: If this Cowboy is dead and has been removed from the game.
       type: boolean
     job:
       description: The job that this Cowboy does, and dictates how they fight and interact within the Saloon.
-      type: string
+      type: const string
     canMove:
       description: If the Cowboy can be moved this turn via its owner.
       type: boolean
     tile:
       description: The Tile that this Cowboy is located on.
-      type: Tile
+      type: Tile?
     focus:
       description: How much focus this Cowboy has. Different Jobs do different things with their Cowboy's focus.
       type: int
@@ -163,10 +163,10 @@ Furnishing:
   attributes:
     isPiano:
       description: True if this Furnishing is a piano and can be played, False otherwise.
-      type: boolean
+      type: const boolean
     tile:
       description: The Tile that this Furnishing is located on.
-      type: Tile
+      type: Tile?
     health:
       description: How much health this Furnishing currently has.
       type: int
@@ -182,32 +182,32 @@ Bottle:
   attributes:
     tile:
       description: The Tile this bottle is currently flying over.
-      type: Tile
+      type: Tile?
     direction:
       description: The Direction this Bottle is flying and will move to between turns, can be 'North', 'East', 'South', or 'West'.
-      type: string
+      type: const string
     isDestroyed:
       description: True if this Bottle has impacted and has been destroyed (removed from the Game). False if still in the game flying through the saloon.
       type: boolean
     drunkDirection:
       description: The direction any Cowboys hit by this will move, can be 'North', 'East', 'South', or 'West'.
-      type: string
+      type: const string
 
 YoungGun:
   description: An eager young person that wants to join your gang, and will call in the veteran Cowboys you need to win the brawl in the saloon.
   attributes:
     owner:
       description: The Player that owns and can control this YoungGun.
-      type: Player
+      type: const Player!
     tile:
       description: The Tile this YoungGun is currently on.
-      type: Tile
+      type: Tile!
     canCallIn:
       description: True if the YoungGun can call in a Cowboy, false otherwise.
       type: boolean
     callInTile:
       description: The Tile that a Cowboy will be called in on if this YoungGun calls in a Cowboy.
-      type: Tile
+      type: Tile!
   functions:
     callIn:
       description: Tells the YoungGun to call in a new Cowboy of the given job to the open Tile nearest to them.

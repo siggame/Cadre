@@ -7,10 +7,10 @@ Game:
   description: Two player grid based game where each player tries to burn down the other player's buildings. Let it burn.
   attributes:
     mapWidth:
-      type: int
+      type: const int
       description: The width of the entire map along the horizontal (x) axis.
     mapHeight:
-      type: int
+      type: const int
       description: The width of the entire map along the vertical (y) axis.
     buildings:
       type: Building[]
@@ -19,19 +19,19 @@ Game:
       type: Forecast[]
       description: All the forecasts in the game, indexed by turn number.
     currentForecast:
-      type: Forecast
+      type: Forecast!
       description: The current Forecast, which will be applied at the end of the turn.
     nextForecast:
-      type: Forecast
+      type: Forecast?
       description: The next Forecast, which will be applied at the end of your opponent's turn. This is also the Forecast WeatherStations can control this turn.
     baseBribesPerTurn:
-      type: int
+      type: const int
       description: How many bribes players get at the beginning of their turn, not counting their burned down Buildings.
     maxFire:
-      type: int
+      type: const int
       description: The maximum amount of fire value for any Building.
     maxForecastIntensity:
-      type: int
+      type: const int
       description: The maximum amount of intensity value for any Forecast.
 
 Player:
@@ -40,7 +40,7 @@ Player:
       type: int
       description: How many bribes this player has remaining to use during their turn. Each action a Building does costs 1 bribe. Any unused bribes are lost at the end of the player's turn.
     headquarters:
-      type: Warehouse
+      type: Warehouse!
       description: The Warehouse that serves as this player's headquarters and has extra health. If this gets destroyed they lose.
     buildings:
       type: Building[]
@@ -68,35 +68,35 @@ Building:
       type: int
       description: How much health this building currently has. When this reaches 0 the Building has been burned down.
     owner:
-      type: Player
+      type: Player!
       description: The player that owns this building. If it burns down (health reaches 0) that player gets an additional bribe(s).
     isHeadquarters:
-      type: boolean
+      type: const boolean
       description: True if this is the Headquarters of the owning player, false otherwise. Burning this down wins the game for the other Player.
     bribed:
       type: boolean
       description: When true this building has already been bribed this turn and cannot be bribed again this turn.
     x:
-      type: int
+      type: const int
       description: The location of the Building along the x-axis.
     'y':
-      type: int
+      type: const int
       description: The location of the Building along the y-axis.
     fire:
       type: int
       description: How much fire is currently burning the building, and thus how much damage it will take at the end of its owner's turn. 0 means no fire.
     buildingNorth:
-      type: Building
+      type: const Building?
       description: The Building directly to the north of this building, or null if not present.
     buildingEast:
-      type: Building
+      type: const Building?
       description: The Building directly to the east of this building, or null if
         not present.
     buildingSouth:
-      type: Building
+      type: const Building?
       description: The Building directly to the south of this building, or null if not present.
     buildingWest:
-      type: Building
+      type: const Building?
       description: The Building directly to the west of this building, or null if not present.
 
 Warehouse:
@@ -105,7 +105,7 @@ Warehouse:
   description: A typical abandoned warehouse... that anarchists hang out in and can be bribed to burn down Buildings.
   attributes:
     fireAdded:
-      type: int
+      type: const int
       description: The amount of fire added to buildings when bribed to ignite a building. Headquarters add more fire than normal Warehouses.
     exposure:
       type: int
@@ -128,7 +128,7 @@ FireDepartment:
   description: Can put out fires completely.
   attributes:
     fireExtinguished:
-      type: int
+      type: const int
       description: The amount of fire removed from a building when bribed to extinguish a building.
   functions:
     extinguish:
@@ -196,5 +196,5 @@ Forecast:
       type: int
       description: How much of a Building's fire that can be blown in the direction of this Forecast. Fire is duplicated (copied), not moved (transfered).
     controllingPlayer:
-      type: Player
+      type: const Player!
       description: The Player that can use WeatherStations to control this Forecast when its the nextForecast.
