@@ -100,7 +100,7 @@ Cowboy:
       type: boolean
     job:
       description: The job that this Cowboy does, and dictates how they fight and interact within the Saloon.
-      type: const string
+      type: const string = "Bartender" | "Brawler" | "Sharpshooter"
     canMove:
       description: If the Cowboy can be moved this turn via its owner.
       type: boolean
@@ -127,7 +127,7 @@ Cowboy:
       description: Moves this Cowboy from its current Tile to an adjacent Tile.
       arguments:
         - name: tile
-          type: Tile
+          type: Tile!
           description: The Tile you want to move this Cowboy to.
       returns:
         type: boolean
@@ -137,7 +137,7 @@ Cowboy:
       description: Sits down and plays a piano.
       arguments:
         - name: piano
-          type: Furnishing
+          type: Furnishing!
           description: The Furnishing that is a piano you want to play.
       returns:
         type: boolean
@@ -147,10 +147,10 @@ Cowboy:
       description: Does their job's action on a Tile.
       arguments:
         - name: tile
-          type: Tile
+          type: Tile!
           description: The Tile you want this Cowboy to act on.
         - name: drunkDirection
-          type: string
+          type: string = "" | "North" | "East" | "South" | "West"
           description: The direction the bottle will cause drunk cowboys to be in, can be 'North', 'East', 'South', or 'West'.
           default: ""
       returns:
@@ -213,9 +213,9 @@ YoungGun:
       description: Tells the YoungGun to call in a new Cowboy of the given job to the open Tile nearest to them.
       arguments:
         - name: job
-          type: string
+          type: string = "Bartender" | "Brawler" | "Sharpshooter"
           description: The job you want the Cowboy being brought to have.
       returns:
         description: The new Cowboy that was called in if valid. They will not be added to any `cowboys` lists until the turn ends. Null otherwise.
-        type: Cowboy
+        type: Cowboy!
         invalidValue: null

@@ -8,18 +8,18 @@ Game:
     on each side that must move diagonally to the opposing side until kinged.
   attributes:
     boardWidth:
-      type: int
+      type: const int
       description: The width of the board for X component of a checker.
       default: 8
     boardHeight:
-      type: int
+      type: const int
       description: The height of the board for the Y component of a checker.
       default: 8
     checkers:
       type: Checker[]
       description: All the checkers currently in the game.
     checkerMoved:
-      type: Checker
+      type: Checker?
       description: The checker that last moved and must be moved because only one
         checker can move during each players turn.
     checkerMovedJumped:

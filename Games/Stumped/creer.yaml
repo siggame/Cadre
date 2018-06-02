@@ -22,16 +22,16 @@ Game:
       type: Job[]
     freeBeaversCount:
       description: When a Player has less Beavers than this number, then recruiting other Beavers is free.
-      type: int
+      type: const int
     lodgesToWin:
       description: How many lodges must be owned by a Player at once to win the game.
-      type: int
+      type: const int
     lodgeCostConstant:
       description: Constant number used to calculate what it costs to spawn a new lodge.
-      type: float
+      type: const float
     spawnerHarvestConstant:
       description: Constant number used to calculate how many branches/food Beavers harvest from Spawners.
-      type: float
+      type: const float
 
 Player:
   attributes:
@@ -48,20 +48,20 @@ Player:
 Tile:
   attributes:
     type:
-      description: What type of Tile this is, either 'Water' or 'Land'.
-      type: string
+      description: What type of Tile this is, either 'water' or 'land'.
+      type: const string = "land" | "water"
     flowDirection:
       description: The cardinal direction water is flowing on this Tile ('North', 'East', 'South', 'West').
-      type: string
+      type: const string = "North" | "East" | "South" | "West" | ""
     beaver:
       description: The Beaver on this Tile if present, otherwise null.
-      type: Beaver
+      type: Beaver?
     spawner:
       description: The resource Spawner on this Tile if present, otherwise null.
-      type: Spawner
+      type: Spawner?
     lodgeOwner:
       description: The owner of the Beaver lodge on this Tile, if present, otherwise null.
-      type: Player
+      type: Player?
     branches:
       description: The number of branches dropped on this Tile.
       type: int
@@ -74,13 +74,13 @@ Spawner:
   attributes:
     type:
       description: What type of resource this is ('food' or 'branches').
-      type: string
+      type: const string = "food" | "branches"
     health:
       description: How much health this Spawner has, which is used to calculate how much of its resource can be harvested.
       type: int
     tile:
       description: The Tile this Spawner is on.
-      type: Tile
+      type: const Tile!
     hasBeenHarvested:
       description: True if this Spawner has been harvested this turn, and it will not heal at the end of the turn, false otherwise.
       type: boolean
@@ -93,13 +93,13 @@ Beaver:
       type: int
     owner:
       description: The Player that owns and can control this Beaver.
-      type: Player
+      type: Player!
     actions:
       description: The number of actions remaining for the Beaver this turn.
       type: int
     tile:
       description: The Tile this Beaver is on.
-      type: Tile
+      type: Tile?
     health:
       description: How much health this Beaver has left.
       type: int
@@ -114,7 +114,7 @@ Beaver:
       type: int
     job:
       description: The Job this Beaver was recruited to do.
-      type: Job
+      type: const Job!
     recruited:
       description: True if the Beaver has finished being recruited and can do things, False otherwise.
       type: boolean
@@ -123,71 +123,71 @@ Beaver:
       description: Moves this Beaver from its current Tile to an adjacent Tile.
       arguments:
       - name: tile
-        type: Tile
         description: The Tile this Beaver should move to.
+        type: Tile!
       returns:
-        type: boolean
         description: True if the move worked, false otherwise.
+        type: boolean
         invalidValue: false
     harvest:
       description: Harvests the branches or food from a Spawner on an adjacent Tile.
       arguments:
       - name: spawner
-        type: Spawner
         description: The Spawner you want to harvest. Must be on an adjacent Tile.
+        type: Spawner!
       returns:
-        type: boolean
         description: True if successfully harvested, false otherwise.
+        type: boolean
         invalidValue: false
     attack:
       description: Attacks another adjacent beaver.
       arguments:
       - name: beaver
-        type: Beaver
         description: The Beaver to attack. Must be on an adjacent Tile.
+        type: Beaver!
       returns:
-        type: boolean
         description: True if successfully attacked, false otherwise.
+        type: boolean
         invalidValue: false
     buildLodge:
       description: Builds a lodge on the Beavers current Tile.
       returns:
-        type: boolean
         description: True if successfully built a lodge, false otherwise.
+        type: boolean
         invalidValue: false
     drop:
       description: Drops some of the given resource on the beaver's Tile.
       arguments:
       - name: tile
-        type: Tile
         description: The Tile to drop branches/food on. Must be the same Tile that the Beaver is on, or an adjacent one.
+        type: Tile!
       - name: resource
-        type: string
-        description: The type of resource to drop ('branch' or 'food').
+        description: The type of resource to drop ('branches' or 'food').
+        type: string = "branches" | "food"
       - name: amount
-        type: int
         description: The amount of the resource to drop, numbers <= 0 will drop all the resource type.
+        type: int
         default: 0
       returns:
-        type: boolean
         description: True if successfully dropped the resource, false otherwise.
+        type: boolean
         invalidValue: false
     pickup:
       description: Picks up some branches or food on the beaver's tile.
       arguments:
       - name: tile
-        type: Tile
         description: The Tile to pickup branches/food from. Must be the same Tile that the Beaver is on, or an adjacent one.
+        type: Tile!
       - name: resource
-        type: string
-        description: The type of resource to pickup ('branch' or 'food').
+        description: The type of resource to pickup ('branches' or 'food').
+        type: string = "branches" | "food"
       - name: amount
-        type: int
         description: The amount of the resource to drop, numbers <= 0 will pickup all of the resource type.
+        type: int
         default: 0
       returns:
-        type: boolean
         description: True if successfully picked up a resource, false otherwise.
+        type: boolean
         invalidValue: false
 
 Job:
@@ -195,42 +195,42 @@ Job:
   attributes:
     title:
       description: The Job title.
-      type: string
+      type: const string
     health:
       description: The amount of starting health this Job has.
-      type: int
+      type: const int
     moves:
       description: The number of moves this Job can make per turn.
-      type: int
+      type: const int
     actions:
       description: The number of actions this Job can make per turn.
-      type: int
+      type: const int
     damage:
       description: The amount of damage this Job does per attack.
-      type: int
+      type: const int
     chopping:
       description: Scalar for how many branches this Job harvests at once.
-      type: int
+      type: const int
     munching:
       description: Scalar for how much food this Job harvests at once.
-      type: int
+      type: const int
     distractionPower:
       description: How many turns a beaver attacked by this Job is distracted by.
-      type: int
+      type: const int
     carryLimit:
       description: How many combined resources a beaver with this Job can hold at once.
-      type: int
+      type: const int
     cost:
       description: How much food this Job costs to recruit.
-      type: int
+      type: const int
   functions:
     recruit:
       description: Recruits a Beaver of this Job to a lodge
       arguments:
       - name: tile
-        type: Tile
         description: The Tile that is a lodge owned by you that you wish to spawn the Beaver of this Job on.
+        type: Tile
       returns:
-        type: Beaver
         description: The recruited Beaver if successful, null otherwise.
+        type: Beaver
         invalidValue: null

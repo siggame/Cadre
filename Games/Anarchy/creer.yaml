@@ -115,7 +115,7 @@ Warehouse:
       description: Bribes the Warehouse to light a Building on fire. This adds this building's fireAdded to their fire, and then this building's exposure is increased based on the Manhatten distance between the two buildings.
       arguments:
       - name: building
-        type: Building
+        type: Building!
         description: The Building you want to light on fire.
       returns:
         type: int
@@ -135,7 +135,7 @@ FireDepartment:
       description: Bribes this FireDepartment to extinguish the some of the fire in a building.
       arguments:
       - name: building
-        type: Building
+        type: Building!
         description: The Building you want to extinguish.
       returns:
         type: boolean
@@ -179,7 +179,7 @@ PoliceDepartment:
       description: Bribe the police to raid a Warehouse, dealing damage equal based on the Warehouse's current exposure, and then resetting it to 0.
       arguments:
       - name: warehouse
-        type: Warehouse
+        type: Warehouse!
         description: The warehouse you want to raid.
       returns:
         type: int
@@ -190,7 +190,7 @@ Forecast:
   description: The weather effect that will be applied at the end of a turn, which causes fires to spread.
   attributes:
     direction:
-      type: string
+      type: string = "North" | "East" | "South" | "West"
       description: The direction the wind will blow fires in. Can be 'north', 'east', 'south', or 'west'.
     intensity:
       type: int
