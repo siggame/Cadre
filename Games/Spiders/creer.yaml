@@ -38,7 +38,7 @@ Game:
       type: const int
       setting: true
     maxWebStrength:
-      description: The maximum strength a web can be strengthened to
+      description: The maximum strength a web can be strengthened to.
       type: const int
       setting: true
     eggsScalar:
@@ -56,6 +56,9 @@ Player:
       description: This player's BroodMother. If it dies they lose the game.
     maxSpiderlings:
       description: The max number of Spiderlings players can spawn.
+      type: int
+    numberOfNestsControlled:
+      description: The number of nests this player controls.
       type: int
 
 

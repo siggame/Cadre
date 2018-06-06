@@ -18,40 +18,56 @@ Game:
       type: Job[]
     catEnergyMult:
       description: The multiplier for the amount of energy regenerated when resting in a shelter with the cat overlord.
-      type: float
+      type: const float
+      setting: true
     starvingEnergyMult:
       description: The multiplier for the amount of energy regenerated when resting while starving.
-      type: float
+      type: const float
+      setting: true
     monumentCostMult:
       description: The multiplier for the cost of actions when performing them in range of a monument. Does not effect pickup cost.
-      type: float
+      type: const float
+      setting: true
     harvestCooldown:
       description: The amount of turns it takes for a Tile that was just harvested to grow food again.
-      type: int
+      type: const int
+      setting: true
     turnsToCreateHuman:
       description: The number of turns between fresh humans being spawned on the road.
-      type: int
+      type: const int
+      setting: true
     turnsToLowerHarvest:
       description: The number of turns before the harvest rate is lowered (length of each season basically).
-      type: int
+      type: const int
+      setting: true
     lowerHarvestAmount:
       description: The amount that the harvest rate is lowered each season.
-      type: int
+      type: const int
+      setting: true
     turnsBetweenHarvests:
       description: After a food tile is harvested, the number of turns before it can be harvested again.
-      type: int
+      type: const int
+      setting: true
     neutralMaterials:
       description: The number of materials in a neutral Structure.
-      type: int
+      type: const int
+      setting: true
     wallMaterials:
       description: The number of materials in a wall.
-      type: int
+      type: const int
+      setting: true
     shelterMaterials:
       description: The number of materials in a shelter.
-      type: int
+      type: const int
+      setting: true
     monumentMaterials:
       description: The number of materials in a monument.
-      type: int
+      type: const int
+      setting: true
+    startingFood:
+      descritpion: The amount of food Players start with.
+      type: const int
+      setting: true
 
 Player:
   attributes:
@@ -60,9 +76,11 @@ Player:
       type: Unit[]
     cat:
       description: The overlord cat Unit owned by this Player.
-      type: Unit
+      type: const Unit!
     upkeep:
-      description: The total upkeep of every Unit owned by this Player. If there isn't enough food for every Unit, all Units become starved and do not consume food.
+      description: The total upkeep of every Unit owned by this Player.
+        If there isn't enough food for every Unit,
+        all Units become starved and do not consume food.
       type: int
     structures:
       description: Every Structure owned by this Player.
@@ -75,10 +93,10 @@ Tile:
   attributes:
     unit:
       description: The Unit on this Tile if present, otherwise null.
-      type: Unit
+      type: Unit?
     structure:
       description: The Structure on this Tile if present, otherwise null.
-      type: Structure
+      type: Structure?
     harvestRate:
       description: The amount of food that can be harvested from this Tile per turn.
       type: int
@@ -97,32 +115,32 @@ Structure:
   attributes:
     type:
       description: The type of Structure this is ('shelter', 'monument', 'wall', 'road', 'neutral').
-      type: string
+      type: const string = "shelter" | "monument" | "wall" | "road" | "neutral"
     tile:
       description: The Tile this Structure is on.
-      type: Tile
+      type: const Tile!
     owner:
       description: The owner of this Structure if any, otherwise null.
-      type: Player
+      type: Player?
     materials:
       description: The number of materials in this Structure. Once this number reaches 0, this Structure is destroyed.
       type: int
     effectRadius:
       description: The range of this Structure's effect. For example, a radius of 1 means this Structure affects a 3x3 square centered on this Structure.
-      type: int
-      
+      type: const int
+
 Unit:
   description: A unit in the game.
   attributes:
     owner:
       description: The Player that owns and can control this Unit, or null if the Unit is neutral.
-      type: Player
+      type: Player?
     tile:
       description: The Tile this Unit is on.
-      type: Tile
+      type: Tile?
     job:
       description: The Job this Unit was recruited to do.
-      type: Job
+      type: Job!
     moves:
       description: How many moves this Unit has left this turn.
       type: int
@@ -149,13 +167,13 @@ Unit:
       type: int
     movementTarget:
       description: The tile this Unit is moving to. This only applies to neutral fresh humans spawned on the road. Otherwise, the tile this Unit is on.
-      type: Tile
+      type: Tile?
   functions:
     move:
       description: Moves this Unit from its current Tile to an adjacent Tile.
       arguments:
       - name: tile
-        type: Tile
+        type: Tile!
         description: The Tile this Unit should move to.
       returns:
         type: boolean
@@ -165,7 +183,7 @@ Unit:
       description: Harvests the food on an adjacent Tile.
       arguments:
       - name: tile
-        type: Tile
+        type: Tile!
         description: The Tile you want to harvest.
       returns:
         type: boolean
@@ -175,7 +193,7 @@ Unit:
       description: Attacks an adjacent Tile. Costs an action for each Unit in this Unit's squad. Units in the squad without an action don't participate in combat. Units in combat cannot move afterwards. Attacking structures will not give materials.
       arguments:
       - name: tile
-        type: Tile
+        type: Tile!
         description: The Tile to attack.
       returns:
         type: boolean
@@ -185,7 +203,7 @@ Unit:
       description: Converts an adjacent Unit to your side.
       arguments:
       - name: tile
-        type: Tile
+        type: Tile!
         description: The Tile with the Unit to convert.
       returns:
         type: boolean
@@ -195,10 +213,10 @@ Unit:
       description: Constructs a Structure on an adjacent Tile.
       arguments:
       - name: tile
-        type: Tile
+        type: Tile!
         description: The Tile to construct the Structure on. It must have enough materials on it for a Structure to be constructed.
       - name: type
-        type: string
+        type: string = "shelter" | "monument" | "wall" | "road" | "neutral"
         description: The type of Structure to construct on that Tile.
       returns:
         type: boolean
@@ -208,7 +226,7 @@ Unit:
       description: Removes materials from an adjacent Tile's Structure. You cannot deconstruct friendly structures (see Unit.attack).
       arguments:
       - name: tile
-        type: Tile
+        type: Tile!
         description: The Tile to deconstruct. It must have a Structure on it.
       returns:
         type: boolean
@@ -218,10 +236,10 @@ Unit:
       description: Drops some of the given resource on or adjacent to the Unit's Tile. Does not count as an action.
       arguments:
       - name: tile
-        type: Tile
+        type: Tile!
         description: The Tile to drop materials/food on.
       - name: resource
-        type: string
+        type: string = "material" | "food"
         description: The type of resource to drop ('material' or 'food').
       - name: amount
         type: int
@@ -235,10 +253,10 @@ Unit:
       description: Picks up some materials or food on or adjacent to the Unit's Tile. Does not count as an action.
       arguments:
       - name: tile
-        type: Tile
+        type: Tile!
         description: The Tile to pickup materials/food from.
       - name: resource
-        type: string
+        type: string = "material" | "food"
         description: The type of resource to pickup ('material' or 'food').
       - name: amount
         type: int
@@ -252,7 +270,8 @@ Unit:
       description: Changes this Unit's Job. Must be at max energy (100.0) to change Jobs.
       arguments:
       - name: job
-        type: string
+        # this should have been a Job type, not string, but we don't want to make breaking API changes
+        type: string = "fresh human" | "cat overlord" | "soldier" | "gatherer" | "builder" | "missionary"
         description: The name of the Job to change to.
       returns:
         type: boolean
@@ -270,19 +289,19 @@ Job:
   attributes:
     title:
       description: The Job title.
-      type: string
+      type: const string = "fresh human" | "cat overlord" | "soldier" | "gatherer" | "builder" | "missionary"
     moves:
       description: The number of moves this Job can make per turn.
-      type: int
+      type: const int
     actionCost:
       description: The amount of energy this Job normally uses to perform its actions.
-      type: float
+      type: const float
     regenRate:
       description: The amount of energy normally regenerated when resting at a shelter.
-      type: float
+      type: const float
     carryLimit:
       description: How many combined resources a Unit with this Job can hold at once.
-      type: int
+      type: const int
     upkeep:
       description: The amount of food per turn this Unit consumes. If there isn't enough food for every Unit, all Units become starved and do not consume food.
-      type: int
+      type: const int
