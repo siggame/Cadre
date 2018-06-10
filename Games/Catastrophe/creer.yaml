@@ -65,7 +65,7 @@ Game:
       type: const int
       setting: true
     startingFood:
-      descritpion: The amount of food Players start with.
+      description: The amount of food Players start with.
       type: const int
       setting: true
 
@@ -115,10 +115,10 @@ Structure:
   attributes:
     type:
       description: The type of Structure this is ('shelter', 'monument', 'wall', 'road', 'neutral').
-      type: const string = "shelter" | "monument" | "wall" | "road" | "neutral"
+      type: const string = "neutral" | "shelter" | "monument" | "wall" | "road"
     tile:
       description: The Tile this Structure is on.
-      type: const Tile!
+      type: Tile?
     owner:
       description: The owner of this Structure if any, otherwise null.
       type: Player?
@@ -216,7 +216,7 @@ Unit:
         type: Tile!
         description: The Tile to construct the Structure on. It must have enough materials on it for a Structure to be constructed.
       - name: type
-        type: string = "shelter" | "monument" | "wall" | "road" | "neutral"
+        type: string = "neutral" | "shelter" | "monument" | "wall" | "road"
         description: The type of Structure to construct on that Tile.
       returns:
         type: boolean
@@ -239,8 +239,8 @@ Unit:
         type: Tile!
         description: The Tile to drop materials/food on.
       - name: resource
-        type: string = "material" | "food"
-        description: The type of resource to drop ('material' or 'food').
+        type: string = "materials" | "food"
+        description: The type of resource to drop ('materials' or 'food').
       - name: amount
         type: int
         description: The amount of the resource to drop. Amounts <= 0 will drop as much as possible.
@@ -256,8 +256,8 @@ Unit:
         type: Tile!
         description: The Tile to pickup materials/food from.
       - name: resource
-        type: string = "material" | "food"
-        description: The type of resource to pickup ('material' or 'food').
+        type: string = "materials" | "food"
+        description: The type of resource to pickup ('materials' or 'food').
       - name: amount
         type: int
         description: The amount of the resource to pickup. Amounts <= 0 will pickup as much as possible.
@@ -271,7 +271,7 @@ Unit:
       arguments:
       - name: job
         # this should have been a Job type, not string, but we don't want to make breaking API changes
-        type: string = "fresh human" | "cat overlord" | "soldier" | "gatherer" | "builder" | "missionary"
+        type: string = "soldier" | "gatherer" | "builder" | "missionary"
         description: The name of the Job to change to.
       returns:
         type: boolean

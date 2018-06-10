@@ -1,109 +1,37 @@
 _parentDatas:
 - twoPlayer
-- turnBased
 
 Game:
   name: Chess
   description: The traditional 8x8 chess board with pieces.
   attributes:
-    pieces:
-      type: Piece[]
-      description: All the uncaptured Pieces in the game.
-    moves:
-      type: Move[]
-      description: The list of Moves that have occurred, in order.
-    turnsToDraw:
-      type: int
-      description: How many turns until the game ends because no pawn has moved and no Piece has been taken.
+    history:
+      type: string[]
+      description: The list of [known] moves that have occured in the game, in
+        Standard Algebriac Notation (SAN) format. The first element is the
+        first move, with the last being the most recent.
     fen:
       type: string
-      description: Forsyth–Edwards Notation, a notation that describes the game board.
+      description: Forsyth-Edwards Notation (fen), a notation that describes
+        the game board state.
+      setting: true
 
 Player:
   attributes:
-    pieces:
-      type: Piece[]
-      description: All the uncaptured chess Pieces owned by this player.
-    madeMove:
-      type: boolean
-      description: If the Player has made their move for the turn. true means they can no longer move a Piece this turn.
-    rankDirection:
-      type: int
-      description: The direction your Pieces must go along the rank axis until they reach the other side. Will be +1 if the Player is 'White', or -1 if the Player is 'Black'.
     color:
-      type: string
-      description: The color (side) of this player. Either 'White' or 'Black', with the 'White' player having the first move.
-    inCheck:
-      type: boolean
-      description: True if this player is currently in check, and must move out of check, false otherwise.
+      type: const string = "black" | "white"
+      description: The color (side) of this player. Either 'white' or 'black',
+        with the 'white' player having the first move.
 
-
-# new GameObjects
-
-Piece:
-  description: A chess piece.
-  attributes:
-    owner:
-      type: Player
-      description: The player that controls this chess Piece.
-    file:
-      type: string
-      description: The file (column) coordinate of the Piece represented as a letter [a-h], with 'a' starting at the left of the board.
-    rank:
-      type: int
-      description: The rank (row) coordinate of the Piece represented as a number [1-8], with 1 starting at the bottom of the board.
-    type:
-      type: string
-      description: The type of chess Piece this is, either 'King, 'Queen', 'Knight', 'Rook', 'Bishop', or 'Pawn'.
-    captured:
-      type: boolean
-      description: When the Piece has been captured (removed from the board) this is true. Otherwise false.
-    hasMoved:
-      type: boolean
-      description: If the Piece has moved from its starting position.
+AI:
   functions:
-    move:
-      description: Moves the Piece from its current location to the given rank and file.
-      arguments:
-      - name: file
-        type: string
-        description: The file coordinate to move to. Must be [a-h].
-      - name: rank
-        type: int
-        description: The rank coordinate to move to. Must be [1-8].
-      - name: promotionType
-        type: string
-        default: ''
-        description: If this is a Pawn moving to the end of the board then this parameter is what to promote it to. When used must be 'Queen', 'Knight', 'Rook', or 'Bishop'.
+    makeMove:
+      description: This is called every time it is this AI.player's turn to
+        make a move.
+      serverPredefined: true
       returns:
-        type: Move
-        description: The Move you did if successful, otherwise null if invalid. In addition if your move was invalid you will lose.
-        invalidValue: null
-
-Move:
-  description: Contains all details about a Piece's move in the game.
-  attributes:
-    san:
-      type: string
-      description: The standard algebraic notation (SAN) representation of the move.
-    piece:
-      type: Piece
-      description: The Piece that was moved.
-    fromRank:
-      type: int
-      description: The rank the Piece moved from.
-    fromFile:
-      type: string
-      description: The file the Piece moved from.
-    toRank:
-      type: int
-      description: The rank the Piece moved to.
-    toFile:
-      type: string
-      description: The file the Piece moved to.
-    captured:
-      type: Piece
-      description: The Piece captured by this Move, null if no capture.
-    promotion:
-      type: string
-      description: The Piece type this Move's Piece was promoted to from a Pawn, empty string if no promotion occurred.
+        type: string
+        description: A string in Standard Algebriac Notation (SAN) for the move
+          you want to make. If the move is invalid or not properly formatted
+          you will lose the game.
+        default: ''
