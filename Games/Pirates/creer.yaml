@@ -15,52 +15,68 @@ Game:
       type: Port[]
     crewCost:
       description: How much gold it costs to construct a single crew.
-      type: int
+      type: const int
+      setting: true
     shipCost:
       description: How much gold it costs to construct a ship.
-      type: int
+      type: const int
+      setting: true
     crewDamage:
       description: How much damage crew deal to each other.
-      type: int
+      type: const int
+      setting: true
     shipDamage:
       description: How much damage ships deal to ships and ports.
-      type: int
+      type: const int
+      setting: true
     crewHealth:
       description: The maximum amount of health a crew member can have.
-      type: int
+      type: const int
+      setting: true
     shipHealth:
       description: The maximum amount of health a ship can have.
-      type: int
+      type: const int
+      setting: true
     crewRange:
       description: A crew's attack range. Range is circular.
-      type: float
+      type: const float
+      setting: true
     shipRange:
       description: A ship's attack range. Range is circular.
-      type: float
+      type: const float
+      setting: true
     crewMoves:
       description: The number of moves Units with only crew are given each turn.
-      type: int
+      type: const int
+      setting: true
     shipMoves:
       description: The number of moves Units with ships are given each turn.
-      type: int
+      type: const int
+      setting: true
     restRange:
       description: How far a Unit can be from a Port to rest. Range is circular.
-      type: float
+      type: const float
+      setting: true
     healFactor:
       description: How much health a Unit recovers when they rest.
-      type: float
+      type: const float
+      setting: true
     buryInterestRate:
       description: The rate buried gold increases each turn.
-      type: float
+      type: const float
+      setting: true
     merchantInterestRate:
       description: When a merchant ship spawns, the amount of additional gold it has relative to the Port's investment.
-      type: float
+      type: const float
+      setting: true
     minInterestDistance:
       description: The Euclidean distance buried gold must be from the Player's Port to accumulate interest.
-      type: float
+      type: const float
+      setting: true
     merchantGoldRate:
       description: How much gold merchant Ports get each turn.
-      type: float
+      type: const float
+      setting: true
 
 Player:
   attributes:
@@ -75,19 +91,19 @@ Player:
       type: int
     port:
       description: The Port owned by this Player.
-      type: Port
+      type: const Port!
 
 Tile:
   attributes:
     unit:
       description: The Unit on this Tile if present, otherwise null.
-      type: Unit
+      type: Unit?
     port:
       description: The Port on this Tile if present, otherwise null.
-      type: Port
+      type: const Port?
     type:
       description: The type of Tile this is ('water' or 'land').
-      type: string
+      type: const string = "water" | "land"
     gold:
       description: The amount of gold buried on this tile.
       type: int
@@ -100,10 +116,10 @@ Port:
   attributes:
     tile:
       description: The Tile this Port is on.
-      type: Tile
+      type: const Tile!
     owner:
       description: The owner of this Port, or null if owned by merchants.
-      type: Player
+      type: Player?
     gold:
       description: For players, how much more gold this Port can spend this turn. For merchants, how much gold this Port has accumulated (it will spawn a ship when the Port can afford one).
       type: int
@@ -115,22 +131,22 @@ Port:
       description: Spawn a Unit on this port.
       arguments:
       - name: type
-        type: string
+        type: string = "crew" | "ship"
         description: What type of Unit to create ('crew' or 'ship').
       returns:
         type: boolean
         description: True if Unit was created successfully, false otherwise.
         invalidValue: false
-      
+
 Unit:
   description: A unit group in the game. This may consist of a ship and any number of crew.
   attributes:
     owner:
       description: The Player that owns and can control this Unit, or null if the Unit is neutral.
-      type: Player
+      type: Player?
     tile:
       description: The Tile this Unit is on.
-      type: Tile
+      type: Tile?
     shipHealth:
       description: If a ship is on this Tile, how much health it has remaining. 0 for no ship.
       type: int
@@ -154,7 +170,7 @@ Unit:
       type: Tile[]
     targetPort:
       description: (Merchants only) The Port this Unit is moving to.
-      type: Port
+      type: Port?
     stunTurns:
       description: (Merchants only) The number of turns this merchant ship won't be able to move. They will still attack. Merchant ships are stunned when they're attacked.
       type: int
@@ -176,7 +192,7 @@ Unit:
         type: Tile
         description: The Tile to attack.
       - name: target
-        type: string
+        type: string = "crew" | "ship"
         description: Whether to attack 'crew' or 'ship'. Crew deal damage to crew and ships deal damage to ships. Consumes any remaining moves.
       returns:
         type: boolean
