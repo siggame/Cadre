@@ -179,7 +179,7 @@ Unit:
       description: Moves this Unit from its current Tile to an adjacent Tile. If this Unit merges with another one, the other Unit will be destroyed and its tile will be set to null. Make sure to check that your Unit's tile is not null before doing things with it.
       arguments:
       - name: tile
-        type: Tile
+        type: Tile!
         description: The Tile this Unit should move to.
       returns:
         type: boolean
@@ -189,7 +189,7 @@ Unit:
       description: Attacks either the 'crew' or 'ship' on a Tile in range.
       arguments:
       - name: tile
-        type: Tile
+        type: Tile!
         description: The Tile to attack.
       - name: target
         type: string = "crew" | "ship"
@@ -245,7 +245,7 @@ Unit:
       description: Moves a number of crew from this Unit to the given Tile. This will consume a move from those crew.
       arguments:
       - name: tile
-        type: Tile
+        type: Tile!
         description: The Tile to move the crew to.
       - name: amount
         type: int

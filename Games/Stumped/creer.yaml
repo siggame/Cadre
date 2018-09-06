@@ -229,8 +229,8 @@ Job:
       arguments:
       - name: tile
         description: The Tile that is a lodge owned by you that you wish to spawn the Beaver of this Job on.
-        type: Tile
+        type: Tile!
       returns:
         description: The recruited Beaver if successful, null otherwise.
-        type: Beaver
+        type: Beaver?
         invalidValue: null

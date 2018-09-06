@@ -217,5 +217,5 @@ YoungGun:
           description: The job you want the Cowboy being brought to have.
       returns:
         description: The new Cowboy that was called in if valid. They will not be added to any `cowboys` lists until the turn ends. Null otherwise.
-        type: Cowboy!
+        type: Cowboy?
         invalidValue: null

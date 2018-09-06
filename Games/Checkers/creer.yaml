@@ -33,7 +33,7 @@ AI:
       description: This is called whenever your checker gets captured (during an opponent's
         turn).
       arguments:
-      - type: Checker
+      - type: Checker!
         name: checker
         description: The checker that was captured.
 
@@ -53,7 +53,7 @@ Checker:
   description: A checker on the game board.
   attributes:
     owner:
-      type: Player
+      type: Player!
       description: The player that controls this Checker.
     x:
       type: int
@@ -76,7 +76,7 @@ Checker:
         type: int
         description: The y coordinate to move to.
       returns:
-        type: Checker
+        type: Checker?
         description: Returns the same checker that moved if the move was successful. null otherwise.
         invalidValue: null
     # this is a silly function showing client side logic that does not effect game state
