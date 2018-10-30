@@ -21,10 +21,10 @@ to easily interact with, all through Cadre; complete with open source tooling an
 ![Tech Stack Image](assets/tech-stack.svg)
 
 Our technical stack is focused on development speed and runtime speed. Currently we utilize mostly web technologies
-such as [TypeScript] and [Node.js] to accomplish this as they are iterating at a blistering pace. However each
+such as [TypeScript] and [Node.js] to accomplish this as they are iterating at a blistering pace. However, each
 component is independent of the others so future developers can come in improve or replace as they see fit.
 
-Also we name all our modules after _French_ words. There's no real reason for this, it just gives us semi unique names
+Also, we name all our modules after _French_ words. There's no real reason for this, it just gives us semi unique names
 that makes sense while not being as boring as just "Server" or "Client".
 
 ### Cerveau - The Game Server
@@ -35,7 +35,7 @@ that makes sense while not being as boring as just "Server" or "Client".
 and as the single source of game logic truth during a game.
 
 Cerveau is a [Node.js] application written in [TypeScript],
-that exposes TCP, WS, and HTTP hooks for various AIs to connect to to play games. Because AIs can send commands
+that exposes TCP, WS, and HTTP hooks for various AIs to connect to play games. Because AIs can send commands
 significantly faster than a human could watch, every action in the game is logged to files we call `gamelogs` for
 developers to help debug and improve their AIs after games are played.
 
@@ -57,7 +57,7 @@ development as the information is made more easily understandable.
 We believe that there should not be a programming language barrier when crafting your AI for all _players_.
 
 To enable each developer to be as comfortable as possible, we have crafted a client "shell" program that handles all
-the hard work: network I/O, game state parsing, consuming and interacting with each games API, etc. We then expose a
+the hard work: network I/O, game state parsing, consuming and interacting with each game's API, etc. We then expose a
 single `ai.lang` file for each game so you can just right into coding the smartest AI for each game. Coders can then
 interact with the game via game objects native to that language's style and syntax.
 
