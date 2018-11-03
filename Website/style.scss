@@ -147,11 +147,6 @@ hr {
   padding-bottom: 1em;
 
   & section.for-h1 {
-    & h1 + p > img {
-      display: block;
-      text-align: center;
-    }
-
     .h1-content {
       & > p {
         display: block;
@@ -169,6 +164,11 @@ hr {
           &:hover, &:focus, &:active {
             color: $black;
           }
+        }
+
+        & > img {
+          margin: 0 auto;
+          max-width: 100%;
         }
       }
 
