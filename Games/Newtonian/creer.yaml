@@ -1,0 +1,265 @@
+_parentDatas:
+- twoPlayer
+- turnBased
+- tiled
+
+Game:
+  name: Newtonian
+  description: Combine elements and be the first scientists to create fusion.
+  attributes:
+    units:
+      description: Every Unit in the game.
+      type: Unit[]
+    jobs:
+      description: A list of all jobs. first item is intern, second is physicists, and third is manager.
+      type: Job[]
+    machines:
+      description: Every Machine in the game.
+      type: Machine[]
+    refinedValue:
+      description: The amount of victory points added when a refined ore is consumed by the generator.
+      type: const int
+      setting: true
+    spawnTime:
+      description: The amount of turns it takes a unit to spawn.
+      type: const int
+      setting: true
+    managerCap:
+      description: The maximum number of managers a player can have.
+      type: const int
+      setting: true
+    internCap:
+      description: The maximum number of interns a player can have.
+      type: const int
+      setting: true
+    physicistCap:
+      description: The maximum number of physicists a player can have.
+      type: const int
+      setting: true
+    stunTime:
+      description: The amount of turns a unit cannot do anything when stunned.
+      type: const int
+      setting: true
+    timeImmune:
+      description: The number turns a unit is immune to being stunned.
+      type: const int
+      setting: true
+    materialSpawn:
+      description: The number of materials that spawn per spawn cycle.
+      type: const int
+      setting: true
+    RegenerateRate:
+      description: The percent of max HP regained when a unit end their turn on a tile owned by their player.
+      type: const float
+      setting: true
+    victoryAmount:
+      description: The amount of combined heat and pressure that you need to win.
+      type: const int
+      setting: true
+
+Player:
+  attributes:
+    units:
+      description: Every Unit owned by this Player.
+      type: Unit[]
+    heat:
+      description: The amount of heat this Player has.
+      type: int
+    pressure:
+      description: The amount of pressure this Player has.
+      type: int
+    internSpawn:
+      description: The time left till a intern spawns. (0 to spawnTime).
+      type: int
+    physicistSpawn:
+      description: The time left till a physicist spawns. (0 to spawnTime).
+      type: int
+    managerSpawn:
+      description: The time left till a manager spawns. (0 to spawnTime).
+      type: int
+    spawnTiles:
+      description: All the tiles this Player's units can spawn on. (listed from the outer edges inward, from top to bottom).
+      type: Tile[]
+    generatorTiles:
+      description: Every generator Tile owned by this Player. (listed from the outer edges inward, from top to bottom).
+      type: Tile[]
+
+Tile:
+  attributes:
+    unit:
+      description: The Unit on this Tile if present, otherwise null.
+      type: Unit?
+    machine:
+      description: The Machine on this Tile if present, otherwise null.
+      type: const Machine?
+    isWall:
+      description: Whether or not the tile is a wall.
+      type: const boolean
+    type:
+      description: The type of Tile this is ('normal', 'generator', 'conveyor', or 'spawn').
+      type: const string = "normal" | "generator" | "conveyor" | "spawn"
+    direction:
+      description: The direction of a conveyor belt ('blank', 'north', 'east', 'south', or 'west'). blank means conveyor doesn't move.
+      type: const string = "blank" | "north" | "east" | "south" | "west"
+    owner:
+      description: The owner of this Tile, or null if owned by no-one. Only for generators and spawn areas.
+      type: Player?
+    rediumOre:
+      description: The amount of redium ore on this tile.
+      type: int
+    redium:
+      description: The amount of redium on this tile.
+      type: int
+    blueiumOre:
+      description: The amount of blueium ore on this tile.
+      type: int
+    blueium:
+      description: The amount of blueium on this tile.
+      type: int
+    decoration:
+      description: (Visualizer only) Different tile types, cracked, slightly dirty, etc. This has no effect on gameplay, but feel free to use it if you want.
+      type: int
+
+Machine:
+  description: A machine in the game. Used to refine ore.
+  attributes:
+    tile:
+      description: The Tile this Machine is on.
+      type: const Tile!
+    worked:
+      description: Tracks how many times this machine has been worked. (0 to refineTime).
+      type: int
+    oreType:
+      description: What type of ore the machine takes it. Also determines the type of material it outputs. (redium or blueium).
+      type: const string = "redium" | "blueium"
+    refineTime:
+      description: The number of times this machine needs to be worked to refine ore.
+      type: const int
+    refineInput:
+      description: The amount of ore that needs to be inputted into the machine for it to be worked.
+      type: const int
+    refineOutput:
+      description: The amount of refined ore that is returned after the machine has been fully worked.
+      type: const int
+
+Unit:
+  description: A unit in the game. May be a manager, intern, or physicist.
+  attributes:
+    owner:
+      description: The Player that owns and can control this Unit.
+      type: Player?
+    tile:
+      description: The Tile this Unit is on.
+      type: Tile?
+    job:
+      description: The Job this Unit has.
+      type: const Job!
+    health:
+      description: The remaining health of a unit.
+      type: int
+    acted:
+      description: Whether or not this Unit has performed its action this turn.
+      type: boolean
+    moves:
+      description: The number of moves this unit has left this turn.
+      type: int
+    rediumOre:
+      description: The amount of redium ore carried by this unit. (0 to job carry capacity - other carried items).
+      type: int
+    redium:
+      description: The amount of redium carried by this unit. (0 to job carry capacity - other carried items).
+      type: int
+    blueiumOre:
+      description: The amount of blueium ore carried by this unit. (0 to job carry capacity - other carried items).
+      type: int
+    blueium:
+      description: The amount of blueium carried by this unit. (0 to job carry capacity - other carried items).
+      type: int
+    stunTime:
+      description: Duration the unit is stunned. (0 to the game constant stunTime).
+      type: int
+    stunImmune:
+      description: Duration of stun immunity. (0 to timeImmune).
+      type: int
+  functions:
+    drop:
+      description: Drops materials at the units feet or adjacent tile.
+      arguments:
+      - name: tile
+        type: Tile!
+        description: The tile the materials will be dropped on.
+      - name: amount
+        type: int
+        description: The number of materials to dropped. Amounts <= 0 will drop all the materials.
+      - name: material
+        type: string = "redium ore" | "redium" | "blueium" | "blueium ore"
+        description: The material the unit will drop. 'redium', 'blueium', 'redium ore', or 'blueium ore'.
+      returns:
+        type: boolean
+        description: True if successfully deposited, false otherwise.
+        invalidValue: false
+    pickup:
+      description: Picks up material at the units feet or adjacent tile.
+      arguments:
+      - name: tile
+        type: Tile!
+        description: The tile the materials will be picked up from.
+      - name: amount
+        type: int
+        description: The amount of materials to pick up. Amounts <= 0 will pick up all the materials that the unit can.
+      - name: material
+        type: string = "redium ore" | "redium" | "blueium" | "blueium ore"
+        description: The material the unit will pick up. 'redium', 'blueium', 'redium ore', or 'blueium ore'.
+      returns:
+        type: boolean
+        description: True if successfully deposited, false otherwise.
+        invalidValue: false
+    move:
+      description: Moves this Unit from its current Tile to an adjacent Tile.
+      arguments:
+      - name: tile
+        type: Tile!
+        description: The Tile this Unit should move to.
+      returns:
+        type: boolean
+        description: True if it moved, false otherwise.
+        invalidValue: false
+    attack:
+      description: Attacks a unit on an adjacent tile.
+      arguments:
+      - name: tile
+        type: Tile!
+        description: The Tile to attack.
+      returns:
+        type: boolean
+        description: True if successfully attacked, false otherwise.
+        invalidValue: false
+    act:
+      description: Makes the unit do something to a machine or unit adjacent to its tile. Interns sabotage, physicists work. Interns stun physicist, physicist stuns manager, manager stuns intern.
+      arguments:
+      - name: tile
+        type: Tile!
+        description: The tile the unit acts on.
+      returns:
+        type: boolean
+        description: True if successfully acted, false otherwise.
+        invalidValue: false
+
+Job:
+  description: Information about a unit's job.
+  attributes:
+    title:
+      description: The Job title. 'intern', 'manager', or 'physicist'.
+      type: const string = "intern" | "manager" | "physicist"
+    health:
+      description: The amount of starting health this Job has.
+      type: const int
+    moves:
+      description: The number of moves this Job can make per turn.
+      type: const int
+    damage:
+      description: The amount of damage this Job does per attack.
+      type: const int
+    carryLimit:
+      description: How many combined resources a unit with this Job can hold at once.
+      type: const int
