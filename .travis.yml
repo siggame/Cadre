@@ -1,0 +1,25 @@
+language: node_js
+node_js:
+  - "11.0.0"
+git:
+  submodules: false
+
+before_script: echo "skip"
+script: echo "skip"
+
+before_deploy:
+  - cd Website
+  # build the static site
+  - npm install
+  - npm run build
+  # file to tell GitHub pages not to try to run jekyll stuff (can break urls)
+  - touch output/.nojekyll
+
+deploy:
+  provider: pages
+  skip-cleanup: true
+  verbose: true
+  local-dir: Website/output/
+  github-token: $GH_TOKEN
+  on:
+    branch: master

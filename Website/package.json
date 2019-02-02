@@ -1,0 +1,25 @@
+{
+  "name": "cadre-website",
+  "version": "1.0.1",
+  "description": "The website builder for Cadre's static site.",
+  "author": "Jacob Fischer <jacob.t.fischer@gmail.com> (http://github.com/JacobFischer/)",
+  "private": true,
+  "license": "MIT",
+  "dependencies": {
+    "flat-html-helpers": "1.0.0",
+    "fs-extra": "7.0.0",
+    "html-minifier": "3.5.20",
+    "http-server": "0.11.1",
+    "marked": "0.5.1",
+    "node-sass": "4.9.4",
+    "shx": "0.3.2"
+  },
+  "scripts": {
+    "build": "npm run build:before && npm run build:html",
+    "build:before": "shx mkdir -p output/ && shx cp -r assets output/assets",
+    "build:html": "node md-to-html.js index.md output/",
+    "clean": "shx rm -rf output/",
+    "server": "http-server output/",
+    "start": "npm run build && npm run server"
+  }
+}
