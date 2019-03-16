@@ -8,11 +8,13 @@ Game:
     history:
       type: string[]
       description: The list of [known] moves that have occured in the game, in
-        Standard Algebriac Notation (SAN) format. The first element is the
-        first move, with the last being the most recent.
+        UCI (Universal Chess Interface) format. The first element is the
+        first move, with the last being the most recent. If the game started
+        from an FEN string where moves were already performed, they will NOT
+        be part of this array.
     fen:
       type: string
-      description: Forsyth-Edwards Notation (fen), a notation that describes
+      description: Forsyth-Edwards Notation (FEN), a notation that describes
         the game board state.
       setting: true
 
@@ -21,7 +23,7 @@ Player:
     color:
       type: const string = "black" | "white"
       description: The color (side) of this player. Either 'white' or 'black',
-        with the 'white' player having the first move.
+        with the 'white' player having the first move normally.
 
 AI:
   functions:
@@ -31,7 +33,8 @@ AI:
       serverPredefined: true
       returns:
         type: string
-        description: A string in Standard Algebriac Notation (SAN) for the move
-          you want to make. If the move is invalid or not properly formatted
-          you will lose the game.
+        description: A string in UCI (Universal Chess Interface), or SAN
+          (Standard Algebraic Notation) for the move you want to make.
+          If the move is invalid or not properly formatted you will lose the
+          game.
         default: ''
