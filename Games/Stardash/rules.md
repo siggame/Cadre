@@ -1,6 +1,6 @@
-# MMAI 23: [StarDash] NOT DONE (If you see this, bug the developers)
+# MMAI 23: [StarDash]
 
-Newtonian is a game focused on making fusion.
+Stardash is a game focused on making fusion.
 
 ## [Map][Map]
 - coordinate based
