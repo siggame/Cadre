@@ -15,6 +15,7 @@ Have the most mithicite to win!
 2. otherwise coin flip.
 
 ## [Units][Unit]
+Each player starts with 3 miners and nothing else.
 There are five types of units, corvettes, missileboats, martyrs, miners, and transports. Martyrs block corvettes, corvettes can destroy missile ships, missile ships ignore martyrs.
 a units radius is stored in the game settings.
 There energy is their health pool.
