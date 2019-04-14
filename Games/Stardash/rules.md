@@ -1,6 +1,6 @@
 # MMAI 23: [StarDash]
 
-Stardash is a game focused on making fusion.
+stardash is a game focused on collecting the most mithicite.
 
 ## [Map][Map]
 - coordinate based
@@ -15,7 +15,7 @@ Have the most mithicite to win!
 2. otherwise coin flip.
 
 ## [Units][Unit]
-There are five types of units, inters, physicists, and managers. Managers stun inters. Interns stun physicists, and physicists stun managers.
+There are five types of units, corvettes, missileboats, martyrs, miners, and transports. Martyrs block corvettes, corvettes can destroy missile ships, missile ships ignore martyrs.
 a units radius is stored in the game settings.
 There energy is their health pool.
 
