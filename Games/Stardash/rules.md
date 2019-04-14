@@ -22,7 +22,8 @@ There energy is their health pool.
 All units cost ot purchase is stored in the job under unitCost (unitCost)
 
 All units may dash at a rate of 50 per 1 energy spent. The rates can be found in the settings for a future proof reference.
- - dash ends a units turn.
+ - dash ends a units turn. (AKA you cannot dash to a asteroid and immediatly start mining)
+ - mining counts as dashing.
 
 Corvette
  - fires projectiles that instantly damage in range. They currently have a range of 100. (job.range) does (job.damage) damage.
@@ -67,6 +68,8 @@ asteroids
      - should we had regeneration, check the settings. It is 0 for now.
      - you can check the map gerating settings in sets like min and max asteroid.
  - you can figure out where they will be x turns in the future by using nextx and nexty. Just tell it how many turns if they future you want to check.
+ - If you are mining a asteroid, your opponent can't mine it
+     - this is only true WHILE you are mining it.
 
 [Stardash]: https://github.com/siggame/Cerveau/blob/master/games/stardash/
 [Map]:  https://github.com/siggame/Cerveau/blob/master/games/stardash/game.ts
