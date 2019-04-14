@@ -1,0 +1,1 @@
+Your people are orbiting on the opposing side of a star are competing for a rare resource that orbits it, and both of your treaties to leave it alone are about to expire. Make the most of this opportunity by collecting the most, or at least by coming out ahead.

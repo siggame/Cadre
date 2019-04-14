@@ -1,0 +1,376 @@
+_parentDatas:
+- twoPlayer
+- turnBased
+
+Game:
+  name: Stardash
+  description: Collect of the most of the rarest mineral orbiting aroung the sun and outcompete your competetor.
+  attributes:
+    units:
+      description: Every Unit in the game.
+      type: Unit[]
+    projectiles:
+      description: Every projectile in the game.
+      type: Projectile[]
+    jobs:
+      description: A list of all jobs. first item is corvette, second is missileboat, third is martyr, fourth is transport, and fifth is miner.
+      type: Job[]
+    bodies:
+      description: All the celestial bodies in the game. The first two are planets and the third is the sun. The fourth is the VP asteroid. Everything else is normal asteroids.
+      type: Body[]
+    sizeX:
+      description: The size of the map in the X direction.
+      type: const int
+      setting: true
+    sizeY:
+      description: The size of the map in the Y direction.
+      type: const int
+      setting: true
+    dashDistance:
+      description: The distance traveled each turn by dashing.
+      type: const int
+      setting: true
+    dashCost:
+      description: The cost of dashing.
+      type: const int
+      setting: true
+    maxAsteroid:
+      description: The highest amount of material, that can be in a asteroid.
+      type: const int
+      setting: true
+    minAsteroid:
+      description: The smallest amount of material, that can be in a asteroid.
+      type: const int
+      setting: true
+    oreRarityGenarium:
+      description: The rarity modifier of the most common ore. This controls how much spawns.
+      type: const float
+      setting: true
+    oreRarityRarium:
+      description: The rarity modifier of the second rarest ore. This controls how much spawns.
+      type: const float
+      setting: true
+    oreRarityLegendarium:
+      description: The rarity modifier of the rarest ore. This controls how much spawns.
+      type: const float
+      setting: true
+    genariumValue:
+      description: The value of every unit of genarium.
+      type: const float
+      setting: true
+    rariumValue:
+      description: The value of every unit of rarium.
+      type: const float
+      setting: true
+    legendariumValue:
+      description: The value of every unit of legendarium.
+      type: const float
+      setting: true
+    mythiciteAmount:
+      description: The amount of mythicite that spawns at the start of the game.
+      type: const float
+      setting: true
+    regenerateRate:
+      description: The regeneration rate of asteroids.
+      type: const float
+      setting: true
+    planetRechargeRate:
+      description: The amount of energy the planets restore each round.
+      type: const int
+      setting: true
+    planetEnergyCap:
+      description: The amount of energy a planet can hold at once.
+      type: const int
+      setting: true
+    miningSpeed:
+      description: The rate at which miners grab minerals from asteroids.
+      type: const int
+      setting: true
+    projectileSpeed:
+      description: The amount of distance missiles travel through space.
+      type: const int
+      setting: true
+    projectileRadius:
+      description: The standard size of ships.
+      type: const int
+      setting: true
+    shipRadius:
+      description: The standard size of ships.
+      type: const int
+      setting: true
+    turnsToOrbit:
+      description: The number of turns it takes for a asteroid to orbit the sun. (Asteroids move after each players turn).
+      type: const int
+      setting: true
+    orbitsProtected:
+      description: The number of orbit updates you cannot mine the mithicite asteroid.
+      type: const int
+      setting: true
+
+Player:
+  attributes:
+    units:
+      description: Every Unit owned by this Player. The earlier in the list the older they are.
+      type: Unit[]
+    projectiles:
+      description: Every Projectile owned by this Player. The earlier in the list the older they are.
+      type: Projectile[]
+    money:
+      description: The amount of money this Player has.
+      type: int
+    homeBase:
+      description: The home base of the player.
+      type: Body!
+    victoryPoints:
+      description: The number of victory points the player has.
+      type: int
+
+Body:
+  description: A celestial body located within the game.
+  attributes:
+    owner:
+      description: The Player that owns and can control this Body.
+      type: Player?
+    x:
+      description: The x value this celestial body is on.
+      type: float!
+    y:
+      description: The y value this celestial body is on.
+      type: float!
+    radius:
+      description: The radius of the circle that this body takes up.
+      type: float!
+    bodyType:
+      description: The type of celestial body it is. Either 'planet', 'asteroid', or 'sun'.
+      type: const string = "planet" | "asteroid" | "sun"
+    materialType:
+      description: The type of material the celestial body has. Either 'none', 'genarium', 'rarium', 'legendarium', or 'mythicite'.
+      type: const string = "none" | "genarium" | "rarium" | "legendarium" | "mythicite"
+    amount:
+      description: The amount of material the object has, or energy if it is a planet.
+      type: int
+  functions:
+    spawn:
+      description: Spawn a unit on some value of this celestial body.
+      arguments:
+      - name: x
+        type: float!
+        description: The x value of the spawned unit.
+      - name: y
+        type: float!
+        description: The y value of the spawned unit.
+      - name: title
+        type: string
+        description: The job title of the unit being spawned.
+      returns:
+        type: boolean
+        description: True if successfully taken, false otherwise.
+        invalidValue: false
+    nextX:
+      description: The x value of this body a number of turns from now. (0-how many you want).
+      arguments:
+      - name: num
+        type: int!
+        description: The number of turns in the future you wish to check.
+      returns:
+        type: int
+        description: The x position of the body the input number of turns in the future.
+        invalidValue: -1
+    nextY:
+      description: The x value of this body a number of turns from now. (0-how many you want).
+      arguments:
+      - name: num
+        type: int!
+        description: The number of turns in the future you wish to check.
+      returns:
+        type: int
+        description: The x position of the body the input number of turns in the future.
+        invalidValue: -1
+        
+Projectile:
+  description: Tracks any projectiles moving through space.
+  attributes:
+    owner:
+      description: The Player that owns and can control this Projectile.
+      type: Player?
+    x:
+      description: The x value this projectile is on.
+      type: float!
+    y:
+      description: The y value this projectile is on.
+      type: float!
+    target:
+      description: The unit that is being attacked by this projectile.
+      type: Unit!
+    fuel:
+      description: The amount of remaining distance the projectile can move.
+      type: int
+    energy:
+      description: The remaining health of the projectile.
+      type: int
+
+Unit:
+  description: A unit in the game. May be a corvette, missleboat, martyr, transport, miner.
+  attributes:
+    owner:
+      description: The Player that owns and can control this Unit.
+      type: Player?
+    x:
+      description: The x value this unit is on.
+      type: float!
+    y:
+      description: The y value this unit is on.
+      type: float!
+    dashX:
+      description: The x value this unit is dashing to.
+      type: float!
+    dashY:
+      description: The y value this unit is dashing to.
+      type: float!
+    job:
+      description: The Job this Unit has.
+      type: const Job!
+    energy:
+      description: The remaining health of the unit.
+      type: int
+    shield:
+      description: The sheild that a martyr ship has.
+      type: int
+    acted:
+      description: Whether or not this Unit has performed its action this turn.
+      type: boolean
+    moves:
+      description: The distance this unit can still move.
+      type: float
+    genarium:
+      description: The amount of Genarium ore carried by this unit. (0 to job carry capacity - other carried items).
+      type: int
+    rarium:
+      description: The amount of Rarium carried by this unit. (0 to job carry capacity - other carried items).
+      type: int
+    legendarium:
+      description: The amount of Legendarium ore carried by this unit. (0 to job carry capacity - other carried items).
+      type: int
+    mythicite:
+      description: The amount of Mythicite carried by this unit. (0 to job carry capacity - other carried items).
+      type: int
+    isBusy:
+      description: Tracks wheither or not the ship is dashing or Mining. If true, it cannot do anything else.
+      type: boolean
+    protector:
+      description: The martyr ship that is currently shielding this ship if any.
+      type: Unit?
+  functions:
+    transfer:
+      description: Grab materials from a friendly unit. Doesn't use a action.
+      arguments:
+      - name: unit
+        type: Unit!
+        description: The unit you are grabbing the resources from.
+      - name: amount
+        type: int
+        description: The amount of materials to you with to grab. Amounts <= 0 will pick up all the materials that the unit can.
+      - name: material
+        type: string = "genarium" | "rarium" | "legendarium" | "mythicite"
+        description: The material the unit will pick up. 'genarium', 'rarium', 'legendarium', or 'mythicite'.
+      returns:
+        type: boolean
+        description: True if successfully taken, false otherwise.
+        invalidValue: false
+    move:
+      description: Moves this Unit from its current location to the new location specified.
+      arguments:
+      - name: x
+        type: float!
+        description: The x value of the destination's coordinates.
+      - name: y
+        type: float!
+        description: The y value of the destination's coordinates.
+      returns:
+        type: boolean
+        description: True if it moved, false otherwise.
+        invalidValue: false
+    attack:
+      description: Attacks the specified unit.
+      arguments:
+      - name: enemy
+        type: Unit!
+        description: The Unit being attacked.
+      returns:
+        type: boolean
+        description: True if successfully attacked, false otherwise.
+        invalidValue: false
+    shootdown:
+      description: Attacks the specified projectile.
+      arguments:
+      - name: missile
+        type: Projectile!
+        description: The projectile being shot down.
+      returns:
+        type: boolean
+        description: True if successfully attacked, false otherwise.
+        invalidValue: false
+    mine:
+      description: allows a miner to mine a asteroid
+      arguments:
+      - name: body
+        type: Body!
+        description: The object to be mined.
+      returns:
+        type: boolean
+        description: True if successfully acted, false otherwise.
+        invalidValue: false
+    safe:
+      description: tells you if your ship can move to that location from were it is without clipping the sun.
+      arguments:
+      - name: x
+        type: float!
+        description: The x position of the location you wish to arrive.
+      - name: y
+        type: float!
+        description: The y position of the location you wish to arrive.
+      returns:
+        type: boolean
+        description: True if pathable by this unit, false otherwise.
+        invalidValue: false
+    dash:
+      description: Causes the unit to dash towards the designated destination.
+      arguments:
+      - name: x
+        type: float!
+        description: The x value of the destination's coordinates.
+      - name: y
+        type: float!
+        description: The y value of the destination's coordinates.
+      returns:
+        type: boolean
+        description: True if it moved, false otherwise.
+        invalidValue: false
+
+Job:
+  description: Information about a unit's job.
+  attributes:
+    title:
+      description: The Job title. 'corvette', 'missileboat', 'martyr', 'transport', or 'miner'. (in this order from 0-4).
+      type: const string = "corvette" | "missileboat" | "martyr" | "transport" | "miner"
+    energy:
+      description: The amount of starting health this Job has.
+      type: const int
+    shield:
+      description: The reserve the martyr use to protect allies.
+      type: const int
+    moves:
+      description: The distance this job can move per turn.
+      type: const int
+    damage:
+      description: The amount of damage this Job does per attack.
+      type: const int
+    carryLimit:
+      description: How many combined resources a unit with this Job can hold at once.
+      type: const int
+    unitCost:
+      description: How much money it costs to spawn a unit.
+      type: const int
+    range:
+      description: The distance at which this job can effect things.
+      type: const int
