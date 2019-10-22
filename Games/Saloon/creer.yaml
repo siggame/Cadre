@@ -115,7 +115,7 @@ Cowboy:
       type: boolean
     drunkDirection:
       description: The direction this Cowboy is moving while drunk. Will be 'North', 'East', 'South', or 'West' when drunk; or '' (empty string) when not drunk.
-      type: string
+      type: string = " | "North" | "East" | "South" | "West"
     tolerance:
       description: How many times this unit has been drunk before taking their siesta and reseting this to 0.
       type: int
@@ -147,11 +147,11 @@ Cowboy:
       description: Does their job's action on a Tile.
       arguments:
         - name: tile
-          type: Tile!
           description: The Tile you want this Cowboy to act on.
+          type: Tile!
         - name: drunkDirection
-          type: string = "" | "North" | "East" | "South" | "West"
           description: The direction the bottle will cause drunk cowboys to be in, can be 'North', 'East', 'South', or 'West'.
+          type: string = "" | "North" | "East" | "South" | "West"
           default: ""
       returns:
         type: boolean
@@ -185,13 +185,13 @@ Bottle:
       type: Tile?
     direction:
       description: The Direction this Bottle is flying and will move to between turns, can be 'North', 'East', 'South', or 'West'.
-      type: const string
+      type: const string = "North" | "East" | "South" | "West"
     isDestroyed:
       description: True if this Bottle has impacted and has been destroyed (removed from the Game). False if still in the game flying through the saloon.
       type: boolean
     drunkDirection:
       description: The direction any Cowboys hit by this will move, can be 'North', 'East', 'South', or 'West'.
-      type: const string
+      type: const string = "North" | "East" | "South" | "West"
 
 YoungGun:
   description: An eager young person that wants to join your gang, and will call in the veteran Cowboys you need to win the brawl in the saloon.
