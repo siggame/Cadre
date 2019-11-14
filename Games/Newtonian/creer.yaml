@@ -48,7 +48,7 @@ Game:
       description: The number of materials that spawn per spawn cycle.
       type: const int
       setting: true
-    RegenerateRate:
+    regenerateRate:
       description: The percent of max HP regained when a unit end their turn on a tile owned by their player.
       type: const float
       setting: true
