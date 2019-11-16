@@ -1,0 +1,304 @@
+_parentDatas:
+- twoPlayer
+- turnBased
+- tiled
+
+Game:
+  name: Necrowar
+  description: Send hordes of the undead at your opponent while defending yourself against theirs to win.
+  attributes:
+    units:
+      description: Every Unit in the game.
+      type: Unit[]
+    UnitJobs:
+      description: A list of every unit type / job.
+      type: UnitJob[]
+    towers:
+      description: Every Tower in the game.
+      type: Tower[]
+    TowerJobs:
+      description: A list of every tower type / job.
+      type: TowerJob[]
+    riverPhase:
+      description: The amount of turns it takes between the river changing phases.
+      type: const int
+      setting: true
+    goldIncomePerUnit:
+      description: The amount of gold income per turn per unit in a mine.
+      type: const int
+      setting: true
+    islandIncomePerUnit:
+      description: The amount of gold income per turn per unit in the island mine.
+      type: const int
+      setting: true
+    manaIncomePerUnit:
+      description: The Amount of gold income per turn per unit fishing on the river side.
+      type: const int
+      setting: true
+
+Player:
+  attributes:
+    units:
+      description: Every Unit owned by this Player.
+      type: Unit[]
+    towers:
+      description: Every Tower owned by this player.
+      type: Tower[]
+    gold:
+      description: The amount of gold this Player has.
+      type: int
+    mana:
+      description: The amount of mana this player has.
+      type: int
+    health:
+      description: The amount of health remaining for this player's main unit.
+      type: int
+    side:
+      description: All tiles that this player can build on and move workers on.
+      type: Tile[]
+    homeBase:
+      description: The tile that the home base is located on.
+      type: Tile[]
+
+Tile:
+  attributes:
+    unit:
+      description: The Unit on this Tile if present, otherwise null.
+      type: Unit?
+    tower:
+      description: The Tower on this Tile if present, otherwise null.
+      type: Tower?
+    isWall:
+      description: Whether or not the tile can be moved on by workers.
+      type: boolean
+    isPath:
+      description: Whether or not the tile is considered a path or not (Units can walk on paths).
+      type: boolean
+    isGrass:
+      description: Whether or not the tile is considered grass or not (Workers can walk on grass).
+      type: boolean
+    isTower:
+      description: Whether or not the tile is considered a tower or not.
+      type: boolean
+    isGoldMine:
+      description: Whether or not the tile is considered to be a gold mine or not.
+      type: boolean
+    isIslandGoldMine:
+      description: Whether or not the tile is considered to be the island gold mine or not.
+      type: boolean
+    isRiver:
+      description: Whether or not the tile is considered a river or not.
+      type: boolean
+    isCastle:
+      description: Whether or not the tile is a castle tile.
+      type: boolean
+    isWorkerSpawn:
+      description: Whether or not the tile is the worker spawn.
+      type: boolean
+    isUnitSpawn:
+      description: Whether or not the tile is the unit spawn.
+      type: boolean
+    corpses:
+      description: The amount of corpses on this tile.
+      type: int
+    numZombies:
+      description: The amount of Zombies on this tile.
+      type: int
+    numGhouls:
+      description: The amount of Ghouls on this tile.
+      type: int
+    numHounds:
+      description: The amount of Hounds on this tile.
+      type: int
+    owner:
+      description: Which player owns this tile, only applies to grass tiles for workers, NULL otherwise.
+      type: Player?
+  functions:
+    res:
+      description: Resurrect the corpses on this tile into Zombies.
+      arguments:
+      - name: num
+        type: int
+        description: Number of zombies to resurrect.
+      returns:
+        type: boolean
+        description: True if successful res, false otherwise.
+        invalidValue: false
+    spawnUnit:
+      description: Spawns a fighting unit on the correct tile.
+      arguments:
+      - name: title
+        type: string
+        description: The title of the desired unit type.
+      returns:
+        type: boolean
+        description: True if successfully spawned, false otherwise.
+        invalidValue: false
+    spawnWorker:
+      description: Spawns a worker on the correct tile.
+      returns:
+        type: boolean
+        description: True if successfully spawned, false otherwise.
+        invalidValue: false
+
+Tower:
+  description: A tower in the game. Used to combat enemy waves.
+  attributes:
+    owner:
+      description: The player that built / owns this tower.
+      type: Player?
+    tile:
+      description: The Tile this Tower is on.
+      type: const Tile!
+    job:
+      description: What type of tower this is (it's job).
+      type: const TowerJob!
+    health:
+      description: How much remaining health this tower has.
+      type: int
+    attacked:
+      description: Whether this tower has attacked this turn or not.
+      type: boolean
+    cooldown: 
+      description: How many turns are left before it can fire again.
+      type: int
+  functions:
+    attack:
+      description: Attacks an enemy unit on an tile within it's range.
+      arguments:
+      - name: tile
+        type: Tile!
+        description: The Tile to attack.
+      returns:
+        type: boolean
+        description: True if successfully attacked, false otherwise.
+        invalidValue: false
+
+Unit:
+  description: A unit in the game. May be a worker, zombie, ghoul, hound, abomination, wraith or horseman.
+  attributes:
+    owner:
+      description: The Player that owns and can control this Unit.
+      type: Player?
+    tile:
+      description: The Tile this Unit is on.
+      type: Tile?
+    job:
+      description: The type of unit this is.
+      type: const UnitJob!
+    health:
+      description: The remaining health of a unit.
+      type: int
+    acted:
+      description: Whether or not this Unit has performed its action this turn (attack or build).
+      type: boolean
+    moves:
+      description: The number of moves this unit has left this turn.
+      type: int
+  functions:
+    mine:
+      description: Enters a mine and is put to work gathering resources.
+      arguments:
+      - name: tile
+        type: Tile!
+        description: The tile the mine is located on.
+      returns:
+        type: boolean
+        description: True if successfully entered mine and began mining, false otherwise.
+        invalidValue: false
+    fish:
+      description: Stops adjacent to a river tile and begins fishing for mana.
+      arguments:
+      - name: tile
+        type: Tile!
+        description: The tile the unit will stand on as it fishes.
+      returns:
+        type: boolean
+        description: True if successfully began fishing for mana, false otherwise.
+        invalidValue: false
+    move:
+      description: Moves this Unit from its current Tile to an adjacent Tile.
+      arguments:
+      - name: tile
+        type: Tile!
+        description: The Tile this Unit should move to.
+      returns:
+        type: boolean
+        description: True if it moved, false otherwise.
+        invalidValue: false
+    attack:
+      description: Attacks an enemy tower on an adjacent tile.
+      arguments:
+      - name: tile
+        type: Tile!
+        description: The Tile to attack.
+      returns:
+        type: boolean
+        description: True if successfully attacked, false otherwise.
+        invalidValue: false
+    build:
+      description: Unit, if it is a worker, builds a tower on the tile it is on, only workers can do this.
+      arguments:
+      - name: title
+        type: string
+        description: The tower type to build, as a string.
+      returns:
+        type: boolean
+        description: True if successfully built, false otherwise.
+        invalidValue: false
+
+UnitJob:
+  description: Information about a unit's job/type.
+  attributes:
+    title:
+      description: The type title. 'worker', 'zombie', 'ghoul', 'hound', 'abomination', 'wraith' or 'horseman'.
+      type: const string = "worker" | "zombie" | "ghoul" | "hound" | "abomination" | "wraith" | "horseman"
+    perTile:
+      description: How many of this type of unit can take up one tile.
+      type: const int
+    health:
+      description: The amount of starting health this type has.
+      type: const int
+    moves:
+      description: The number of moves this type can make per turn.
+      type: const int
+    damage:
+      description: The amount of damage this type does per attack.
+      type: const int
+    goldCost:
+      description: How much does this type cost in gold.
+      type: const int
+    manaCost:
+      description: How much does this type cost in mana.
+      type: const int
+    range:
+      description: Amount of tiles away this type has to be in order to be effective.
+      type: const int
+      
+TowerJob:
+  description: Information about a tower's job/type.
+  attributes:
+    title:
+      description: The type title. 'arrow', 'aoe', 'ballista', 'cleansing', or 'castle'.
+      type: const string = "arrow" | "aoe" | "ballista" | "cleansing" | "castle"
+    health:
+      description: The amount of starting health this type has.
+      type: const int
+    range:
+      description: The number of tiles this type can attack from.
+      type: const int
+    allUnits:
+      description: Whether this tower type hits all of the units on a tile (true) or one at a time (false).
+      type: boolean
+    damage:
+      description: The amount of damage this type does per attack.
+      type: const int
+    goldCost:
+      description: How much does this type cost in gold.
+      type: const int
+    turnsBetweenAttacks:
+      description: How many turns have to take place between this type's attacks.
+      type: const int
+    manaCost:
+      description: How much does this type cost in mana.
+      type: const int

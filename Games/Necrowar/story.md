@@ -1,0 +1,1 @@
+Deep in an enchated woods, two rival necromancers have both laid claim on a clearing of land with a river running though the middle. Angery at each other for not stepping down and allowing the other to reign, they both claim a ruined caslte on either side of the river and prepare to send thier undead forces against each other in a battle for the land!
