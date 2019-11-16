@@ -10,13 +10,13 @@ Game:
     units:
       description: Every Unit in the game.
       type: Unit[]
-    UnitJobs:
+    unitJobs:
       description: A list of every unit type / job.
       type: UnitJob[]
     towers:
       description: Every Tower in the game.
       type: Tower[]
-    TowerJobs:
+    towerJobs:
       description: A list of every tower type / job.
       type: TowerJob[]
     riverPhase:
