@@ -13,6 +13,9 @@
 [submodule "Joueur.cs"]
 	path = Joueur.cs
 	url = git@github.com:siggame/Joueur.cs.git
+[submodule "Joueur.go"]
+	path = Joueur.go
+	url = git@github.com:siggame/Joueur.go.git
 [submodule "Joueur.java"]
 	path = Joueur.java
 	url = git@github.com:siggame/Joueur.java.git
