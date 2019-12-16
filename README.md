@@ -38,6 +38,7 @@ The naming scheme is simple, *French*:
 * Codegen = [Creer](https://github.com/siggame/Creer) - generates code for the game in all projects
 * Game Client (C++) = [Joueur.cpp](https://github.com/siggame/Joueur.cpp) - plays the game in C++
 * Game Client (C#) = [Joueur.cs](https://github.com/siggame/Joueur.cs)
+* Game Client (Go) = [Joueur.go](https://github.com/siggame/Joueur.go)
 * Game Client (Java) = [Joueur.java](https://github.com/siggame/Joueur.java)
 * Game Client (JavaScript) = [Joueur.js](https://github.com/siggame/Joueur.js)
 * Game Client (Lua) = [Joueur.lua](https://github.com/siggame/Joueur.lua)
