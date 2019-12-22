@@ -5,8 +5,8 @@ git:
   submodules: false
 
 before_script: echo "skip"
-script: init.sh
-before_deploy: build-website.sh
+script: bash init.sh
+before_deploy: bash build-website.sh
 
 deploy:
   provider: pages
