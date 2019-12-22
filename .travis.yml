@@ -4,9 +4,15 @@ node_js:
 git:
   submodules: false
 
-before_script: echo "skip"
-script: init.sh
-before_deploy: build-website.sh
+before_script:
+  - echo "skip"
+
+script:
+  - bash transform-ssh-to-http.sh
+  - bash init.sh
+
+before_deploy:
+  - bash build-website.sh
 
 deploy:
   provider: pages

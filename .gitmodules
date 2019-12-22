@@ -3,7 +3,7 @@
 	url = git@github.com:siggame/Cerveau.git
 [submodule "Creer"]
 	path = Creer
-	url = git@github.com:siggame/Creer
+	url = git@github.com:siggame/Creer.git
 [submodule "Viseur"]
 	path = Viseur
 	url = git@github.com:siggame/Viseur.git
@@ -21,16 +21,16 @@
 	url = git@github.com:siggame/Joueur.java.git
 [submodule "Joueur.js"]
 	path = Joueur.js
-	url = git@github.com:siggame/Joueur.js
+	url = git@github.com:siggame/Joueur.js.git
 [submodule "Joueur.lua"]
 	path = Joueur.lua
 	url = git@github.com:siggame/Joueur.lua.git
 [submodule "Joueur.py"]
 	path = Joueur.py
-	url = git@github.com:siggame/Joueur.py
+	url = git@github.com:siggame/Joueur.py.git
 [submodule "Joueur.ts"]
 	path = Joueur.ts
-	url = git@github.com:siggame/Joueur.ts
+	url = git@github.com:siggame/Joueur.ts.git
 [submodule "Website"]
 	path = Website
 	url = git@github.com:siggame/Cadre-Website.git
