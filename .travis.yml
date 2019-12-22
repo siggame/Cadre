@@ -5,16 +5,8 @@ git:
   submodules: false
 
 before_script: echo "skip"
-script:
-  - ./init.sh
-
-before_deploy:
-  - cd Website
-  # build the static site
-  - npm install
-  - npm run build
-  # file to tell GitHub pages not to try to run jekyll stuff (can break urls)
-  - touch output/.nojekyll
+script: init.sh
+before_deploy: build-website.sh
 
 deploy:
   provider: pages
