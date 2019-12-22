@@ -31,3 +31,6 @@
 [submodule "Joueur.ts"]
 	path = Joueur.ts
 	url = git@github.com:siggame/Joueur.ts
+[submodule "Website"]
+	path = Website
+	url = git@github.com:siggame/Cadre-Website.git

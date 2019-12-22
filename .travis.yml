@@ -5,7 +5,8 @@ git:
   submodules: false
 
 before_script: echo "skip"
-script: echo "skip"
+script:
+  - ./init.sh
 
 before_deploy:
   - cd Website
