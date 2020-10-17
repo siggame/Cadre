@@ -4,7 +4,7 @@ _parentDatas:
 
 Game:
   name: Stardash
-  description: Collect of the most of the rarest mineral orbiting aroung the sun and outcompete your competetor.
+  description: Collect of the most of the rarest mineral orbiting around the sun and out-compete your competitor.
   attributes:
     units:
       description: Every Unit in the game.
@@ -13,7 +13,7 @@ Game:
       description: Every projectile in the game.
       type: Projectile[]
     jobs:
-      description: A list of all jobs. first item is corvette, second is missileboat, third is martyr, fourth is transport, and fifth is miner.
+      description: A list of all jobs. The first element is corvette, second is missileboat, third is martyr, fourth is transport, and fifth is miner.
       type: Job[]
     bodies:
       description: All the celestial bodies in the game. The first two are planets and the third is the sun. The fourth is the VP asteroid. Everything else is normal asteroids.
@@ -234,7 +234,7 @@ Unit:
       description: The remaining health of the unit.
       type: int
     shield:
-      description: The sheild that a martyr ship has.
+      description: The shield that a martyr ship has.
       type: int
     acted:
       description: Whether or not this Unit has performed its action this turn.
@@ -255,7 +255,7 @@ Unit:
       description: The amount of Mythicite carried by this unit. (0 to job carry capacity - other carried items).
       type: int
     isBusy:
-      description: Tracks wheither or not the ship is dashing or Mining. If true, it cannot do anything else.
+      description: Tracks whether or not the ship is dashing or Mining. If true, it cannot do anything else.
       type: boolean
     protector:
       description: The martyr ship that is currently shielding this ship if any.
@@ -311,7 +311,7 @@ Unit:
         description: True if successfully attacked, false otherwise.
         invalidValue: false
     mine:
-      description: allows a miner to mine a asteroid
+      description: Allows a miner to mine a asteroid.
       arguments:
       - name: body
         type: Body!
@@ -321,7 +321,7 @@ Unit:
         description: True if successfully acted, false otherwise.
         invalidValue: false
     safe:
-      description: tells you if your ship can move to that location from were it is without clipping the sun.
+      description: Tells you if your ship can move to that location from were it is without clipping the sun.
       arguments:
       - name: x
         type: float!

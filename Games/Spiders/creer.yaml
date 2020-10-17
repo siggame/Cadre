@@ -4,8 +4,8 @@ _parentDatas:
 
 Game:
   name: Spiders
-  description: There's an infestation of enemy spiders challenging your queen broodmother spider!
-    Protect her and attack the other broodmother in this turn based, node based, game.
+  description: There's an infestation of enemy spiders challenging your queen BroodMother spider!
+    Protect her and attack the other BroodMother in this turn based, node based, game.
   attributes:
     nests:
       description: Every Nest in the game.
@@ -148,7 +148,7 @@ BroodMother:
         description: The string name of the Spiderling class you want to Spawn. Must be 'Spitter', 'Weaver', or 'Cutter'.
         type: string = "Spitter" | "Weaver" | "Cutter"
       returns:
-        description: The newly spwaned Spiderling if successful. Null otherwise.
+        description: The newly spawned Spiderling if successful. Null otherwise.
         type: Spiderling?
         invalidValue: null
 
@@ -161,7 +161,7 @@ Spiderling:
       description: When empty string this Spiderling is not busy, and can act. Otherwise a string representing what it is busy with, e.g. 'Moving', 'Attacking'.
       type: string = "" | "Moving" | "Attacking" | "Strengthening" | "Weakening" | "Cutting" | "Spitting"
     workRemaining:
-      description: How much work needs to be done for this Spiderling to finish being busy. See docs for the Work forumla.
+      description: How much work needs to be done for this Spiderling to finish being busy. See docs for the Work formula.
       type: float
     numberOfCoworkers:
       description: The number of Spiderlings busy with the same work this Spiderling is doing, speeding up the task.
@@ -184,7 +184,7 @@ Spiderling:
         description: True if the move was successful, false otherwise.
         invalidValue: false
     attack:
-      description: Attacks another Spiderling
+      description: Attacks another Spiderling.
       arguments:
       - name: spiderling
         type: Spiderling!

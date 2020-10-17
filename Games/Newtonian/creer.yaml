@@ -11,7 +11,7 @@ Game:
       description: Every Unit in the game.
       type: Unit[]
     jobs:
-      description: A list of all jobs. first item is intern, second is physicists, and third is manager.
+      description: A list of all jobs. The first element is intern, second is physicists, and third is manager.
       type: Job[]
     machines:
       description: Every Machine in the game.
@@ -99,7 +99,7 @@ Tile:
       description: The type of Tile this is ('normal', 'generator', 'conveyor', or 'spawn').
       type: const string = "normal" | "generator" | "conveyor" | "spawn"
     direction:
-      description: The direction of a conveyor belt ('blank', 'north', 'east', 'south', or 'west'). blank means conveyor doesn't move.
+      description: The direction of a conveyor belt ('blank', 'north', 'east', 'south', or 'west'). Blank means conveyor doesn't move.
       type: const string = "blank" | "north" | "east" | "south" | "west"
     owner:
       description: The owner of this Tile, or null if owned by no-one. Only for generators and spawn areas.

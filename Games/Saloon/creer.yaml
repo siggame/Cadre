@@ -117,7 +117,7 @@ Cowboy:
       description: The direction this Cowboy is moving while drunk. Will be 'North', 'East', 'South', or 'West' when drunk; or '' (empty string) when not drunk.
       type: string = " | "North" | "East" | "South" | "West"
     tolerance:
-      description: How many times this unit has been drunk before taking their siesta and reseting this to 0.
+      description: How many times this unit has been drunk before taking their siesta and resetting this to 0.
       type: int
     turnsBusy:
       description: How many turns this unit has remaining before it is no longer busy and can `act()` or `play()` again.

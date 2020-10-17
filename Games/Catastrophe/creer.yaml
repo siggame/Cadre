@@ -223,7 +223,7 @@ Unit:
         description: True if successfully constructed a structure, false otherwise.
         invalidValue: false
     deconstruct:
-      description: Removes materials from an adjacent Tile's Structure. You cannot deconstruct friendly structures (see Unit.attack).
+      description: Removes materials from an adjacent Tile's Structure. You cannot deconstruct friendly structures (see `Unit.attack`).
       arguments:
       - name: tile
         type: Tile!
@@ -267,7 +267,7 @@ Unit:
         description: True if successfully picked up a resource, false otherwise.
         invalidValue: false
     changeJob:
-      description: Changes this Unit's Job. Must be at max energy (100.0) to change Jobs.
+      description: Changes this Unit's Job. Must be at max energy (100) to change Jobs.
       arguments:
       - name: job
         # this should have been a Job type, not string, but we don't want to make breaking API changes

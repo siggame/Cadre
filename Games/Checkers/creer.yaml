@@ -77,7 +77,7 @@ Checker:
         description: The y coordinate to move to.
       returns:
         type: Checker?
-        description: Returns the same checker that moved if the move was successful. null otherwise.
+        description: Returns the same checker that moved if the move was successful. Otherwise null.
         invalidValue: null
     # this is a silly function showing client side logic that does not effect game state
     isMine:

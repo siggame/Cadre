@@ -102,7 +102,7 @@ Building:
 Warehouse:
   parentClasses:
   - Building
-  description: A typical abandoned warehouse... that anarchists hang out in and can be bribed to burn down Buildings.
+  description: A typical abandoned warehouse that anarchists hang out in and can be bribed to burn down Buildings.
   attributes:
     fireAdded:
       type: const int
@@ -112,7 +112,7 @@ Warehouse:
       description: How exposed the anarchists in this warehouse are to PoliceDepartments. Raises when bribed to ignite buildings, and drops each turn if not bribed.
   functions:
     ignite:
-      description: Bribes the Warehouse to light a Building on fire. This adds this building's fireAdded to their fire, and then this building's exposure is increased based on the Manhatten distance between the two buildings.
+      description: Bribes the Warehouse to light a Building on fire. This adds this building's fireAdded to their fire, and then this building's exposure is increased based on the Manhattan distance between the two buildings.
       arguments:
       - name: building
         type: Building!
@@ -159,7 +159,7 @@ WeatherStation:
         description: True if the rotation worked, false otherwise.
         invalidValue: false
     intensify:
-      description: Bribe the weathermen to intensity the next Forecast by 1 or -1
+      description: Bribe the weathermen to intensity the next Forecast by 1 or -1.
       arguments:
       - name: negative
         type: boolean
@@ -194,7 +194,7 @@ Forecast:
       description: The direction the wind will blow fires in. Can be 'north', 'east', 'south', or 'west'.
     intensity:
       type: int
-      description: How much of a Building's fire that can be blown in the direction of this Forecast. Fire is duplicated (copied), not moved (transfered).
+      description: How much of a Building's fire that can be blown in the direction of this Forecast. Fire is duplicated (copied), not moved (transferred).
     controllingPlayer:
       type: const Player!
       description: The Player that can use WeatherStations to control this Forecast when its the nextForecast.

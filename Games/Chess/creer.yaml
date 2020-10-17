@@ -8,7 +8,7 @@ Game:
     history:
       type: string[]
       description: The list of [known] moves that have occurred in the game,
-        in Universal Chess Inferface (UCI) format. The first element is
+        in Universal Chess Interface (UCI) format. The first element is
         the first move, with the last element being the most recent.
     fen:
       type: string
@@ -31,7 +31,7 @@ AI:
       serverPredefined: true
       returns:
         type: string
-        description: A string in Universal Chess Inferface (UCI) or
+        description: A string in Universal Chess Interface (UCI) or
           Standard Algebraic Notation (SAN) formatting for the move you want
           to make. If the move is invalid or not properly formatted you will
           lose the game.
