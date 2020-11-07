@@ -1,0 +1,328 @@
+_parentDatas:
+- twoPlayer
+- turnBased
+- tiled
+
+Game:
+  name: Coreminer
+  description: Mine resources to obtain more value than your opponent.
+  attributes:
+    miners:
+      description: Every Miner in the game.
+      type: Miner[]
+    bombs:
+      description: Every Bomb in the game.
+      type: Bomb[]
+    upgrades:
+      description: Every Upgrade for a Miner in the game.
+      type: Upgrade[]
+    victoryAmount:
+      description: The amount of victory points (value) required to win.
+      type: const int
+      setting: true
+    oreValue:
+      description: The amount of value awarded when ore is dumped in the base and sold.
+      type: const int
+      setting: true
+    orePrice:
+      description: The amount of money awarded when ore is dumped in the base and sold.
+      type: const int
+      setting: true
+    dirtPrice:
+      description: The monetary price of dirt when bought or sold.
+      type: const int
+      setting: true
+    bombPrice:
+      description: The monetary price of a bomb when bought or sold.
+      type: const int
+      setting: true
+    buildingMaterialPrice:
+      description: The monetary price of building materials when bought.
+      type: const int
+      setting: true
+    ladderCost:
+      description: The amount of building material required to build a ladder.
+      type: const int
+      setting: true
+    shieldCost:
+      description: The amount of building material required to shield a Tile.
+      type: const int
+      setting: true
+    supportCost:
+      description: The amount of building material required to build a support.
+      type: const int
+      setting: true
+    bombSize:
+      description: The amount of cargo space taken up by a Bomb.
+      type: const int
+      setting: true
+    spawnPrice:
+      description: The monetary price of spawning a Miner.
+      type: const int
+      setting: true
+    upgradePrice:
+      description: The cost to upgrade a Miner.
+      type: const int
+      setting: true
+    maxUpgradeLevel:
+      description: The highest upgrade level allowed on a Miner.
+      type: const int
+      setting: true
+    maxShielding:
+      description: The maximum amount of shielding possible on a Tile.
+      type: const int
+      setting: true
+    fallDamage:
+      description: The amount of damage taken per Tile fallen.
+      type: const int
+      setting: true
+    fallWeightDamage:
+      description: The amount of extra damage taken for falling while carrying a large amount of cargo.
+      type: const int
+      setting: true
+    suffocationDamage:
+      description: The amount of damage taken when suffocating inside a filled Tile.
+      type: const int
+      setting: true
+    suffocationWeightDamage:
+      description: The amount of extra damage taken for suffocating under a large amount of material.
+      type: const int
+      setting: true
+    ladderHealth:
+      description: The amount of mining power needed to remove a ladder from a Tile.
+      type: const int
+      setting: true
+    supportHealth:
+      description: The amount of mining power needed to remove a support from a Tile.
+      type: const int
+      setting: true
+    shieldHealth:
+      description: The amount of mining power needed to remove one unit of shielding off a Tile.
+      type: const int
+      setting: true
+    largeCargoSize:
+      description: The amount deemed as a large amount of cargo.
+      type: const int
+      setting: true
+    largeMaterialSize:
+      description: The amount deemed as a large amount of material.
+      type: const int
+      setting: structure
+
+Player:
+  attributes:
+    value:
+      description: The amount of value (victory points) this Player has gained.
+      type: int
+    money:
+      description: The amount of money this Player currently has.
+      type: int
+    miners:
+      description: Every Miner owned by this Player.
+      type: Miner[]
+    bombs:
+      description: Every Bomb owned by this Player.
+      type: Bomb[]
+    baseTile:
+      description: The Tile this Player's base is on.
+      type: Tile!
+    hopperTiles:
+      description: The Tiles this Player's hoppers are on.
+      type: Tile[]
+  functions:
+    spawnMiner:
+      description: Spawns a Miner on this Player's base Tile.
+      returns:
+        type: boolean
+        description: True if successfully spawned, false otherwise.
+        invalidValue: false
+
+Tile:
+  attributes:
+    owner:
+      description: The owner of this Tile, or undefined if owned by no-one.
+      type: Player?
+    isBase:
+      description: Whether or not the Tile is a base Tile.
+      type: boolean
+    isHopper:
+      description: Whether or not a hopper is on this Tile.
+      type: boolean
+    isLadder:
+      description: Whether or not a ladder is built on this Tile.
+      type: boolean
+    isSupport:
+      description: Whether or not a support is built on this Tile.
+      type: boolean
+    isFalling:
+      description: Whether or not this Tile is about to fall after this turn.
+      type: boolean
+    shielding:
+      description: The amount of shielding on this Tile.
+      type: int
+    dirt:
+      description: The amount of dirt on this Tile.
+      type: int
+    ore:
+      description: The amount of ore on this Tile.
+      type: int
+    miners:
+      description: An array of the Miners on this Tile.
+      type: Miner[]
+    bombs:
+      description: An array of Bombs on this Tile.
+      type: Bomb[]
+
+Miner:
+  description: A Miner in the game.
+  attributes:
+    owner:
+      description: The Player that owns and can control this Miner.
+      type: const Player!
+    tile:
+      description: The Tile this Miner is on.
+      type: Tile?
+    currentUpgrade:
+      description: The Upgrade this Miner is on.
+      type: Upgrade!
+    health:
+      description: The remaining health of this Miner.
+      type: int
+    miningPower:
+      description: The remaining mining power this Miner has this turn.
+      type: int
+    moves:
+      description: The number of moves this Miner has left this turn.
+      type: int
+    buildingMaterials:
+      description: The number of building materials carried by this Miner.
+      type: int
+    bombs:
+      description: The number of bombs being carried by this Miner.
+      type: int
+    dirt:
+      description: The amount of dirt carried by this Miner.
+      type: int
+    ore:
+      description: The amount of ore carried by this Miner.
+      type: int
+    upgradeLevel:
+      description: The upgrade level of this Miner. Starts at 0.
+      type: int
+  functions:
+    dump:
+      description: Dumps materials from cargo to an adjacent Tile. If the Tile is a base or a hopper Tile, materials are sold instead of placed.
+      arguments:
+      - name: tile
+        type: Tile!
+        description: The Tile the materials will be dumped on.
+      - name: material
+        type: string = "dirt" | "ore" | "bomb"
+        description: The material the Miner will drop. 'dirt', 'ore', or 'bomb'.
+      - name: amount
+        type: int
+        description: The number of materials to drop. Amounts <= 0 will drop all of the material.
+      returns:
+        type: boolean
+        description: True if successfully dumped materials, false otherwise.
+        invalidValue: false
+    mine:
+      description: Mines the Tile the Miner is on or an adjacent Tile.
+      arguments:
+      - name: tile
+        type: Tile!
+        description: The Tile the materials will be mined from.
+      - name: amount
+        type: int
+        description: The amount of material to mine up. Amounts <= 0 will mine all the materials that the Miner can.
+      returns:
+        type: boolean
+        description: True if successfully mined, false otherwise.
+        invalidValue: false
+    move:
+      description: Moves this Miner from its current Tile to an adjacent Tile.
+      arguments:
+      - name: tile
+        type: Tile!
+        description: The Tile this Miner should move to.
+      returns:
+        type: boolean
+        description: True if it moved, false otherwise.
+        invalidValue: false
+    build:
+      description: Builds a support, shield, or ladder on Miner's Tile, or an adjacent Tile.
+      arguments:
+      - name: tile
+        type: Tile!
+        description: The Tile to build on.
+      - name: type
+        type: string = "support" | "ladder" | "shield"
+        description: The structure to build (support, ladder, or shield).
+      returns:
+        type: boolean
+        description: True if successfully built, False otherwise.
+        invalidValue: false
+    upgrade:
+      description: Upgrade this Miner by installing an upgrade module.
+      returns:
+        type: boolean
+        description: True if successfully upgraded, False otherwise.
+        invalidValue: false
+    transfer:
+      description: Transfers a resource from the one Miner to another.
+      arguments:
+      - name: miner
+        type: Miner!
+        description: The Miner to transfer materials to.
+      - name: resource
+        type: string = "dirt" | "ore" | "bomb" | "buildingMaterials"
+        description: The type of resource to transfer.
+      - name: amount
+        type: int
+        description: The amount of resource to transfer. Amounts <= 0 will transfer all the of the material.
+      returns:
+        type: boolean
+        description: True if successfully transferred, false otherwise.
+        invalidValue: false
+    buy:
+      description: Purchase a resource from the Player's base or hopper.
+      arguments:
+      - name: resource
+        type: string = "dirt" | "ore" | "bomb" | "buildingMaterials"
+        description: The type of resource to buy.
+      - name: amount
+        type: int
+        description: The amount of resource to buy. Amounts <= 0 will buy all of that material Player can.
+      returns:
+        type: boolean
+        description: True if successfully purchased, false otherwise.
+        invalidValue: false
+
+Upgrade:
+  description: Information about a Miner's Upgrade module.
+  attributes:
+    title:
+      description: The Upgrade title.
+      type: const string
+    health:
+      description: The maximum amount of health this Upgrade has.
+      type: const int
+    moves:
+      description: The number of moves this Upgrade can make per turn.
+      type: const int
+    miningPower:
+      description: The amount of mining power this Upgrade has per turn.
+      type: const int
+    cargoCapacity:
+      description: The amount of cargo capacity this Upgrade has.
+      type: const int
+
+Bomb:
+  description: A Bomb in the game.
+  attributes:
+    tile:
+      description: The Tile this Bomb is on.
+      type: Tile?
+    timer:
+      description: The number of turns before this Bomb explodes. One means it will explode after the current turn.
+      type: int
