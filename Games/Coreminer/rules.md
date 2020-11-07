@@ -4,7 +4,7 @@ Coreminer is a resource gathering game about undermining your opponent.
 
 ## [Map][Map]
 - Tile-based
-- Fairly large, around 60 x 40
+- Fairly large, around 30 x 30
 - Tiles can contain dirt and ore, anti-bomb shielding, ladders, supports, hoppers, any number of Miners and/or bombs, and a Player's base.
 - There is more dirt and ore as you go deeper underground, which takes longer to mine.
 - Bases are in the top left and right corners of the map.
