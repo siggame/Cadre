@@ -5,22 +5,17 @@ Game:
   name: Jungle
   description: A 7x9 board game with pieces.
   attributes:
-    history:
-      type: string[]
-      description: The list of [known] moves that have occurred in the game,
-        in a format. The first element is the first move, with the last element
-        being the most recent.
-    fen:
+    jungleFen:
       type: string
-      description: Forsyth-Edwards Notation (fen), a notation that describes
-        the game board state.
+      description: JungleFen is similar to chess FEN it starts with the board,
+        the turn, half move, the full move.
       setting: true
 
 Player:
   attributes:
     color:
-      type: const string = "Player1" | "Player2"
-      description: A coin flip will decide if 'player1' or 'player2' will go first.
+      type: const string = "b" | "r"
+      description: Blue will always start first.
 
 AI:
   functions:
